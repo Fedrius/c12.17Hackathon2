@@ -8,6 +8,10 @@
     justify-content: space-between;
 }
 
+.mainTitle {
+    text-align: center;
+}
+
 .sunrise {
     border: 1px solid black;
     height: 100px;
