@@ -99,29 +99,42 @@
 
 
 
-//Flickr API for Beach Photos
+var hbPhotoArray = [];
+var hbPhotoArrayData = [];
+var dataFromServer;
+
+var makePhotoURL = function(array){
+    for(let photoIndex = 0; photoIndex<array.length; photoIndex++) {
+        let farm = array[photoIndex].farm;
+        let id = array[photoIndex].id;
+        let server = array[photoIndex].server;
+        let secret = array[photoIndex].secret;
+        let url = `https://farm${farm}.staticflickr.com/${server}/${id}_${secret}.jpg`;
+        hbPhotoArray.push(url);
+        // https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}.jpg
+    }
+}
 
 //Huntington Beach flickr ClickHandler
 var hbClickHandler = function() {
-    var dataFromServer;
+
     var photoObj;
     var ajaxConfig = {
         method: "GET",
-        dataType: 'json',
-        nojsoncallback: '1',
-        text: 'huntington beach', // input field needs to change text using jQuery
-        url: 'https://api.flickr.com/services/rest?method=flickr.photos.search&api_key=629e34714d717373e24940da3b0ad6cb&format=json&nojsoncallback=1&text=huntington beach&per_page=10',
+        text: 'huntington beach surf', // input field needs to change text using jQuery
+        url: 'https://api.flickr.com/services/rest?method=flickr.photos.search&api_key=629e34714d717373e24940da3b0ad6cb&format=json&nojsoncallback=1&text=huntington beach surf&per_page=10',
         success: function(data) {
             dataFromServer = data;
-            for(var dataIndex = 0; dataIndex < 5; dataIndex++) {
+            for(let dataIndex = 0; dataIndex < 5; dataIndex++) {
                 var dataObj = {
                     id: dataFromServer.photos.photo[dataIndex].id,
                     server: dataFromServer.photos.photo[dataIndex].server,
                     farm: dataFromServer.photos.photo[dataIndex].farm,
-                    secret: dataFromServer.data[dataIndex].secret,
+                    secret: dataFromServer.photos.photo[dataIndex].secret,
                 };
+                hbPhotoArrayData.push(dataObj);
             }
-            console.log(data);
+            makePhotoURL(hbPhotoArrayData);
         },
         error: function() {
             console.log(false);
@@ -129,6 +142,7 @@ var hbClickHandler = function() {
     };
     $.ajax(ajaxConfig);
 }
+hbClickHandler();
 //Newport Beach Click Handler
 // var nbClickHandler = function() {
 //     var dataFromServer;
@@ -187,15 +201,3 @@ var hbClickHandler = function() {
 
 
 
-
-// var dataObj = {
-//     name: dataFromServer.data[dataIndex].name,
-//     course: dataFromServer.data[dataIndex].course,
-//     grade: dataFromServer.data[dataIndex].grade,
-//     id: dataFromServer.data[dataIndex].id,
-//
-// };
-
-// for(var dataIndex = 0; dataIndex < dataFromServer.data.length; dataIndex++) {
-//
-// }
