@@ -24,7 +24,6 @@ Hackathon project involving the combination of different data sources into an ap
   - henry
   - james
   - shawn
-  - matt
   - justin
 
 - Team 2
