@@ -99,7 +99,7 @@
 
 
 
-var hbPhotoArray = [];
+var beachPhotoArray = [];
 var hbPhotoArrayData = [];
 var dataFromServer;
 
@@ -110,7 +110,7 @@ var makePhotoURL = function(array){
         let server = array[photoIndex].server;
         let secret = array[photoIndex].secret;
         let url = `https://farm${farm}.staticflickr.com/${server}/${id}_${secret}.jpg`;
-        hbPhotoArray.push(url);
+        beachPhotoArray.push(url);
         // https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}.jpg
     }
 }
