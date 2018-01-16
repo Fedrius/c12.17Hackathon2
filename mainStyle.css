@@ -1,0 +1,34 @@
+* {
+    box-sizing: border-box;
+}
+
+.headerContainer {
+    border: 1px solid black;
+    text-align: center;
+}
+
+.container {
+    border: 1px solid black;
+    width: 90vw;
+    height: 90vh;
+    margin: 0 auto;
+}
+
+.weatherInfoContainer {
+    display: flex;
+    justify-content: space-around;
+}
+
+.tempBox {
+    border: 1px solid black;
+    height: 100px;
+    width: 100px;
+}
+
+.tideInfoContainer {
+    border: 1px solid black;
+    width: 80%;
+    height: 20%;
+    margin: 0 auto;
+}
+
