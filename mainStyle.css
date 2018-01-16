@@ -4,12 +4,25 @@
 
 .headerContainer {
     border: 1px solid black;
-    text-align: center;
+    display: flex;
+    justify-content: space-between;
+}
+
+.sunrise {
+    border: 1px solid black;
+    height: 100px;
+    width: 100px;
+}
+
+.sunset {
+    border: 1px solid black;
+    height: 100px;
+    width: 100px;
 }
 
 .container {
     border: 1px solid black;
-    width: 90vw;
+    width: 80vw;
     height: 95vh;
     margin: 0 auto;
 }
@@ -39,3 +52,9 @@
     margin: 5px auto;
 }
 
+.pictureInfoContainer {
+    border: 1px solid black;
+    width: 80%;
+    height: 20%;
+    margin: 5px auto;
+}
