@@ -243,8 +243,8 @@ var sealBeachClickHandler = function() {
     $.ajax(ajaxConfig);
 }
 
-
 let beachInput = 'newport beach'; //currently just a placeholder
+let beachObject = {};
 
 function googleApiCall(name){
     $.ajax({
@@ -252,7 +252,9 @@ function googleApiCall(name){
         url: 'http://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyDbDr73Tuj2WLSNXkSc2P8mH2JdF0xjAeo&address=' + name,
         method: 'get',
         success: function(response){
-            console.log(response)
+            console.log(response['results'][0]['address_components'][0]['long_name']);
+            console.log(response['results'][0]['geometry']['location']['lat']);
+            console.log(response['results'][0]['geometry']['location']['lng']);
         },
         error: function(response){
             console.log(response);
