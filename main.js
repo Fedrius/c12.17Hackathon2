@@ -140,7 +140,12 @@ var makePhotoDivs = function(array) {
         $('.pictureInfoDataContainer').append(makePhotoDiv);
     }
 };
-//Huntington Beach flickr ClickHandler
+/***************************************************************************************************
+ * flickrClickHandler - ajax call to flickr API which creates a data object which holds encrypted URL information
+ * @param {string} the string of the beach name to be inputted into the flickr ajax search call
+ * @return undefined
+ * @calls makePhotoURL
+ */
 var flickrClickHandler = function(beachName) {
     var beachPhotoArrayData = [];
     var flickrSearch = beachName;
@@ -148,7 +153,6 @@ var flickrClickHandler = function(beachName) {
     var dataFromServer;
     var ajaxConfig = {
         method: "GET",
-        // beachName + surf input field needs to change text using jQuery beachObject.name
         url: `https://api.flickr.com/services/rest?method=flickr.photos.search&api_key=629e34714d717373e24940da3b0ad6cb&format=json&nojsoncallback=1&text=${flickrSearch} sunset&per_page=10`,
         success: function(data) {
             dataFromServer = data;
@@ -169,13 +173,22 @@ var flickrClickHandler = function(beachName) {
     }
     $.ajax(ajaxConfig);
 }
-
+/***************************************************************************************************
+ * showModal - a click handler that targets the current picture div and opens up a modal which enlarges the image clicked.
+ * @param undefined none
+ * @return undefined none
+ */
 var showModal = function(){
     var backgroundImage = $(event.currentTarget).css('background-image');
     $('.pictureContent').css('background-image', backgroundImage);
     $('.pictureModal').show();
 }
 
+/***************************************************************************************************
+ * closeModal - a click handler which closes the modal on click.
+ * @param undefined none
+ * @return undefined none
+ */
 var closeModal = function(){
     $('.pictureModal').hide();
 }
