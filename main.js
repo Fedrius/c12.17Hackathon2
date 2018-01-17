@@ -139,13 +139,13 @@ var makePhotoDivs = function() {
     }
 }
 //Huntington Beach flickr ClickHandler
-var hbClickHandler = function() {
+var hbClickHandler = function(beachName) {
     beachPhotoArrayData = [];
     beachPhotoArray = [];
     var photoObj;
     var ajaxConfig = {
         method: "GET",
-        text: 'huntington beach surf', // input field needs to change text using jQuery
+        text: 'huntington beach surf', // beachName + surf input field needs to change text using jQuery beachObject.name
         url: 'https://api.flickr.com/services/rest?method=flickr.photos.search&api_key=629e34714d717373e24940da3b0ad6cb&format=json&nojsoncallback=1&text=huntington beach waves&per_page=10',
         success: function(data) {
             dataFromServer = data;
@@ -256,7 +256,6 @@ var sealBeachClickHandler = function() {
 var showModal = function(){
     var backgroundImage = $(event.currentTarget).css('background-image');
     $('.pictureContent').css('background-image', backgroundImage);
-    debugger;
     $('.pictureModal').show();
 }
 
