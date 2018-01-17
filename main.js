@@ -10,7 +10,7 @@ $(document).ready(init);
  * @calls on click of search button calls googleGeoLoc(location);
  */
 function init(){
-    playSearchMusic();
+    playTitleMusic();
     $('.muteButton').click(muteSound);
     $('.locationInput').attr('autocomplete','off');
     $(".searchButton").on("click", ()=>{
@@ -258,8 +258,8 @@ birdChirp.volume = .5;
  * @param undefined none
  * @return undefined none
  */
-// var titleMusicSound = new Audio("sounds/spongebob.mp3");
-// titleMusicSound.volume = .5;
+var titleMusicSound = new Audio("sounds/spongebob.mp3");
+titleMusicSound.volume = .5;
 
 /***************************************************************************************************
  * takePlungeSound - global variable that creates a new audio sound for clicking on search button
