@@ -1,3 +1,6 @@
+/**
+ * Listen for the document to load and initializes the application
+ */
 $(document).ready(init);
 
 //init -
@@ -47,7 +50,11 @@ function googleGeoLoc(name){
     })
 };
 
-
+/***************************************************************************************************
+ * weatherApi - ajax call that appends all of the relevant surf and weather conditions onto the DOM
+ * @param (number, number) two - Latitude and Longitude coordinates of the beach location
+ * @return undefined none
+ */
 function weatherApi(lat, long){
     $.ajax({
         dataType: "json",
@@ -108,9 +115,7 @@ function weatherApi(lat, long){
  * @return undefined
  * @calls makePhotoDivs
  */
-
-var makePhotoURL = function(array){
-    debugger;
+function makePhotoURL(array){
     var beachPhotoArray = [];
     for(let photoIndex = 0; photoIndex<array.length; photoIndex++) {
         let farm = array[photoIndex].farm;
@@ -130,9 +135,7 @@ var makePhotoURL = function(array){
  * @return undefined
  * @calls undefined
  */
-
-var makePhotoDivs = function(array) {
-
+ function makePhotoDivs(array) {
     for (let photoDivIndex = 0; photoDivIndex < array.length; photoDivIndex++) {
         var definePhotoDiv = $('<div>').addClass('photoDiv');
         var beachPhoto = array[photoDivIndex];
@@ -146,7 +149,7 @@ var makePhotoDivs = function(array) {
  * @return undefined
  * @calls makePhotoURL
  */
-var flickrClickHandler = function(beachName) {
+ function flickrClickHandler(beachName) {
     var beachPhotoArrayData = [];
     var flickrSearch = beachName;
     var photoObj;
@@ -178,18 +181,17 @@ var flickrClickHandler = function(beachName) {
  * @param undefined none
  * @return undefined none
  */
-var showModal = function(){
+function showModal(){
     var backgroundImage = $(event.currentTarget).css('background-image');
     $('.pictureContent').css('background-image', backgroundImage);
     $('.pictureModal').show();
 }
-
 /***************************************************************************************************
  * closeModal - a click handler which closes the modal on click.
  * @param undefined none
  * @return undefined none
  */
-var closeModal = function(){
+ function closeModal(){
     $('.pictureModal').hide();
 }
 
