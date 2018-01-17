@@ -49,7 +49,6 @@ function googleGeoLoc(name){
 
             localTemp(beachObject.lat, beachObject.long);
             weatherApi(beachObject.lat, beachObject.long);
-
             flickrClickHandler(beachFlickr);
         },
         error: function(response){
