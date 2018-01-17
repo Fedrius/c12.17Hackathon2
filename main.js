@@ -1,4 +1,8 @@
 $(document).ready(init);
+
+//init -
+//@Params -
+//@Returns -
 function init(){
     $('.locationInput').attr('autocomplete','off');
     $(".searchButton").on("click", ()=>{
@@ -8,7 +12,9 @@ function init(){
     });
 }
 
-
+//googleGeoLoc - Ajax call with Google Geo Location when user clicks the search button
+//@Params - input value which is a string the from search box
+//@Returns - beach location data and calls flickr ajax function
 function googleGeoLoc(name){
     $.ajax({
         dataType: 'json',
