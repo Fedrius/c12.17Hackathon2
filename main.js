@@ -3,8 +3,8 @@ function init(){
     $('.locationInput').attr('autocomplete','off');
     $(".searchButton").on("click", ()=>{
         let location = $(".locationInput").val();
-        $(".locationInput").val("");
         googleGeoLoc(location);         //for ajax call
+        // $(".locationInput").val("");
     });
 }
 
@@ -28,9 +28,10 @@ function googleGeoLoc(name){
 
             $(".beachName").text(beachObject.name);
             $(".beachLocation").text(beachObject.city + ", " + beachObject.state);
+            var beachFlickr = beachObject.name;
             // console.log(beachObject);
-            weatherApi(beachObject.lat, beachObject.long);
-
+            // weatherApi(beachObject.lat, beachObject.long);
+            flickrClickHandler(beachFlickr);
         },
         error: function(response){
             console.log(response);
@@ -216,17 +217,18 @@ var makePhotoDivs = function() {
     }
 };
 //Huntington Beach flickr ClickHandler
-var hbClickHandler = function(beachName) {
+var flickrClickHandler = function(beachName) {
     beachPhotoArrayData = [];
     beachPhotoArray = [];
+    var flickrSearch = beachName;
     var photoObj;
     var ajaxConfig = {
         method: "GET",
-        text: 'huntington beach surf', // beachName + surf input field needs to change text using jQuery beachObject.name
-        url: 'https://api.flickr.com/services/rest?method=flickr.photos.search&api_key=629e34714d717373e24940da3b0ad6cb&format=json&nojsoncallback=1&text=huntington beach waves&per_page=10',
+        // beachName + surf input field needs to change text using jQuery beachObject.name
+        url: `https://api.flickr.com/services/rest?method=flickr.photos.search&api_key=629e34714d717373e24940da3b0ad6cb&format=json&nojsoncallback=1&text=${flickrSearch} sunset&per_page=10`,
         success: function(data) {
             dataFromServer = data;
-            for(let dataIndex = 0; dataIndex < 5; dataIndex++) {
+            for(let dataIndex = 0; dataIndex < 10; dataIndex++) {
                 var dataObj = {
                     id: dataFromServer.photos.photo[dataIndex].id,
                     server: dataFromServer.photos.photo[dataIndex].server,

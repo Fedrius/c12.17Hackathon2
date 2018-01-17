@@ -263,12 +263,13 @@
     border: 5px solid white;
     display: flex;
     justify-content: space-around;
-    align-items: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
     height: 90%;
     width: 100%;
 }
 .photoDiv{
-    width: 50%;
+    width: 20%;
     height: 50%;
     display: flex;
     justify-content: center;
