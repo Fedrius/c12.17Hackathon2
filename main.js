@@ -47,7 +47,7 @@ function googleGeoLoc(name){
             var beachFlickr = beachObject.name;
             // console.log(beachObject);
             weatherApi(beachObject.lat, beachObject.long);
-            // flickrClickHandler(beachFlickr);
+            flickrClickHandler(beachFlickr);
         },
         error: function(response){
             console.log(response);
