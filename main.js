@@ -3,10 +3,27 @@ function init(){
     $('.locationInput').attr('autocomplete','off');
     $(".searchButton").on("click", ()=>{
         let location = $(".locationInput").val();
+        $(".locationInput").val("");
         googleGeoLoc(location);         //for ajax call
-        // $(".locationInput").val("");
+
     });
 }
+
+
+/*All Global Variables Defined Here
+ * beachPhotoArray - global array to hold photo URLS
+ * @type {Array}
+ * example of beachPhotoArray after input:
+ * beachPhotoArray = [
+ * "https://farm5.staticflickr.com/4653/39746351561_93864fe707.jpg",
+ * "https://farm5.staticflickr.com/4705/39737831611_a920befbdd.jpg"
+ * ];
+ */
+var beachPhotoArray = [];
+
+
+
+
 
 
 function googleGeoLoc(name){
@@ -190,11 +207,8 @@ function weatherApi(lat, long){
 
 
 
-var beachPhotoArray = [];
-var beachPhotoArrayData = [];
-var dataFromServer;
-
 var makePhotoURL = function(array){
+    var beachPhotoArray = [];
     for(let photoIndex = 0; photoIndex<array.length; photoIndex++) {
         let farm = array[photoIndex].farm;
         let id = array[photoIndex].id;
@@ -218,10 +232,11 @@ var makePhotoDivs = function() {
 };
 //Huntington Beach flickr ClickHandler
 var flickrClickHandler = function(beachName) {
-    beachPhotoArrayData = [];
+    var beachPhotoArrayData = [];
     beachPhotoArray = [];
     var flickrSearch = beachName;
     var photoObj;
+    var dataFromServer;
     var ajaxConfig = {
         method: "GET",
         // beachName + surf input field needs to change text using jQuery beachObject.name
