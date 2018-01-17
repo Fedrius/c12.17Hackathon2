@@ -10,6 +10,7 @@ $(document).ready(init);
  * @calls on click of search button calls googleGeoLoc(location);
  */
 function init(){
+    playSearchMusic();
     $('.locationInput').attr('autocomplete','off');
     $(".searchButton").on("click", ()=>{
         let location = $(".locationInput").val();
@@ -47,7 +48,7 @@ function googleGeoLoc(name){
             var beachFlickr = beachObject.name;
             // console.log(beachObject);
             weatherApi(beachObject.lat, beachObject.long);
-            // flickrClickHandler(beachFlickr);
+            flickrClickHandler(beachFlickr);
         },
         error: function(response){
             console.log(response);
@@ -234,4 +235,24 @@ function resetPage(){
     $('.pictureInfoDataContainer div').remove();
 
 
+}
+
+// Audio Javascript
+var searchBackgroundSound = new Audio("sounds/searchPageWaves.wav");
+searchBackgroundSound.volume = .5;
+
+function playSearchMusic(){
+    searchBackgroundSound.pause();
+    searchBackgroundSound.currentTime = 0;
+    searchBackgroundSound.play();
+    searchBackgroundSound.loop = true;
+}
+
+function muteSound(){
+    if(searchBackgroundSound.volume === 0){
+        searchBackgroundSound.volume = .5;
+    }
+    else{
+        searchBackgroundSound.volume = 0;
+    }
 }
