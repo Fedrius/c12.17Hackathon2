@@ -195,7 +195,7 @@ function weatherApi(lat, long){
 
 
 /***************************************************************************************************
- * makePhotoURL - creates a s based on input fields in the form and adds the object to global student array
+ * makePhotoURL - creates an array of photo URLS based on data array being pushed in from the flickr Ajax Call
  * @param {array} one
  * @return undefined
  * @calls makePhotoDivs
@@ -215,6 +215,13 @@ var makePhotoURL = function(array){
     }
     makePhotoDivs(beachPhotoArray);
 }
+
+/***************************************************************************************************
+ * makePhotoDivs - dynamically creates and appends divs onto the pictureInforDataContainer div
+ * @param {array} one
+ * @return undefined
+ * @calls undefined
+ */
 
 var makePhotoDivs = function(array) {
 
