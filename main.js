@@ -238,56 +238,121 @@ function resetPage(){
 }
 
 // Audio Javascript
+/***************************************************************************************************
+ * searchBackgroundSound - global variable that creates a new audio sound for the search page
+ * @param undefined none
+ * @return undefined none
+ */
 var searchBackgroundSound = new Audio("sounds/searchPageWaves.wav");
 searchBackgroundSound.volume = .5;
+/***************************************************************************************************
+ * birdChirp - global variable that creates a new audio sound for hovering over the search button
+ * @param undefined none
+ * @return undefined none
+ */
 var birdChirp= new Audio("sounds/birdchirp.wav");
 birdChirp.volume = .5;
-// var titleMusicSound = new Audio("sounds/searchPageWaves.wav");
+
+/***************************************************************************************************
+ * titleMusicSound - global variable that creates audio sound for title page
+ * @param undefined none
+ * @return undefined none
+ */
+// var titleMusicSound = new Audio("sounds/spongebob.mp3");
 // titleMusicSound.volume = .5;
+
+/***************************************************************************************************
+ * takePlungeSound - global variable that creates a new audio sound for clicking on search button
+ * @param undefined none
+ * @return undefined none
+ */
 var takePlungeSound = new Audio("sounds/takePlunge.wav");
 takePlungeSound.volumne = .5;
+/***************************************************************************************************
+ * seagull - global variable that creates a seagull sound for mouseentering input field
+ * @param undefined none
+ * @return undefined none
+ */
 var seagull = new Audio("sounds/seagull.wav");
 seagull.volume = .5;
 
+/***************************************************************************************************
+ * playSearchMusic - function that plays the search page music
+ * @param undefined none
+ * @return undefined
+ */
 function playSearchMusic(){
     searchBackgroundSound.pause();
     searchBackgroundSound.currentTime = 0;
     searchBackgroundSound.play();
     searchBackgroundSound.loop = true;
 }
+/***************************************************************************************************
+ * stopSearchMusic - click handler that stops the search page music
+ * @param undefined none
+ * @return undefined
+ */
 function stopSearchMusic(){
     searchBackgroundSound.pause();
     searchBackgroundSound.currentTime = 0;
     searchBackgroundSound.loop = true;
 }
+/***************************************************************************************************
+ * playBirdChirp - click handler that plays the bird chirp on hovering over the search button
+ * @param undefined none
+ * @return undefined
+ */
 function playBirdChirp(){
     birdChirp.pause();
     birdChirp.currentTime = 0;
     birdChirp.play();
 }
+/***************************************************************************************************
+ * playSeagull - click handler that plays seagull sounds on hovering over the input field
+ * @param undefined none
+ * @return undefined
+ */
 function playSeagull(){
     seagull.pause();
     seagull.currentTime = 0;
     seagull.play();
 }
+/***************************************************************************************************
+ * playTitleMusic - click handler that plays the title page music when it loads.
+ * @param undefined none
+ * @return undefined
+ */
 function playTitleMusic(){
     titleMusicSound.pause();
     titleMusicSound.currentTime = 0;
     titleMusicSound.play();
     titleMusicSound.loop = true;
 }
+/***************************************************************************************************
+ * stopTitleMusic - click handler that stops the title page music
+ * @param undefined none
+ * @return undefined
+ */
 function stopTitleMusic(){
     titleMusicSound.pause();
     titleMusicSound.currentTime = 0;
     titleMusicSound.loop = true;
 }
-
+/***************************************************************************************************
+ * playTakePlunge - click handler that plays the take plunge sound on search button click.
+ * @param undefined none
+ * @return undefined
+ */
 function playTakePlunge(){
     takePlungeSound.pause();
     takePlungeSound.currentTime = 0;
     takePlungeSound.play();
 }
-
+/***************************************************************************************************
+ * muteSound - click handler that stops all sounds.
+ * @param undefined none
+ * @return undefined
+ */
 function muteSound(){
     if(searchBackgroundSound.volume === 0){
         searchBackgroundSound.volume = .5;
