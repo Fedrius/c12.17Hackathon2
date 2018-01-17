@@ -1,10 +1,36 @@
 function weatherApi(){
     $.ajax({
-        dataType: "text",
-        url: "https://api.worldweatheronline.com/premium/v1/marine.ashx?key=ee5b80f43e9149f79be22719181601&num_of_days=1&tp=3&format=json&q=33.656595, -118.004010&tide=yes",
+        dataType: "json",
+        url: "https://api.worldweatheronline.com/premium/v1/marine.ashx?key=ee5b80f43e9149f79be22719181601&num_of_days=1&tp=3&format=json&q=44.068203, -114.742043&tide=yes",
         method: "get",
         success: function(result){
             console.log("success");
+            var weatherArray = result.data.weather[0];
+            var tideArray = result.data.weather[0].tides[0];
+            var sunrise = weatherArray.astronomy[0].sunrise;
+            var sunset = weatherArray.astronomy[0].sunset;
+            var maxTemp = weatherArray.maxtempF;
+            var minTemp = weatherArray.mintempF;
+            
+            for (var hourlyIndex = 2; hourlyIndex < 7; hourlyIndex++){
+                var hourObj = result.data.weather[0].hourly[hourlyIndex];
+                var imageDirect = result.data.weather[0].hourly[hourlyIndex].weatherIconUrl[0].value;
+                var tempAtHour = hourObj.tempF;
+                var windSpeed = hourObj.windspeedMiles;
+                var windDir = hourObj.winddir16Point;
+                var swellHeight = hourObj.swellHeight_ft;
+                var swellDir = hourObj.swellDir16Point;
+                var waterTemp = hourObj.waterTemp_F;
+                console.log(hourObj);
+            }
+
+            for (var tideIndex = 0; tideIndex < 3; tideIndex++){
+                var tideArray = result.data.weather[0].tides[0].tide_data[tideIndex];
+                var tideTime = tideArray.tideTime;
+                var tideHeight = tideArray.tideHeight_mt;
+                var tideType = tideArray.tide_type;
+            }
+            // console.log(tideArray);
         },
         error: function(result){
             console.log("ajax call failed");
@@ -262,3 +288,32 @@ var showModal = function(){
 var closeModal = function(){
     $('.pictureModal').hide();
 }
+
+let beachInput = 'newport beach'; //currently just a placeholder
+let beachObject = {};
+
+function googleGeoLoc(name){
+    $.ajax({
+        dataType: 'json',
+        url: 'http://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyDbDr73Tuj2WLSNXkSc2P8mH2JdF0xjAeo&address=' + name,
+        method: 'get',
+        success: function(response){
+
+            //store these variables
+            console.log(response['results'][0]['address_components'][0]['long_name']); //string
+            console.log(response['results'][0]['geometry']['location']['lat']); //num
+            console.log(response['results'][0]['geometry']['location']['lng']); //num
+
+            beachObject.name = response['results'][0]['address_components'][0]['long_name'];
+            beachObject.latLong = [];
+            beachObject.latLong.push(response['results'][0]['geometry']['location']['lat']);
+            beachObject.latLong.push(response['results'][0]['geometry']['location']['lng']);
+            console.log(beachObject);
+        },
+        error: function(response){
+            console.log(response);
+            console.log('ERRRROR');
+        }
+    })
+}
+
