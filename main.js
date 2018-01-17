@@ -3,9 +3,12 @@
  */
 $(document).ready(init);
 
-//init -
-//@Params -
-//@Returns -
+/***************************************************************************************************
+ * init - adds click handler on search button
+ * @param none
+ * @return undefined
+ * @calls on click of search button calls googleGeoLoc(location);
+ */
 function init(){
     $('.locationInput').attr('autocomplete','off');
     $(".searchButton").on("click", ()=>{
@@ -16,9 +19,12 @@ function init(){
     });
 }
 
-//googleGeoLoc - Ajax call with Google Geo Location when user clicks the search button
-//@Params - input value which is a string the from search box
-//@Returns - beach location data and calls flickr ajax function
+/***************************************************************************************************
+ * googleGeoLoc - Ajax call with Google Geo Location when user clicks the search button
+ * @param name user input value which is a string the from search box
+ * @return undefined
+ * @calls flickrClickHandler(beachFlickr), weatherApi(beachObject.lat, beachObject.long);
+ */
 function googleGeoLoc(name){
     $.ajax({
         dataType: 'json',
@@ -50,11 +56,34 @@ function googleGeoLoc(name){
     })
 };
 
+
 /***************************************************************************************************
  * weatherApi - ajax call that appends all of the relevant surf and weather conditions onto the DOM
  * @param (number, number) two - Latitude and Longitude coordinates of the beach location
  * @return undefined none
  */
+
+function localTemp(lat, long){
+    $.ajax({
+        dataType: "json",
+        url: `https://api.worldweatheronline.com/premium/v1/weather.ashx?key=ee5b80f43e9149f79be22719181601&format=json&q=${lat}, ${long}&num_of_days=1`,
+        method: 'get',
+        success: function(result){
+            var hourlyWeather = [];
+            for(var tempIndex = 2; tempIndex < 7; tempIndex++){
+                var tempObj = {};
+                var tempHour = result.data.weather[0].hourly[tempIndex];
+                var tempAtHour = tempHour.tempF;
+                
+                tempObj.tempAtHour = tempAtHour;
+                hourlyWeather.push(tempObj);
+            }
+            // console.log(hourlyWeather);
+        }
+    })
+}
+
+
 function weatherApi(lat, long){
     $.ajax({
         dataType: "json",
@@ -89,8 +118,8 @@ function weatherApi(lat, long){
                 var hourObj = result.data.weather[0].hourly[hourlyIndex];
                 var imageDirect = result.data.weather[0].hourly[hourlyIndex].weatherIconUrl[0].value;
                 $(`.temp${hourlyIndex-1} .tempPic`).css("background-image", 'url('+imageDirect+')');
-                var tempAtHour = hourObj.tempF;
-                $(`.temp${hourlyIndex-1} .tempTemp`).html(tempAtHour+ "&#x2109");
+                // var tempAtHour = hourObj.tempF;
+                // $(`.temp${hourlyIndex-1} .tempTemp`).html(tempAtHour+ "&#x2109");
 
                 statsObj.windSpeed = hourObj.windspeedMiles;
                 statsObj.windDir = hourObj.winddir16Point;
@@ -100,7 +129,6 @@ function weatherApi(lat, long){
                 timeOfDayStats.push(statsObj);
                 // console.log(statsObj);
             }
-
 
         },
         error: function(result){
@@ -195,6 +223,8 @@ function showModal(){
     $('.pictureModal').hide();
 }
 
+function resetPage(){
+    $('.pictureInfoDataContainer div').remove();
 
 
-
+}
