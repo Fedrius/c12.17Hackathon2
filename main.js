@@ -1,52 +1,103 @@
-function weatherApi(){
+$(document).ready(init);
+function init(){
+    $('.locationInput').attr('autocomplete','off');
+    $(".searchButton").on("click", ()=>{
+        let location = $(".locationInput").val();
+        $(".locationInput").val("");
+        googleGeoLoc(location);         //for ajax call
+    });
+}
+
+
+function googleGeoLoc(name){
+    $.ajax({
+        dataType: 'json',
+        url: 'http://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyDbDr73Tuj2WLSNXkSc2P8mH2JdF0xjAeo&address=' + name,
+        method: 'get',
+        success: function(response){
+
+            $(".beachName").text("");         //to remove before reassigning
+            $(".beachLocation").text("");
+
+            let beachObject = {};
+            beachObject.name = response['results'][0]['address_components'][0]['long_name'];
+            beachObject.city = response['results'][0]['address_components'][1]['long_name'];
+            beachObject.state = response['results'][0]['address_components'][2]['short_name'];
+            beachObject.lat  = (response['results'][0]['geometry']['location']['lat']);
+            beachObject.long = (response['results'][0]['geometry']['location']['lng']);
+
+            $(".beachName").text(beachObject.name);
+            $(".beachLocation").text(beachObject.city + ", " + beachObject.state);
+            // console.log(beachObject);
+            weatherApi(beachObject.lat, beachObject.long);
+
+        },
+        error: function(response){
+            console.log(response);
+            console.log('ERRRROR');
+        }
+    })
+};
+
+
+
+
+
+
+
+function weatherApi(lat, long){
     $.ajax({
         dataType: "json",
-        url: "https://api.worldweatheronline.com/premium/v1/marine.ashx?key=ee5b80f43e9149f79be22719181601&num_of_days=1&tp=3&format=json&q=44.068203, -114.742043&tide=yes",
+        url: `https://api.worldweatheronline.com/premium/v1/marine.ashx?key=ee5b80f43e9149f79be22719181601&num_of_days=1&tp=3&format=json&q=${lat}, ${long}&tide=yes`,
         method: "get",
         success: function(result){
             console.log("success");
+
+            //putting dom elements here that need to be cleared later
+            $(".sunriseTime").text("");
+            $(".sunsetTime").text("");
+            $(".tideData").text("");
+            $(`.temp .tempPic`).css("background-image", "");
+            $(`.temp .tempTemp`).text("");
+
+
+            //find all weather data
             var weatherArray = result.data.weather[0];
-            var tideArray = result.data.weather[0].tides[0];
             var sunrise = weatherArray.astronomy[0].sunrise;
+            $(".sunriseTime").text(sunrise);
             var sunset = weatherArray.astronomy[0].sunset;
-            var maxTemp = weatherArray.maxtempF;
-            var minTemp = weatherArray.mintempF;
-            
+            $(".sunsetTime").text(sunset);
+            var tideArray = result.data.weather[0].tides[0].tide_data[1];
+            var tideHeight = tideArray.tideHeight_mt;
+            var tideType = tideArray.tide_type;
+            $(".tideData").text(tideHeight + " meters, " + tideType);
+
+            var timeOfDayStats = [];            //array to hold objects
+            console.log(result);
             for (var hourlyIndex = 2; hourlyIndex < 7; hourlyIndex++){
+                var statsObj = {};
                 var hourObj = result.data.weather[0].hourly[hourlyIndex];
                 var imageDirect = result.data.weather[0].hourly[hourlyIndex].weatherIconUrl[0].value;
+                $(`.temp${hourlyIndex-1} .tempPic`).css("background-image", 'url('+imageDirect+')');
                 var tempAtHour = hourObj.tempF;
-                var windSpeed = hourObj.windspeedMiles;
-                var windDir = hourObj.winddir16Point;
-                var swellHeight = hourObj.swellHeight_ft;
-                var swellDir = hourObj.swellDir16Point;
-                var waterTemp = hourObj.waterTemp_F;
-                console.log(hourObj);
+                $(`.temp${hourlyIndex-1} .tempTemp`).html(tempAtHour+ "&#x2109");
+
+                statsObj.windSpeed = hourObj.windspeedMiles;
+                statsObj.windDir = hourObj.winddir16Point;
+                statsObj.swellHeight = hourObj.swellHeight_ft;
+                statsObj.swellDir = hourObj.swellDir16Point;
+                statsObj.waterTemp = hourObj.waterTemp_F;
+                timeOfDayStats.push(statsObj);
+                // console.log(statsObj);
             }
 
-            for (var tideIndex = 0; tideIndex < 3; tideIndex++){
-                var tideArray = result.data.weather[0].tides[0].tide_data[tideIndex];
-                var tideTime = tideArray.tideTime;
-                var tideHeight = tideArray.tideHeight_mt;
-                var tideType = tideArray.tide_type;
-            }
-            // console.log(tideArray);
+
         },
         error: function(result){
             console.log("ajax call failed");
         }
     })
 }
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -163,7 +214,7 @@ var makePhotoDivs = function() {
         var makePhotoDiv = definePhotoDiv.css('background-image', 'url(' + beachPhoto + ')').attr('onclick','showModal()');
         $('.pictureInfoDataContainer').append(makePhotoDiv);
     }
-}
+};
 //Huntington Beach flickr ClickHandler
 var hbClickHandler = function(beachName) {
     beachPhotoArrayData = [];
@@ -192,92 +243,92 @@ var hbClickHandler = function(beachName) {
     }
     $.ajax(ajaxConfig);
 }
-// Newport Beach Click Handler
-var nbClickHandler = function() {
-    beachPhotoArrayData = [];
-    beachPhotoArray = [];
-    var dataFromServer;
-    var ajaxConfig = {
-        method: "GET",
-        text: 'newport beach', // input field needs to change text using jQuery
-        url: 'https://api.flickr.com/services/rest?method=flickr.photos.search&api_key=629e34714d717373e24940da3b0ad6cb&format=json&nojsoncallback=1&text=newport beach&per_page=10',
-        success: function (data) {
-            dataFromServer = data;
-            for (let dataIndex = 0; dataIndex < 5; dataIndex++) {
-                var dataObj = {
-                    id: dataFromServer.photos.photo[dataIndex].id,
-                    server: dataFromServer.photos.photo[dataIndex].server,
-                    farm: dataFromServer.photos.photo[dataIndex].farm,
-                    secret: dataFromServer.photos.photo[dataIndex].secret,
-                };
-                beachPhotoArrayData.push(dataObj);
-            }
-            makePhotoURL(beachPhotoArrayData);
-        },
-            error: function(error){
-                console.log(error);
-        }
-    }
-    $.ajax(ajaxConfig);
-}
-// Sunset Beach Click Handler
-var sunsetBeachClickHandler = function() {
-    beachPhotoArrayData = [];
-    beachPhotoArray = [];
-    var dataFromServer;
-    var ajaxConfig = {
-        method: "GET",
-        dataType: 'json',
-        text: 'sunset beach', // input field needs to change text using jQuery later on will make make a dynamic variable
-        url: 'https://api.flickr.com/services/rest?method=flickr.photos.search&api_key=629e34714d717373e24940da3b0ad6cb&format=json&nojsoncallback=1&text=sunset beach surf&per_page=10',
-        success: function (data) {
-            dataFromServer = data;
-            for (let dataIndex = 0; dataIndex < 5; dataIndex++) {
-                var dataObj = {
-                    id: dataFromServer.photos.photo[dataIndex].id,
-                    server: dataFromServer.photos.photo[dataIndex].server,
-                    farm: dataFromServer.photos.photo[dataIndex].farm,
-                    secret: dataFromServer.photos.photo[dataIndex].secret,
-                };
-                beachPhotoArrayData.push(dataObj);
-            }
-            makePhotoURL(beachPhotoArrayData);
-        },
-            error: function(error){
-                console.log(error);
-            }
-    }
-    $.ajax(ajaxConfig);
-}
-
-//Seal Beach Click Handler for Ajax Call
-var sealBeachClickHandler = function() {
-    beachPhotoArrayData = [];
-    beachPhotoArray = [];
-    var dataFromServer;
-    var ajaxConfig = {
-        method: "GET",
-        text: 'seal beach', // input field needs to change text using jQuery
-        url: 'https://api.flickr.com/services/rest?method=flickr.photos.search&api_key=629e34714d717373e24940da3b0ad6cb&format=json&nojsoncallback=1&text=seal beach surf&per_page=10',
-        success: function (data) {
-            dataFromServer = data;
-            for (let dataIndex = 0; dataIndex < 5; dataIndex++) {
-                var dataObj = {
-                    id: dataFromServer.photos.photo[dataIndex].id,
-                    server: dataFromServer.photos.photo[dataIndex].server,
-                    farm: dataFromServer.photos.photo[dataIndex].farm,
-                    secret: dataFromServer.photos.photo[dataIndex].secret,
-                };
-                beachPhotoArrayData.push(dataObj);
-            }
-            makePhotoURL(beachPhotoArrayData);
-        },
-        error: function (error) {
-            console.log(error);
-        }
-    }
-    $.ajax(ajaxConfig);
-}
+// // Newport Beach Click Handler
+// var nbClickHandler = function() {
+//     beachPhotoArrayData = [];
+//     beachPhotoArray = [];
+//     var dataFromServer;
+//     var ajaxConfig = {
+//         method: "GET",
+//         text: 'newport beach', // input field needs to change text using jQuery
+//         url: 'https://api.flickr.com/services/rest?method=flickr.photos.search&api_key=629e34714d717373e24940da3b0ad6cb&format=json&nojsoncallback=1&text=newport beach&per_page=10',
+//         success: function (data) {
+//             dataFromServer = data;
+//             for (let dataIndex = 0; dataIndex < 5; dataIndex++) {
+//                 var dataObj = {
+//                     id: dataFromServer.photos.photo[dataIndex].id,
+//                     server: dataFromServer.photos.photo[dataIndex].server,
+//                     farm: dataFromServer.photos.photo[dataIndex].farm,
+//                     secret: dataFromServer.photos.photo[dataIndex].secret,
+//                 };
+//                 beachPhotoArrayData.push(dataObj);
+//             }
+//             makePhotoURL(beachPhotoArrayData);
+//         },
+//             error: function(error){
+//                 console.log(error);
+//         }
+//     }
+//     $.ajax(ajaxConfig);
+// }
+// // Sunset Beach Click Handler
+// var sunsetBeachClickHandler = function() {
+//     beachPhotoArrayData = [];
+//     beachPhotoArray = [];
+//     var dataFromServer;
+//     var ajaxConfig = {
+//         method: "GET",
+//         dataType: 'json',
+//         text: 'sunset beach', // input field needs to change text using jQuery later on will make make a dynamic variable
+//         url: 'https://api.flickr.com/services/rest?method=flickr.photos.search&api_key=629e34714d717373e24940da3b0ad6cb&format=json&nojsoncallback=1&text=sunset beach surf&per_page=10',
+//         success: function (data) {
+//             dataFromServer = data;
+//             for (let dataIndex = 0; dataIndex < 5; dataIndex++) {
+//                 var dataObj = {
+//                     id: dataFromServer.photos.photo[dataIndex].id,
+//                     server: dataFromServer.photos.photo[dataIndex].server,
+//                     farm: dataFromServer.photos.photo[dataIndex].farm,
+//                     secret: dataFromServer.photos.photo[dataIndex].secret,
+//                 };
+//                 beachPhotoArrayData.push(dataObj);
+//             }
+//             makePhotoURL(beachPhotoArrayData);
+//         },
+//             error: function(error){
+//                 console.log(error);
+//             }
+//     }
+//     $.ajax(ajaxConfig);
+// }
+//
+// //Seal Beach Click Handler for Ajax Call
+// var sealBeachClickHandler = function() {
+//     beachPhotoArrayData = [];
+//     beachPhotoArray = [];
+//     var dataFromServer;
+//     var ajaxConfig = {
+//         method: "GET",
+//         text: 'seal beach', // input field needs to change text using jQuery
+//         url: 'https://api.flickr.com/services/rest?method=flickr.photos.search&api_key=629e34714d717373e24940da3b0ad6cb&format=json&nojsoncallback=1&text=seal beach surf&per_page=10',
+//         success: function (data) {
+//             dataFromServer = data;
+//             for (let dataIndex = 0; dataIndex < 5; dataIndex++) {
+//                 var dataObj = {
+//                     id: dataFromServer.photos.photo[dataIndex].id,
+//                     server: dataFromServer.photos.photo[dataIndex].server,
+//                     farm: dataFromServer.photos.photo[dataIndex].farm,
+//                     secret: dataFromServer.photos.photo[dataIndex].secret,
+//                 };
+//                 beachPhotoArrayData.push(dataObj);
+//             }
+//             makePhotoURL(beachPhotoArrayData);
+//         },
+//         error: function (error) {
+//             console.log(error);
+//         }
+//     }
+//     $.ajax(ajaxConfig);
+// }
 
 var showModal = function(){
     var backgroundImage = $(event.currentTarget).css('background-image');
@@ -289,31 +340,6 @@ var closeModal = function(){
     $('.pictureModal').hide();
 }
 
-let beachInput = 'newport beach'; //currently just a placeholder
-let beachObject = {};
 
-function googleGeoLoc(name){
-    $.ajax({
-        dataType: 'json',
-        url: 'http://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyDbDr73Tuj2WLSNXkSc2P8mH2JdF0xjAeo&address=' + name,
-        method: 'get',
-        success: function(response){
 
-            //store these variables
-            console.log(response['results'][0]['address_components'][0]['long_name']); //string
-            console.log(response['results'][0]['geometry']['location']['lat']); //num
-            console.log(response['results'][0]['geometry']['location']['lng']); //num
-
-            beachObject.name = response['results'][0]['address_components'][0]['long_name'];
-            beachObject.latLong = [];
-            beachObject.latLong.push(response['results'][0]['geometry']['location']['lat']);
-            beachObject.latLong.push(response['results'][0]['geometry']['location']['lng']);
-            console.log(beachObject);
-        },
-        error: function(response){
-            console.log(response);
-            console.log('ERRRROR');
-        }
-    })
-}
 
