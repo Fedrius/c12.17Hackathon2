@@ -4,13 +4,19 @@
 $(document).ready(init);
 
 /***************************************************************************************************
- * init - adds click handler on search button
+ * init - adds clicks handlers on search button, keypress for location, clickhandler for main page logo
  * @param none
  * @return undefined
  * @calls on click of search button calls googleGeoLoc(location);
  */
 function init(){
     $('.locationInput').attr('autocomplete','off');
+    $(".logoContainer").on("click", ()=>{
+        $(".titlePageContainer").addClass("hidden");
+        $(".mainPageContainer").addClass("visible");
+    });
+
+
     $(".searchButton").on("click", ()=>{
         let location = $(".locationInput").val();
         if(location.length <= 2){
@@ -64,6 +70,8 @@ function googleGeoLoc(name){
             localTemp(beachObject.lat, beachObject.long);
             weatherApi(beachObject.lat, beachObject.long);
             flickrClickHandler(beachFlickr);
+
+
         },
         error: function(response){
             console.log(response);
@@ -177,6 +185,9 @@ function weatherApi(lat, long){
         var makePhotoDiv = definePhotoDiv.css('background-image', 'url(' + beachPhoto + ')').attr('onclick','showModal()');
         $('.pictureInfoDataContainer').append(makePhotoDiv);
     }
+    $(".dataPageContainer").addClass("visible");
+
+
 };
 /***************************************************************************************************
  * flickrClickHandler - ajax call to flickr API which creates a data object which holds encrypted URL information
