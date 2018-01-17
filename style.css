@@ -97,7 +97,7 @@
 }
 
 .headerContainer {
-    border: 1px solid black;
+    /*border: 1px solid black;*/
     display: flex;
     justify-content: space-around;
     width: 100%;
@@ -111,7 +111,7 @@
 }
 
 .sunrise {
-    border: 1px solid salmon;
+    /*border: 1px solid salmon;*/
     height: 100%;
     width: 8%;
     color: white;
@@ -135,7 +135,7 @@
 }
 
 .sunset {
-    border: 1px solid salmon;
+    /*border: 1px solid salmon;*/
     height: 100%;
     width: 8%;
     color: white;
@@ -175,12 +175,14 @@
 
 }
 .tempTime{
-    border: 1px solid purple;
+    /*border: 1px solid purple;*/
 }
 .tempPic{
     height: 30%;
     width: 30%;
-    border: 1px solid green;
+    /*border: 1px solid green;*/
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 .infoContainer{
     border: 3px solid blue;
@@ -215,7 +217,9 @@
     width: 100%;
 }
 .tideInfoCategories{
-    border: 2px solid blue;
+    /*border: 2px solid blue;*/
+    color: black;
+    font-size: 3vmin;
     height: 90%;
     width: 30%;
     display: flex;
@@ -224,7 +228,7 @@
 
 }
 .categoryTitle{
-    border: 3px solid crimson;
+    /*border: 3px solid crimson;*/
     height: 16%;
 }
 .tideInfoData{
