@@ -242,7 +242,12 @@ var searchBackgroundSound = new Audio("sounds/searchPageWaves.wav");
 searchBackgroundSound.volume = .5;
 var birdChirp= new Audio("sounds/birdchirp.wav");
 birdChirp.volume = .5;
-
+// var titleMusicSound = new Audio("sounds/searchPageWaves.wav");
+// titleMusicSound.volume = .5;
+var takePlungeSound = new Audio("sounds/takePlunge.wav");
+takePlungeSound.volumne = .5;
+var seagull = new Audio("sounds/seagull.wav");
+seagull.volume = .5;
 
 function playSearchMusic(){
     searchBackgroundSound.pause();
@@ -260,15 +265,42 @@ function playBirdChirp(){
     birdChirp.currentTime = 0;
     birdChirp.play();
 }
+function playSeagull(){
+    seagull.pause();
+    seagull.currentTime = 0;
+    seagull.play();
+}
+function playTitleMusic(){
+    titleMusicSound.pause();
+    titleMusicSound.currentTime = 0;
+    titleMusicSound.play();
+    titleMusicSound.loop = true;
+}
+function stopTitleMusic(){
+    titleMusicSound.pause();
+    titleMusicSound.currentTime = 0;
+    titleMusicSound.loop = true;
+}
+
+function playTakePlunge(){
+    takePlungeSound.pause();
+    takePlungeSound.currentTime = 0;
+    takePlungeSound.play();
+}
 
 function muteSound(){
     if(searchBackgroundSound.volume === 0){
         searchBackgroundSound.volume = .5;
         birdChirp.volume = .5;
+        titleMusicSound.volume = .5;
+        seagull.volume = .5;
     }
     else{
         searchBackgroundSound.volume = 0;
         birdChirp.volume = 0;
+        titleMusicSound = 0;
+        titleMusicSound.volume = 0;
+        seagull.volume = .5;
     }
 }
 
