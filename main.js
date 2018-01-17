@@ -152,17 +152,27 @@ var makePhotoURL = function(array){
         beachPhotoArray.push(url);
         // https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}.jpg
     }
+    makePhotoDivs();
 }
 
+var makePhotoDivs = function() {
+
+    for (let photoDivIndex = 0; photoDivIndex < beachPhotoArray.length; photoDivIndex++) {
+        var definePhotoDiv = $('<div>').addClass('photoDiv');
+        var beachPhoto = beachPhotoArray[photoDivIndex];
+        var makePhotoDiv = definePhotoDiv.css('background-image', 'url(' + beachPhoto + ')').attr('onclick','showModal()');
+        $('.pictureInfoContainer').append(makePhotoDiv);
+    }
+}
 //Huntington Beach flickr ClickHandler
-var hbClickHandler = function() {
+var hbClickHandler = function(beachName) {
     beachPhotoArrayData = [];
     beachPhotoArray = [];
     var photoObj;
     var ajaxConfig = {
         method: "GET",
-        text: 'huntington beach surf', // input field needs to change text using jQuery
-        url: 'https://api.flickr.com/services/rest?method=flickr.photos.search&api_key=629e34714d717373e24940da3b0ad6cb&format=json&nojsoncallback=1&text=huntington beach surf&per_page=10',
+        text: 'huntington beach surf', // beachName + surf input field needs to change text using jQuery beachObject.name
+        url: 'https://api.flickr.com/services/rest?method=flickr.photos.search&api_key=629e34714d717373e24940da3b0ad6cb&format=json&nojsoncallback=1&text=huntington beach waves&per_page=10',
         success: function(data) {
             dataFromServer = data;
             for(let dataIndex = 0; dataIndex < 5; dataIndex++) {
@@ -269,6 +279,16 @@ var sealBeachClickHandler = function() {
     $.ajax(ajaxConfig);
 }
 
+var showModal = function(){
+    var backgroundImage = $(event.currentTarget).css('background-image');
+    $('.pictureContent').css('background-image', backgroundImage);
+    $('.pictureModal').show();
+}
+
+var closeModal = function(){
+    $('.pictureModal').hide();
+}
+
 let beachInput = 'newport beach'; //currently just a placeholder
 let beachObject = {};
 
@@ -296,3 +316,4 @@ function googleGeoLoc(name){
         }
     })
 }
+
