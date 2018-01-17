@@ -10,17 +10,6 @@ function init(){
 }
 
 
-/*All Global Variables Defined Here
- * beachPhotoArray - global array to hold photo URLS
- * @type {Array}
- * example of beachPhotoArray after input:
- * beachPhotoArray = [
- * "https://farm5.staticflickr.com/4653/39746351561_93864fe707.jpg",
- * "https://farm5.staticflickr.com/4705/39737831611_a920befbdd.jpg"
- * ];
- */
-var beachPhotoArray = [];
-
 
 
 
@@ -205,9 +194,15 @@ function weatherApi(lat, long){
 
 
 
-
+/***************************************************************************************************
+ * makePhotoURL - creates a s based on input fields in the form and adds the object to global student array
+ * @param {array} one
+ * @return undefined
+ * @calls makePhotoDivs
+ */
 
 var makePhotoURL = function(array){
+    debugger;
     var beachPhotoArray = [];
     for(let photoIndex = 0; photoIndex<array.length; photoIndex++) {
         let farm = array[photoIndex].farm;
@@ -218,14 +213,14 @@ var makePhotoURL = function(array){
         beachPhotoArray.push(url);
         // https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}.jpg
     }
-    makePhotoDivs();
+    makePhotoDivs(beachPhotoArray);
 }
 
-var makePhotoDivs = function() {
+var makePhotoDivs = function(array) {
 
-    for (let photoDivIndex = 0; photoDivIndex < beachPhotoArray.length; photoDivIndex++) {
+    for (let photoDivIndex = 0; photoDivIndex < array.length; photoDivIndex++) {
         var definePhotoDiv = $('<div>').addClass('photoDiv');
-        var beachPhoto = beachPhotoArray[photoDivIndex];
+        var beachPhoto = array[photoDivIndex];
         var makePhotoDiv = definePhotoDiv.css('background-image', 'url(' + beachPhoto + ')').attr('onclick','showModal()');
         $('.pictureInfoDataContainer').append(makePhotoDiv);
     }
@@ -233,7 +228,6 @@ var makePhotoDivs = function() {
 //Huntington Beach flickr ClickHandler
 var flickrClickHandler = function(beachName) {
     var beachPhotoArrayData = [];
-    beachPhotoArray = [];
     var flickrSearch = beachName;
     var photoObj;
     var dataFromServer;
