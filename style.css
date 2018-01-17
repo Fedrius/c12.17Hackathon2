@@ -231,6 +231,14 @@
     border: 2px solid green;
     height: 90%;
     width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.dataTitle{
+    border: 3px solid crimson;
+    height: 16%;
+    color: black;
 }
 
 
