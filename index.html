@@ -9,12 +9,13 @@
 </head>
 <body>
     <div class="mainPageContainer">
-        <div class="formContainer">
+        <button class="muteButton">Mute</button>
 
-            <form class="inputForm">
+        <div class="formContainer">
+            <form onmouseenter="playSeagull()" class="inputForm">
                 <input class="locationInput" type="text" name="search" placeholder="Search..">
             </form>
-            <button class="searchButton"></button>
+            <button onmouseenter="playBirdChirp()" onclick="playTakePlunge()" class="searchButton"></button>
 
         </div>
     </div>
@@ -36,7 +37,11 @@
                 <div class="sunsetTime"></div>
             </div>
 
+            <button class="muteButton">Mute</button>
+
+
             <button class="returnToMain">GET BACK!</button>
+
         </div>
 
         <div class="weatherInfoContainer">

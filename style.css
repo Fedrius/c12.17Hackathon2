@@ -20,6 +20,26 @@
     justify-content: center;
     align-items: center;
 }
+.muteButton{
+    position: absolute;
+    width: 2.5%;
+    height: 2.5%;
+    color: seashell;
+    font-size: 2vmin;
+    text-align: center;
+    right: 5%;
+    top: 2%;
+    background:none;
+    border:none;
+    margin:0;
+    padding:0;
+}
+.muteButton:hover {
+    cursor: pointer;
+    color: #1b6d85;
+    border-color: #1b6d85;
+    transform: scale(1.1);
+}
 
 .formContainer{
     /*border: 2px solid white;*/
@@ -328,6 +348,9 @@ h2 {
 .modalButton{
     height: 5%;
     width: 10%;
+}
+.muteButton{
+
 }
 
 .returnToMain {
