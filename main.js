@@ -29,6 +29,7 @@ function weatherApi(){
                 var tideTime = tideArray.tideTime;
                 var tideHeight = tideArray.tideHeight_mt;
                 var tideType = tideArray.tide_type;
+                console.log(tideArray);
             }
             // console.log(tideArray);
         },
