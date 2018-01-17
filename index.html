@@ -8,13 +8,18 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="overlay"></div>
+    <div class="titlePageContainer">
+        <div class="logoContainer"></div>
+    </div>
     <div class="mainPageContainer">
-        <div class="formContainer">
+        <button class="muteButton">Mute</button>
 
-            <form class="inputForm">
+        <div class="formContainer">
+            <form onmouseenter="playSeagull()" class="inputForm">
                 <input class="locationInput" type="text" name="search" placeholder="Search..">
             </form>
-            <button class="searchButton"></button>
+            <button onmouseenter="playBirdChirp()" onclick="playTakePlunge()" class="searchButton"></button>
 
         </div>
     </div>
@@ -35,6 +40,12 @@
                 <div class="moonImg"></div>
                 <div class="sunsetTime"></div>
             </div>
+
+            <button class="muteButton">Mute</button>
+
+
+            <button class="returnToMain">GET BACK!</button>
+
         </div>
 
         <div class="weatherInfoContainer">
@@ -88,7 +99,7 @@
                 </div>
             </div>
             <div class="pictureInfoContainer">
-                <div class = "pictureInfoHeader">Pictures</div>
+                <div class = "pictureInfoHeader"></div>
                 <div class="pictureInfoDataContainer"></div>
             </div>
         </div>

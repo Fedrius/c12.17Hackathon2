@@ -4,18 +4,40 @@
 $(document).ready(init);
 
 /***************************************************************************************************
- * init - adds click handler on search button
+ * init - adds clicks handlers on search button, keypress for location, clickhandler for main page logo
  * @param none
  * @return undefined
  * @calls on click of search button calls googleGeoLoc(location);
  */
 function init(){
+    playTitleMusic();
+    $('.muteButton').click(muteSound);
     $('.locationInput').attr('autocomplete','off');
+    $(".logoContainer").on("click", ()=>{
+        $(".titlePageContainer").addClass("hidden");
+        $(".mainPageContainer").addClass("visible");
+    });
+
+
     $(".searchButton").on("click", ()=>{
         let location = $(".locationInput").val();
+        if(location.length <= 2){
+            return;
+        }
         $(".locationInput").val("");
         googleGeoLoc(location);         //for ajax call
-
+    });
+    $(".locationInput").keypress(event=>{
+        if (event.which === 13){
+            console.log('enter was pressed');
+            event.preventDefault();
+            let location = $(".locationInput").val();
+            if(location.length <= 2){
+                return;
+            }
+            $(".locationInput").val("");
+            googleGeoLoc(location);         //for ajax call
+        }
     });
 }
 
@@ -46,8 +68,12 @@ function googleGeoLoc(name){
             $(".beachLocation").text(beachObject.city + ", " + beachObject.state);
             var beachFlickr = beachObject.name;
             // console.log(beachObject);
+
+            localTemp(beachObject.lat, beachObject.long);
             weatherApi(beachObject.lat, beachObject.long);
-            // flickrClickHandler(beachFlickr);
+            flickrClickHandler(beachFlickr);
+
+
         },
         error: function(response){
             console.log(response);
@@ -63,16 +89,16 @@ function localTemp(lat, long){
         url: `https://api.worldweatheronline.com/premium/v1/weather.ashx?key=ee5b80f43e9149f79be22719181601&format=json&q=${lat}, ${long}&num_of_days=1`,
         method: 'get',
         success: function(result){
-            var hourlyWeather = [];
+            $(`.temp .tempTemp`).text("");
             for(var tempIndex = 2; tempIndex < 7; tempIndex++){
-                var tempObj = {};
                 var tempHour = result.data.weather[0].hourly[tempIndex];
                 var tempAtHour = tempHour.tempF;
-                
-                tempObj.tempAtHour = tempAtHour;
-                hourlyWeather.push(tempObj);
+                $(`.temp${tempIndex-1} .tempTemp`).html(tempAtHour+ "&#x2109");
             }
-            // console.log(hourlyWeather);
+        },
+        error: function(result){
+            console.log(result);
+            console.log("error");
         }
     })
 }
@@ -95,7 +121,7 @@ function weatherApi(lat, long){
             $(".sunsetTime").text("");
             $(".tideData").text("");
             $(`.temp .tempPic`).css("background-image", "");
-            $(`.temp .tempTemp`).text("");
+            // $(`.temp .tempTemp`).text("");
 
 
             //find all weather data
@@ -116,8 +142,7 @@ function weatherApi(lat, long){
                 var hourObj = result.data.weather[0].hourly[hourlyIndex];
                 var imageDirect = result.data.weather[0].hourly[hourlyIndex].weatherIconUrl[0].value;
                 $(`.temp${hourlyIndex-1} .tempPic`).css("background-image", 'url('+imageDirect+')');
-                // var tempAtHour = hourObj.tempF;
-                // $(`.temp${hourlyIndex-1} .tempTemp`).html(tempAtHour+ "&#x2109");
+
 
                 statsObj.windSpeed = hourObj.windspeedMiles;
                 statsObj.windDir = hourObj.winddir16Point;
@@ -126,6 +151,10 @@ function weatherApi(lat, long){
                 statsObj.waterTemp = hourObj.tempF;
                 timeOfDayStats.push(statsObj);
             }
+            $(".dataTitle").text('');  //clear text
+            $(".swellData").text(timeOfDayStats[0].swellHeight + "ft, " + timeOfDayStats[0].swellDir);
+            $(".waterTempData").html(timeOfDayStats[0].waterTemp+"&#x2109");
+            $(".windData").text(timeOfDayStats[0].windSpeed+"mph, "+ timeOfDayStats[0].windDir);
             $(".tempBox").on("click", function(){
                 var weatherAtTime = timeOfDayStats[this.id];
                 $(".dataTitle").text('');  //clear text
@@ -143,38 +172,22 @@ function weatherApi(lat, long){
 }
 
 /***************************************************************************************************
- * makePhotoURL - creates an array of photo URLS based on data array being pushed in from the flickr Ajax Call
- * @param {array} one
- * @return undefined
- * @calls makePhotoDivs
- */
-function makePhotoURL(array){
-    var beachPhotoArray = [];
-    for(let photoIndex = 0; photoIndex<array.length; photoIndex++) {
-        let farm = array[photoIndex].farm;
-        let id = array[photoIndex].id;
-        let server = array[photoIndex].server;
-        let secret = array[photoIndex].secret;
-        let url = `https://farm${farm}.staticflickr.com/${server}/${id}_${secret}.jpg`;
-        beachPhotoArray.push(url);
-        // https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}.jpg
-    }
-    makePhotoDivs(beachPhotoArray);
-}
-
-/***************************************************************************************************
  * makePhotoDivs - dynamically creates and appends divs onto the pictureInforDataContainer div
  * @param {array} one
  * @return undefined
  * @calls undefined
  */
  function makePhotoDivs(array) {
+    $('.pictureInfoDataContainer div').remove();
     for (let photoDivIndex = 0; photoDivIndex < array.length; photoDivIndex++) {
         var definePhotoDiv = $('<div>').addClass('photoDiv');
         var beachPhoto = array[photoDivIndex];
         var makePhotoDiv = definePhotoDiv.css('background-image', 'url(' + beachPhoto + ')').attr('onclick','showModal()');
         $('.pictureInfoDataContainer').append(makePhotoDiv);
     }
+    $(".dataPageContainer").addClass("visible");
+
+
 };
 /***************************************************************************************************
  * flickrClickHandler - ajax call to flickr API which creates a data object which holds encrypted URL information
@@ -193,20 +206,19 @@ function makePhotoURL(array){
         success: function(data) {
             dataFromServer = data;
             for(let dataIndex = 0; dataIndex < 4; dataIndex++) {
-                var dataObj = {
-                    id: dataFromServer.photos.photo[dataIndex].id,
-                    server: dataFromServer.photos.photo[dataIndex].server,
-                    farm: dataFromServer.photos.photo[dataIndex].farm,
-                    secret: dataFromServer.photos.photo[dataIndex].secret,
-                };
-                beachPhotoArrayData.push(dataObj);
+                let farm = dataFromServer.photos.photo[dataIndex].farm;
+                let id = dataFromServer.photos.photo[dataIndex].id;
+                let server = dataFromServer.photos.photo[dataIndex].server;
+                let secret = dataFromServer.photos.photo[dataIndex].secret;
+                let url = `https://farm${farm}.staticflickr.com/${server}/${id}_${secret}.jpg`;
+                beachPhotoArrayData.push(url);
             }
-            makePhotoURL(beachPhotoArrayData);
+            makePhotoDivs(beachPhotoArrayData);
         },
         error: function() {
             console.log(false);
         }
-    }
+    };
     $.ajax(ajaxConfig);
 }
 /***************************************************************************************************
@@ -233,3 +245,137 @@ function resetPage(){
 
 
 }
+
+// Audio Javascript
+/***************************************************************************************************
+ * searchBackgroundSound - global variable that creates a new audio sound for the search page
+ * @param undefined none
+ * @return undefined none
+ */
+var searchBackgroundSound = new Audio("sounds/searchPageWaves.wav");
+searchBackgroundSound.volume = .5;
+/***************************************************************************************************
+ * birdChirp - global variable that creates a new audio sound for hovering over the search button
+ * @param undefined none
+ * @return undefined none
+ */
+var birdChirp= new Audio("sounds/birdchirp.wav");
+birdChirp.volume = .5;
+
+/***************************************************************************************************
+ * titleMusicSound - global variable that creates audio sound for title page
+ * @param undefined none
+ * @return undefined none
+ */
+var titleMusicSound = new Audio("sounds/spongebob.mp3");
+titleMusicSound.volume = .5;
+
+/***************************************************************************************************
+ * takePlungeSound - global variable that creates a new audio sound for clicking on search button
+ * @param undefined none
+ * @return undefined none
+ */
+var takePlungeSound = new Audio("sounds/takePlunge.wav");
+takePlungeSound.volumne = .5;
+/***************************************************************************************************
+ * seagull - global variable that creates a seagull sound for mouseentering input field
+ * @param undefined none
+ * @return undefined none
+ */
+var seagull = new Audio("sounds/seagull.wav");
+seagull.volume = .5;
+
+/***************************************************************************************************
+ * playSearchMusic - function that plays the search page music
+ * @param undefined none
+ * @return undefined
+ */
+function playSearchMusic(){
+    searchBackgroundSound.pause();
+    searchBackgroundSound.currentTime = 0;
+    searchBackgroundSound.play();
+    searchBackgroundSound.loop = true;
+}
+/***************************************************************************************************
+ * stopSearchMusic - click handler that stops the search page music
+ * @param undefined none
+ * @return undefined
+ */
+function stopSearchMusic(){
+    searchBackgroundSound.pause();
+    searchBackgroundSound.currentTime = 0;
+    searchBackgroundSound.loop = true;
+}
+/***************************************************************************************************
+ * playBirdChirp - click handler that plays the bird chirp on hovering over the search button
+ * @param undefined none
+ * @return undefined
+ */
+function playBirdChirp(){
+    birdChirp.pause();
+    birdChirp.currentTime = 0;
+    birdChirp.play();
+}
+/***************************************************************************************************
+ * playSeagull - click handler that plays seagull sounds on hovering over the input field
+ * @param undefined none
+ * @return undefined
+ */
+function playSeagull(){
+    seagull.pause();
+    seagull.currentTime = 0;
+    seagull.play();
+}
+/***************************************************************************************************
+ * playTitleMusic - click handler that plays the title page music when it loads.
+ * @param undefined none
+ * @return undefined
+ */
+function playTitleMusic(){
+    titleMusicSound.pause();
+    titleMusicSound.currentTime = 0;
+    titleMusicSound.play();
+    titleMusicSound.loop = true;
+}
+/***************************************************************************************************
+ * stopTitleMusic - click handler that stops the title page music
+ * @param undefined none
+ * @return undefined
+ */
+function stopTitleMusic(){
+    titleMusicSound.pause();
+    titleMusicSound.currentTime = 0;
+    titleMusicSound.loop = true;
+}
+/***************************************************************************************************
+ * playTakePlunge - click handler that plays the take plunge sound on search button click.
+ * @param undefined none
+ * @return undefined
+ */
+function playTakePlunge(){
+    takePlungeSound.pause();
+    takePlungeSound.currentTime = 0;
+    takePlungeSound.play();
+}
+/***************************************************************************************************
+ * muteSound - click handler that stops all sounds.
+ * @param undefined none
+ * @return undefined
+ */
+function muteSound(){
+    if(titleMusicSound.volume === 0){
+        searchBackgroundSound.volume = .5;
+        birdChirp.volume = .5;
+        titleMusicSound.volume = .5;
+        seagull.volume = .5;
+        takePlungeSound.volume = .5;
+    }
+    else{
+        searchBackgroundSound.volume = 0;
+        birdChirp.volume = 0;
+        titleMusicSound.volume = 0;
+        seagull.volume = 0;
+        takePlungeSound.volume = 0;
+    }
+}
+

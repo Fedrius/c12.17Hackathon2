@@ -5,12 +5,104 @@
     user-focus: none;
     outline: none;
     font-family: 'Concert One', cursive;
+}
+/*keyframes here*/
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        visibility: visible
+    }
+    to {
+        opacity: 0;
+        visibility: hidden
+    }
+}
+@keyframes fadeOutShrink {
+    from {
+        opacity: 1;
+        transform: scale(1) translateY(69%);
+        visibility: visible
+    }
+    to {
+        opacity: 0;
+        transform: scale(0) translate(-100%);
+        visibility: hidden
+    }
+}
+@keyframes fadeInRight {
+    from { opacity: 0; visibility: hidden; transform: translate(-20%) }
+    to { opacity: 1; visibility: visible; transform: translate(0%)}
 
 }
 
+.overlay{                        /*ENTIRE PAGE HERE, overlay for transitions*/
+    position: absolute;
+    height:100%;
+    width: 100%;
+    background: black;
+    animation-name: fadeOut;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    z-index: 8;
+}
+
+.titlePageContainer{                  /*ENTIRE PAGE HERE */
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    background-image: url("images/SurfsUpBackground.jpg");
+    background-repeat: no-repeat;
+    background-size: cover ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 6;
+}
+.logoContainer{
+    height: 40%;
+    width: 30%;
+    position: absolute;
+    left: 36.4%;
+    /*border: 1px solid black;*/
+    background-image: url("images/surfsup.gif");
+    background-repeat: no-repeat;
+    background-size: contain ;
+}
+
+.logoContainer:hover{
+    transform: scale(1.1);
+    cursor: pointer;
+}
+.logoContainer:active{
+    transform: scale(.95);
+}
+
+
+.titlePageContainer.hidden{
+    height: 40%;
+    width: 30%;
+    position: absolute;
+    left: 36.4%;
+    /*border: 1px solid black;*/
+    background-image: url("images/surfsup.gif");
+    /*background-image: url("images/SurfsUpBackground.jpg");*/
+    background-repeat: no-repeat;
+    background-size: contain ;
+    animation-name: fadeOutShrink;
+    animation-duration: 1.3s;
+    /*transition-duration: 10s;*/
+    transition-timing-function: ease-out;
+    /*z-index: 6;*/
+    visibility: hidden;
+}
+
+
+
+                                    /*ENTIRE PAGE HERE */
+
 .mainPageContainer{
     /*border: 1px solid black;*/
-    /*position: absolute;*/
+    position: absolute;
     height: 100vh;
     width: 100vw;
     background-image: url("images/surferBg0.jpg");
@@ -19,6 +111,45 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 5;
+    visibility: hidden;
+}
+.mainPageContainer.visible{
+    /*border: 1px solid black;*/
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    background-image: url("images/surferBg0.jpg");
+    background-repeat: no-repeat;
+    background-size: cover ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation-name: fadeInRight;
+    animation-duration: .7s;
+    transition-timing-function: ease-in;
+    z-index: 5;
+    visibility: visible;
+}
+.muteButton{
+    position: absolute;
+    width: 2.5%;
+    height: 2.5%;
+    color: seashell;
+    font-size: 2vmin;
+    text-align: center;
+    right: 5%;
+    top: 2%;
+    background:none;
+    border:none;
+    margin:0;
+    padding:0;
+}
+.muteButton:hover {
+    cursor: pointer;
+    color: #1b6d85;
+    border-color: #1b6d85;
+    transform: scale(1.1);
 }
 
 .formContainer{
@@ -30,9 +161,8 @@
     display: flex;
     justify-content: space-between;
     box-shadow: .1em .1em .1em .1em black;
-
-
 }
+
 .inputForm{
     width: 100%;
     height: 100%;
@@ -83,16 +213,32 @@
 }
 
 
-/*DataPage*/
+/*DataPage*/                        /*ENTIRE PAGE HERE*/
 .dataPageContainer{
-    border: 2px solid red;
+    /*border: 2px solid red;*/
     position: absolute;
     height: 100vh;
     width: 100vw;
-    color: white;
     /*background: linear-gradient(120deg, #ece837, #ec8c53);*/
-    background-image: url("images/infoBeachImage.jpg");
+    /*background-image: url("images/infoBeachImage.jpg");*/
+    background-image: url("https://wonderopolis.org/wp-content/uploads/2014/07/dreamstime_xl_22656707-custom.jpg");
     background-size: cover;
+    visibility: hidden;
+}
+.dataPageContainer.visible{
+    /*border: 2px solid red;*/
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    /*background: linear-gradient(120deg, #ece837, #ec8c53);*/
+    /*background-image: url("images/infoBeachImage.jpg");*/
+    background-image: url("https://wonderopolis.org/wp-content/uploads/2014/07/dreamstime_xl_22656707-custom.jpg");
+    background-size: cover;
+    animation-name: fadeInRight;
+    animation-duration: .7s;
+    transition-timing-function: ease-in;
+    z-index: 10;
+    visibility: visible;
 }
 
 .headerContainer {
@@ -109,16 +255,24 @@
     font-family: 'Concert One', cursive;
 }
 
+h1 {
+    font-size: 5vmin;
+}
+
+h2 {
+    font-size: 3vmin;
+}
+
 .sunrise {
     /*border: 1px solid salmon;*/
     height: 100%;
     width: 8%;
-    color: white;
     text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+    font-size: 2.4vmin;
 }
 .sunImg{
     height: 45%;
@@ -137,13 +291,14 @@
     /*border: 1px solid salmon;*/
     height: 100%;
     width: 8%;
-    color: white;
     text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+    font-size: 2.4vmin;
 }
+
 .moonImg{
     height: 45%;
     width: 50%;
@@ -159,12 +314,15 @@
 
 .weatherInfoContainer {
     display: flex;
+    font-size: 2.3vmin;
     justify-content: space-around;
     height: 16%;
+    background-color: rgba(240,255,255,0.3);
+    box-shadow: 10px 10px 27px 1px rgba(211,214,214,1);
 }
 
 .tempBox {
-    border: 1px solid black;
+    /*border: 1px solid black;*/
     height: 100%;
     width: 9%;
     display: flex;
@@ -184,7 +342,7 @@
     background-size: cover;
 }
 .infoContainer{
-    border: 3px solid blue;
+    /*border: 3px solid blue;*/
     display: flex;
     justify-content: center;
     align-items: center;
@@ -192,7 +350,7 @@
 }
 
 .tideInfoContainer {
-    border: 1px solid black;
+    /*border: 1px solid black;*/
     width: 80%;
     height: 100%;
     display: flex;
@@ -200,15 +358,16 @@
     justify-content: flex-start;
     align-items: flex-start;
 }
+
 .tideInfoHeader{
     width: 100%;
     height: 10%;
-    border: 1px solid blue;
+    /*border: 1px solid blue;*/
     text-align: center;
-    font-size: 4vmin;
+    font-size: 5vmin;
 }
 .tideInfoDataContainer{
-    border: 5px solid white;
+    /*border: 5px solid white;*/
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -216,27 +375,32 @@
     width: 100%;
 }
 .tideInfoCategories{
-    /*border: 2px solid blue;*/
-    color: black;
-    font-size: 3vmin;
+    /* border: 2px solid blue; */
+    font-size: 4vmin;
     height: 90%;
-    width: 30%;
+    width: 50%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-
+    background-color: rgba(240,255,255,0.3);
+    border-radius: 5px;
+    /*box-shadow: 10px 10px 71px 0px rgba(0,0,0,0.75);*/
 }
 .categoryTitle{
     /*border: 3px solid crimson;*/
     height: 16%;
 }
 .tideInfoData{
-    border: 2px solid green;
+    /* border: 2px solid green; */
+    font-size: 4vmin;
     height: 90%;
-    width: 60%;
+    width: 50%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    background-color: rgba(240,255,255,0.2);
+    border-radius: 5px;
+    /*box-shadow: 10px 10px 71px 0px rgba(0,0,0,0.75);*/
 }
 .dataTitle{
     /*border: 3px solid crimson;*/
@@ -248,23 +412,21 @@
     height: 16%;
     color: black;
 }
-
-
-
 .pictureInfoContainer {
-    border: 1px solid black;
+    /*border: 1px solid black;*/
+    font-size: 3vmin;
     width: 80%;
     height: 100%;
 }
 .pictureInfoHeader{
     width: 100%;
     height: 10%;
-    border: 1px solid blue;
+    /*border: 1px solid blue;*/
     text-align: center;
     font-size: 4vmin;
 }
 .pictureInfoDataContainer{
-    border: 5px solid white;
+    /*border: 5px solid white;*/
     display: flex;
     justify-content: space-around;
     align-items: flex-start;
@@ -273,18 +435,20 @@
     width: 100%;
 }
 .photoDiv{
-    width: 50%;
-    height: 50%;
+    width: 45%;
+    height: 45%;
     display: flex;
     justify-content: center;
-    align-items:flex-end;
+    align-items: flex-end;
     background: no-repeat center;
     background-size: cover;
+    border-radius: 5px;
+    box-shadow: 10px 10px 18px 0px rgba(0,0,0,0.75);
 }
 .pictureModal {
     display: none;
     position: fixed;
-    z-index: 1;
+    z-index: 20;
     left: 0;
     top: 0;
     width: 100%;
@@ -312,7 +476,14 @@
     height: 5%;
     width: 10%;
 }
+.muteButton{
 
+}
 
+.returnToMain {
+    position: absolute;
+    top: 5%;
+    right: 2%;
+}
 
 
