@@ -4,7 +4,7 @@ $(document).ready(init);
  * init - adds click handler on search button
  * @param none
  * @return undefined
- * @calls googleGeoLoc(location);
+ * @calls on click of search button calls googleGeoLoc(location);
  */
 function init(){
     $('.locationInput').attr('autocomplete','off');
