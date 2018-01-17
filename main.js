@@ -354,18 +354,19 @@ function playTakePlunge(){
  * @return undefined
  */
 function muteSound(){
-    if(searchBackgroundSound.volume === 0){
+    if(titleMusicSound.volume === 0){
         searchBackgroundSound.volume = .5;
         birdChirp.volume = .5;
         titleMusicSound.volume = .5;
         seagull.volume = .5;
+        takePlungeSound.volume = .5;
     }
     else{
         searchBackgroundSound.volume = 0;
         birdChirp.volume = 0;
-        titleMusicSound = 0;
         titleMusicSound.volume = 0;
-        seagull.volume = .5;
+        seagull.volume = 0;
+        takePlungeSound.volume = 0;
     }
 }
 
