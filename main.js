@@ -37,8 +37,8 @@ function googleGeoLoc(name){
             $(".beachLocation").text(beachObject.city + ", " + beachObject.state);
             var beachFlickr = beachObject.name;
             // console.log(beachObject);
-            // weatherApi(beachObject.lat, beachObject.long);
-            flickrClickHandler(beachFlickr);
+            weatherApi(beachObject.lat, beachObject.long);
+            // flickrClickHandler(beachFlickr);
         },
         error: function(response){
             console.log(response);
@@ -76,23 +76,29 @@ function weatherApi(lat, long){
             $(".tideData").text(tideHeight + " meters, " + tideType);
 
             var timeOfDayStats = [];            //array to hold objects
-            console.log(result);
+
             for (var hourlyIndex = 2; hourlyIndex < 7; hourlyIndex++){
                 var statsObj = {};
                 var hourObj = result.data.weather[0].hourly[hourlyIndex];
                 var imageDirect = result.data.weather[0].hourly[hourlyIndex].weatherIconUrl[0].value;
                 $(`.temp${hourlyIndex-1} .tempPic`).css("background-image", 'url('+imageDirect+')');
-                var tempAtHour = hourObj.tempF;
-                $(`.temp${hourlyIndex-1} .tempTemp`).html(tempAtHour+ "&#x2109");
-
+                // var tempAtHour = hourObj.tempF;
+                // $(`.temp${hourlyIndex-1} .tempTemp`).html(tempAtHour+ "&#x2109");
                 statsObj.windSpeed = hourObj.windspeedMiles;
                 statsObj.windDir = hourObj.winddir16Point;
                 statsObj.swellHeight = hourObj.swellHeight_ft;
                 statsObj.swellDir = hourObj.swellDir16Point;
-                statsObj.waterTemp = hourObj.waterTemp_F;
+                statsObj.waterTemp = hourObj.tempF;
                 timeOfDayStats.push(statsObj);
-                // console.log(statsObj);
             }
+            $(".tempBox").on("click", function(){
+                var weatherAtTime = timeOfDayStats[this.id];
+                $(".dataTitle").text('');  //clear text
+                $(".swellData").text(weatherAtTime.swellHeight + "ft, " + weatherAtTime.swellDir);
+                $(".waterTempData").html(weatherAtTime.waterTemp+"&#x2109");
+                $(".windData").text(weatherAtTime.windSpeed+"mph, "+ weatherAtTime.windDir);
+            });
+        console.log(timeOfDayStats);
 
 
         },

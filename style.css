@@ -91,7 +91,7 @@
     height: 100vh;
     width: 100vw;
     color: white;
-    /*background: linear-gradient(120deg, #76ecd6, #fffdcb);*/
+    /*background: linear-gradient(120deg, #ece837, #ec8c53);*/
     background-image: url("images/infoBeachImage.jpg");
     background-size: cover;
 }
@@ -240,7 +240,12 @@
     justify-content: space-around;
 }
 .dataTitle{
-    border: 3px solid crimson;
+    /*border: 3px solid crimson;*/
+    height: 16%;
+    color: black;
+}
+.tideData{
+    /*border: 3px solid crimson;*/
     height: 16%;
     color: black;
 }
