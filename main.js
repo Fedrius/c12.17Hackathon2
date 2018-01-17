@@ -57,12 +57,6 @@ function googleGeoLoc(name){
 };
 
 
-/***************************************************************************************************
- * weatherApi - ajax call that appends all of the relevant surf and weather conditions onto the DOM
- * @param (number, number) two - Latitude and Longitude coordinates of the beach location
- * @return undefined none
- */
-
 function localTemp(lat, long){
     $.ajax({
         dataType: "json",
@@ -83,7 +77,11 @@ function localTemp(lat, long){
     })
 }
 
-
+/***************************************************************************************************
+ * weatherApi - ajax call that appends all of the relevant surf and weather conditions onto the DOM
+ * @param (number, number) two - Latitude and Longitude coordinates of the beach location
+ * @return undefined none
+ */
 function weatherApi(lat, long){
     $.ajax({
         dataType: "json",
