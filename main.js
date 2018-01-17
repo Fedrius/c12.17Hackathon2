@@ -1,8 +1,11 @@
 $(document).ready(init);
 
-//init -
-//@Params -
-//@Returns -
+/***************************************************************************************************
+ * init - adds click handler on search button
+ * @param none
+ * @return undefined
+ * @calls on click of search button calls googleGeoLoc(location);
+ */
 function init(){
     $('.locationInput').attr('autocomplete','off');
     $(".searchButton").on("click", ()=>{
@@ -13,9 +16,12 @@ function init(){
     });
 }
 
-//googleGeoLoc - Ajax call with Google Geo Location when user clicks the search button
-//@Params - input value which is a string the from search box
-//@Returns - beach location data and calls flickr ajax function
+/***************************************************************************************************
+ * googleGeoLoc - Ajax call with Google Geo Location when user clicks the search button
+ * @param name user input value which is a string the from search box
+ * @return undefined
+ * @calls flickrClickHandler(beachFlickr), weatherApi(beachObject.lat, beachObject.long);
+ */
 function googleGeoLoc(name){
     $.ajax({
         dataType: 'json',
@@ -191,6 +197,8 @@ var closeModal = function(){
     $('.pictureModal').hide();
 }
 
+function resetPage(){
+    $('.pictureInfoDataContainer div').remove();
 
 
-
+}
