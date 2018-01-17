@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>MainPage</title>
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
     <link href="mainStyle.css" rel="stylesheet">
+    <script src="main.js"></script>
 </head>
 <body>
     <div class="container">
@@ -32,11 +34,18 @@
         <div class="swellInfoContainer">
             <div>Info here!</div>
         </div>
-
+        <!--onclick="showModal()" add to picture info container-->
         <div class="pictureInfoContainer">
-            <div>Pictures here?</div>
+
         </div>
 
+    </div>
+
+    <div class="pictureModal">
+        <div class="pictureContent">
+            <button onclick="closeModal()">Close</button>
+            <p></p>
+        </div>
     </div>
 </body>
 </html>

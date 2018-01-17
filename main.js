@@ -126,8 +126,18 @@ var makePhotoURL = function(array){
         beachPhotoArray.push(url);
         // https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}.jpg
     }
+    makePhotoDivs();
 }
 
+var makePhotoDivs = function() {
+
+    for (let photoDivIndex = 0; photoDivIndex < beachPhotoArray.length; photoDivIndex++) {
+        var definePhotoDiv = $('<div>').addClass('photoDiv');
+        var beachPhoto = beachPhotoArray[photoDivIndex];
+        var makePhotoDiv = definePhotoDiv.css('background-image', 'url(' + beachPhoto + ')');
+        $('.pictureInfoContainer').append(makePhotoDiv);
+    }
+}
 //Huntington Beach flickr ClickHandler
 var hbClickHandler = function() {
     beachPhotoArrayData = [];
