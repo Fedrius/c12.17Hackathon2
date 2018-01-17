@@ -1,3 +1,6 @@
+/**
+ * Listen for the document to load and initializes the application
+ */
 $(document).ready(init);
 
 /***************************************************************************************************
@@ -53,6 +56,13 @@ function googleGeoLoc(name){
     })
 };
 
+
+/***************************************************************************************************
+ * weatherApi - ajax call that appends all of the relevant surf and weather conditions onto the DOM
+ * @param (number, number) two - Latitude and Longitude coordinates of the beach location
+ * @return undefined none
+ */
+
 function localTemp(lat, long){
     $.ajax({
         dataType: "json",
@@ -72,6 +82,7 @@ function localTemp(lat, long){
         }
     })
 }
+
 
 function weatherApi(lat, long){
     $.ajax({
@@ -127,14 +138,12 @@ function weatherApi(lat, long){
 }
 
 /***************************************************************************************************
- * makePhotoURL - creates a s based on input fields in the form and adds the object to global student array
+ * makePhotoURL - creates an array of photo URLS based on data array being pushed in from the flickr Ajax Call
  * @param {array} one
  * @return undefined
  * @calls makePhotoDivs
  */
-
-var makePhotoURL = function(array){
-    debugger;
+function makePhotoURL(array){
     var beachPhotoArray = [];
     for(let photoIndex = 0; photoIndex<array.length; photoIndex++) {
         let farm = array[photoIndex].farm;
@@ -148,8 +157,13 @@ var makePhotoURL = function(array){
     makePhotoDivs(beachPhotoArray);
 }
 
-var makePhotoDivs = function(array) {
-
+/***************************************************************************************************
+ * makePhotoDivs - dynamically creates and appends divs onto the pictureInforDataContainer div
+ * @param {array} one
+ * @return undefined
+ * @calls undefined
+ */
+ function makePhotoDivs(array) {
     for (let photoDivIndex = 0; photoDivIndex < array.length; photoDivIndex++) {
         var definePhotoDiv = $('<div>').addClass('photoDiv');
         var beachPhoto = array[photoDivIndex];
@@ -157,15 +171,19 @@ var makePhotoDivs = function(array) {
         $('.pictureInfoDataContainer').append(makePhotoDiv);
     }
 };
-//Huntington Beach flickr ClickHandler
-var flickrClickHandler = function(beachName) {
+/***************************************************************************************************
+ * flickrClickHandler - ajax call to flickr API which creates a data object which holds encrypted URL information
+ * @param {string} the string of the beach name to be inputted into the flickr ajax search call
+ * @return undefined
+ * @calls makePhotoURL
+ */
+ function flickrClickHandler(beachName) {
     var beachPhotoArrayData = [];
     var flickrSearch = beachName;
     var photoObj;
     var dataFromServer;
     var ajaxConfig = {
         method: "GET",
-        // beachName + surf input field needs to change text using jQuery beachObject.name
         url: `https://api.flickr.com/services/rest?method=flickr.photos.search&api_key=629e34714d717373e24940da3b0ad6cb&format=json&nojsoncallback=1&text=${flickrSearch} sunset&per_page=10`,
         success: function(data) {
             dataFromServer = data;
@@ -186,14 +204,22 @@ var flickrClickHandler = function(beachName) {
     }
     $.ajax(ajaxConfig);
 }
-
-var showModal = function(){
+/***************************************************************************************************
+ * showModal - a click handler that targets the current picture div and opens up a modal which enlarges the image clicked.
+ * @param undefined none
+ * @return undefined none
+ */
+function showModal(){
     var backgroundImage = $(event.currentTarget).css('background-image');
     $('.pictureContent').css('background-image', backgroundImage);
     $('.pictureModal').show();
 }
-
-var closeModal = function(){
+/***************************************************************************************************
+ * closeModal - a click handler which closes the modal on click.
+ * @param undefined none
+ * @return undefined none
+ */
+ function closeModal(){
     $('.pictureModal').hide();
 }
 
