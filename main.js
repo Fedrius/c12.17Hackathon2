@@ -46,8 +46,11 @@ function googleGeoLoc(name){
             $(".beachLocation").text(beachObject.city + ", " + beachObject.state);
             var beachFlickr = beachObject.name;
             // console.log(beachObject);
+
+            localTemp(beachObject.lat, beachObject.long);
             weatherApi(beachObject.lat, beachObject.long);
-            // flickrClickHandler(beachFlickr);
+
+            flickrClickHandler(beachFlickr);
         },
         error: function(response){
             console.log(response);
@@ -69,16 +72,16 @@ function localTemp(lat, long){
         url: `https://api.worldweatheronline.com/premium/v1/weather.ashx?key=ee5b80f43e9149f79be22719181601&format=json&q=${lat}, ${long}&num_of_days=1`,
         method: 'get',
         success: function(result){
-            var hourlyWeather = [];
+            $(`.temp .tempTemp`).text("");
             for(var tempIndex = 2; tempIndex < 7; tempIndex++){
-                var tempObj = {};
                 var tempHour = result.data.weather[0].hourly[tempIndex];
                 var tempAtHour = tempHour.tempF;
-                
-                tempObj.tempAtHour = tempAtHour;
-                hourlyWeather.push(tempObj);
+                $(`.temp${tempIndex-1} .tempTemp`).html(tempAtHour+ "&#x2109");
             }
-            // console.log(hourlyWeather);
+        },
+        error: function(result){
+            console.log(result);
+            console.log("error");
         }
     })
 }
@@ -97,7 +100,7 @@ function weatherApi(lat, long){
             $(".sunsetTime").text("");
             $(".tideData").text("");
             $(`.temp .tempPic`).css("background-image", "");
-            $(`.temp .tempTemp`).text("");
+            // $(`.temp .tempTemp`).text("");
 
 
             //find all weather data
@@ -118,8 +121,7 @@ function weatherApi(lat, long){
                 var hourObj = result.data.weather[0].hourly[hourlyIndex];
                 var imageDirect = result.data.weather[0].hourly[hourlyIndex].weatherIconUrl[0].value;
                 $(`.temp${hourlyIndex-1} .tempPic`).css("background-image", 'url('+imageDirect+')');
-                // var tempAtHour = hourObj.tempF;
-                // $(`.temp${hourlyIndex-1} .tempTemp`).html(tempAtHour+ "&#x2109");
+
 
                 statsObj.windSpeed = hourObj.windspeedMiles;
                 statsObj.windDir = hourObj.winddir16Point;
@@ -128,6 +130,10 @@ function weatherApi(lat, long){
                 statsObj.waterTemp = hourObj.tempF;
                 timeOfDayStats.push(statsObj);
             }
+            $(".dataTitle").text('');  //clear text
+            $(".swellData").text(timeOfDayStats[0].swellHeight + "ft, " + timeOfDayStats[0].swellDir);
+            $(".waterTempData").html(timeOfDayStats[0].waterTemp+"&#x2109");
+            $(".windData").text(timeOfDayStats[0].windSpeed+"mph, "+ timeOfDayStats[0].windDir);
             $(".tempBox").on("click", function(){
                 var weatherAtTime = timeOfDayStats[this.id];
                 $(".dataTitle").text('');  //clear text
@@ -145,32 +151,13 @@ function weatherApi(lat, long){
 }
 
 /***************************************************************************************************
- * makePhotoURL - creates an array of photo URLS based on data array being pushed in from the flickr Ajax Call
- * @param {array} one
- * @return undefined
- * @calls makePhotoDivs
- */
-function makePhotoURL(array){
-    var beachPhotoArray = [];
-    for(let photoIndex = 0; photoIndex<array.length; photoIndex++) {
-        let farm = array[photoIndex].farm;
-        let id = array[photoIndex].id;
-        let server = array[photoIndex].server;
-        let secret = array[photoIndex].secret;
-        let url = `https://farm${farm}.staticflickr.com/${server}/${id}_${secret}.jpg`;
-        beachPhotoArray.push(url);
-        // https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}.jpg
-    }
-    makePhotoDivs(beachPhotoArray);
-}
-
-/***************************************************************************************************
  * makePhotoDivs - dynamically creates and appends divs onto the pictureInforDataContainer div
  * @param {array} one
  * @return undefined
  * @calls undefined
  */
  function makePhotoDivs(array) {
+    $('.pictureInfoDataContainer div').remove();
     for (let photoDivIndex = 0; photoDivIndex < array.length; photoDivIndex++) {
         var definePhotoDiv = $('<div>').addClass('photoDiv');
         var beachPhoto = array[photoDivIndex];
@@ -195,20 +182,19 @@ function makePhotoURL(array){
         success: function(data) {
             dataFromServer = data;
             for(let dataIndex = 0; dataIndex < 4; dataIndex++) {
-                var dataObj = {
-                    id: dataFromServer.photos.photo[dataIndex].id,
-                    server: dataFromServer.photos.photo[dataIndex].server,
-                    farm: dataFromServer.photos.photo[dataIndex].farm,
-                    secret: dataFromServer.photos.photo[dataIndex].secret,
-                };
-                beachPhotoArrayData.push(dataObj);
+                let farm = dataFromServer.photos.photo[dataIndex].farm;
+                let id = dataFromServer.photos.photo[dataIndex].id;
+                let server = dataFromServer.photos.photo[dataIndex].server;
+                let secret = dataFromServer.photos.photo[dataIndex].secret;
+                let url = `https://farm${farm}.staticflickr.com/${server}/${id}_${secret}.jpg`;
+                beachPhotoArrayData.push(url);
             }
-            makePhotoURL(beachPhotoArrayData);
+            makePhotoDivs(beachPhotoArrayData);
         },
         error: function() {
             console.log(false);
         }
-    }
+    };
     $.ajax(ajaxConfig);
 }
 /***************************************************************************************************
