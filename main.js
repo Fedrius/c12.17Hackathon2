@@ -179,6 +179,8 @@ var closeModal = function(){
     $('.pictureModal').hide();
 }
 
+function resetPage(){
+    $('.pictureInfoDataContainer div').remove();
 
 
-
+}
