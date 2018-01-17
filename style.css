@@ -30,9 +30,8 @@
     display: flex;
     justify-content: space-between;
     box-shadow: .1em .1em .1em .1em black;
-
-
 }
+
 .inputForm{
     width: 100%;
     height: 100%;
@@ -126,6 +125,7 @@ h2 {
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+    font-size: 2.4vmin;
 }
 .sunImg{
     height: 45%;
@@ -149,7 +149,9 @@ h2 {
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+    font-size: 2.4vmin;
 }
+
 .moonImg{
     height: 45%;
     width: 50%;
@@ -165,10 +167,11 @@ h2 {
 
 .weatherInfoContainer {
     display: flex;
+    font-size: 2.3vmin;
     justify-content: space-around;
     height: 16%;
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
+    background-color: rgba(240,255,255,0.3);
+    box-shadow: 10px 10px 27px 1px rgba(211,214,214,1);
 }
 
 .tempBox {
@@ -208,12 +211,13 @@ h2 {
     justify-content: flex-start;
     align-items: flex-start;
 }
+
 .tideInfoHeader{
     width: 100%;
     height: 10%;
     /*border: 1px solid blue;*/
     text-align: center;
-    font-size: 4vmin;
+    font-size: 5vmin;
 }
 .tideInfoDataContainer{
     /*border: 5px solid white;*/
@@ -225,13 +229,15 @@ h2 {
 }
 .tideInfoCategories{
     /* border: 2px solid blue; */
-    font-size: 3vmin;
+    font-size: 4vmin;
     height: 90%;
-    width: 30%;
+    width: 50%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-
+    background-color: rgba(240,255,255,0.3);
+    border-radius: 5px;
+    /*box-shadow: 10px 10px 71px 0px rgba(0,0,0,0.75);*/
 }
 .categoryTitle{
     /*border: 3px solid crimson;*/
@@ -239,12 +245,15 @@ h2 {
 }
 .tideInfoData{
     /* border: 2px solid green; */
+    font-size: 4vmin;
     height: 90%;
-    width: 30%;
+    width: 50%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    font-size: 3vmin;
+    background-color: rgba(240,255,255,0.2);
+    border-radius: 5px;
+    /*box-shadow: 10px 10px 71px 0px rgba(0,0,0,0.75);*/
 }
 .dataTitle{
     /*border: 3px solid crimson;*/
@@ -256,7 +265,6 @@ h2 {
     height: 16%;
     color: black;
 }
-
 .pictureInfoContainer {
     /*border: 1px solid black;*/
     font-size: 3vmin;
@@ -322,6 +330,10 @@ h2 {
     width: 10%;
 }
 
-
+.returnToMain {
+    position: absolute;
+    top: 5%;
+    right: 2%;
+}
 
 
