@@ -161,7 +161,7 @@ var makePhotoDivs = function() {
         var definePhotoDiv = $('<div>').addClass('photoDiv');
         var beachPhoto = beachPhotoArray[photoDivIndex];
         var makePhotoDiv = definePhotoDiv.css('background-image', 'url(' + beachPhoto + ')').attr('onclick','showModal()');
-        $('.pictureInfoContainer').append(makePhotoDiv);
+        $('.pictureInfoDataContainer').append(makePhotoDiv);
     }
 }
 //Huntington Beach flickr ClickHandler
