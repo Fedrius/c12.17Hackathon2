@@ -13,9 +13,23 @@ function init(){
     $('.locationInput').attr('autocomplete','off');
     $(".searchButton").on("click", ()=>{
         let location = $(".locationInput").val();
+        if(location.length <= 2){
+            return;
+        }
         $(".locationInput").val("");
         googleGeoLoc(location);         //for ajax call
-
+    });
+    $(".locationInput").keypress(event=>{
+        if (event.which === 13){
+            console.log('enter was pressed');
+            event.preventDefault();
+            let location = $(".locationInput").val();
+            if(location.length <= 2){
+                return;
+            }
+            $(".locationInput").val("");
+            googleGeoLoc(location);         //for ajax call
+        }
     });
 }
 
