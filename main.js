@@ -3,10 +3,27 @@ function init(){
     $('.locationInput').attr('autocomplete','off');
     $(".searchButton").on("click", ()=>{
         let location = $(".locationInput").val();
+        $(".locationInput").val("");
         googleGeoLoc(location);         //for ajax call
-        // $(".locationInput").val("");
+
     });
 }
+
+
+/*All Global Variables Defined Here
+ * beachPhotoArray - global array to hold photo URLS
+ * @type {Array}
+ * example of beachPhotoArray after input:
+ * beachPhotoArray = [
+ * "https://farm5.staticflickr.com/4653/39746351561_93864fe707.jpg",
+ * "https://farm5.staticflickr.com/4705/39737831611_a920befbdd.jpg"
+ * ];
+ */
+var beachPhotoArray = [];
+
+
+
+
 
 
 function googleGeoLoc(name){
@@ -190,11 +207,8 @@ function weatherApi(lat, long){
 
 
 
-var beachPhotoArray = [];
-var beachPhotoArrayData = [];
-var dataFromServer;
-
 var makePhotoURL = function(array){
+    var beachPhotoArray = [];
     for(let photoIndex = 0; photoIndex<array.length; photoIndex++) {
         let farm = array[photoIndex].farm;
         let id = array[photoIndex].id;
@@ -218,17 +232,18 @@ var makePhotoDivs = function() {
 };
 //Huntington Beach flickr ClickHandler
 var flickrClickHandler = function(beachName) {
-    beachPhotoArrayData = [];
+    var beachPhotoArrayData = [];
     beachPhotoArray = [];
     var flickrSearch = beachName;
     var photoObj;
+    var dataFromServer;
     var ajaxConfig = {
         method: "GET",
         // beachName + surf input field needs to change text using jQuery beachObject.name
         url: `https://api.flickr.com/services/rest?method=flickr.photos.search&api_key=629e34714d717373e24940da3b0ad6cb&format=json&nojsoncallback=1&text=${flickrSearch} sunset&per_page=10`,
         success: function(data) {
             dataFromServer = data;
-            for(let dataIndex = 0; dataIndex < 10; dataIndex++) {
+            for(let dataIndex = 0; dataIndex < 4; dataIndex++) {
                 var dataObj = {
                     id: dataFromServer.photos.photo[dataIndex].id,
                     server: dataFromServer.photos.photo[dataIndex].server,
@@ -245,92 +260,6 @@ var flickrClickHandler = function(beachName) {
     }
     $.ajax(ajaxConfig);
 }
-// // Newport Beach Click Handler
-// var nbClickHandler = function() {
-//     beachPhotoArrayData = [];
-//     beachPhotoArray = [];
-//     var dataFromServer;
-//     var ajaxConfig = {
-//         method: "GET",
-//         text: 'newport beach', // input field needs to change text using jQuery
-//         url: 'https://api.flickr.com/services/rest?method=flickr.photos.search&api_key=629e34714d717373e24940da3b0ad6cb&format=json&nojsoncallback=1&text=newport beach&per_page=10',
-//         success: function (data) {
-//             dataFromServer = data;
-//             for (let dataIndex = 0; dataIndex < 5; dataIndex++) {
-//                 var dataObj = {
-//                     id: dataFromServer.photos.photo[dataIndex].id,
-//                     server: dataFromServer.photos.photo[dataIndex].server,
-//                     farm: dataFromServer.photos.photo[dataIndex].farm,
-//                     secret: dataFromServer.photos.photo[dataIndex].secret,
-//                 };
-//                 beachPhotoArrayData.push(dataObj);
-//             }
-//             makePhotoURL(beachPhotoArrayData);
-//         },
-//             error: function(error){
-//                 console.log(error);
-//         }
-//     }
-//     $.ajax(ajaxConfig);
-// }
-// // Sunset Beach Click Handler
-// var sunsetBeachClickHandler = function() {
-//     beachPhotoArrayData = [];
-//     beachPhotoArray = [];
-//     var dataFromServer;
-//     var ajaxConfig = {
-//         method: "GET",
-//         dataType: 'json',
-//         text: 'sunset beach', // input field needs to change text using jQuery later on will make make a dynamic variable
-//         url: 'https://api.flickr.com/services/rest?method=flickr.photos.search&api_key=629e34714d717373e24940da3b0ad6cb&format=json&nojsoncallback=1&text=sunset beach surf&per_page=10',
-//         success: function (data) {
-//             dataFromServer = data;
-//             for (let dataIndex = 0; dataIndex < 5; dataIndex++) {
-//                 var dataObj = {
-//                     id: dataFromServer.photos.photo[dataIndex].id,
-//                     server: dataFromServer.photos.photo[dataIndex].server,
-//                     farm: dataFromServer.photos.photo[dataIndex].farm,
-//                     secret: dataFromServer.photos.photo[dataIndex].secret,
-//                 };
-//                 beachPhotoArrayData.push(dataObj);
-//             }
-//             makePhotoURL(beachPhotoArrayData);
-//         },
-//             error: function(error){
-//                 console.log(error);
-//             }
-//     }
-//     $.ajax(ajaxConfig);
-// }
-//
-// //Seal Beach Click Handler for Ajax Call
-// var sealBeachClickHandler = function() {
-//     beachPhotoArrayData = [];
-//     beachPhotoArray = [];
-//     var dataFromServer;
-//     var ajaxConfig = {
-//         method: "GET",
-//         text: 'seal beach', // input field needs to change text using jQuery
-//         url: 'https://api.flickr.com/services/rest?method=flickr.photos.search&api_key=629e34714d717373e24940da3b0ad6cb&format=json&nojsoncallback=1&text=seal beach surf&per_page=10',
-//         success: function (data) {
-//             dataFromServer = data;
-//             for (let dataIndex = 0; dataIndex < 5; dataIndex++) {
-//                 var dataObj = {
-//                     id: dataFromServer.photos.photo[dataIndex].id,
-//                     server: dataFromServer.photos.photo[dataIndex].server,
-//                     farm: dataFromServer.photos.photo[dataIndex].farm,
-//                     secret: dataFromServer.photos.photo[dataIndex].secret,
-//                 };
-//                 beachPhotoArrayData.push(dataObj);
-//             }
-//             makePhotoURL(beachPhotoArrayData);
-//         },
-//         error: function (error) {
-//             console.log(error);
-//         }
-//     }
-//     $.ajax(ajaxConfig);
-// }
 
 var showModal = function(){
     var backgroundImage = $(event.currentTarget).css('background-image');
