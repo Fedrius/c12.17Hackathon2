@@ -243,3 +243,22 @@ var sealBeachClickHandler = function() {
     $.ajax(ajaxConfig);
 }
 
+
+let beachInput = 'newport beach'; //currently just a placeholder
+
+function googleApiCall(name){
+    $.ajax({
+        dataType: 'json',
+        url: 'http://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyDbDr73Tuj2WLSNXkSc2P8mH2JdF0xjAeo&address=' + name,
+        method: 'get',
+        success: function(response){
+            console.log(response)
+        },
+        error: function(response){
+            console.log(response);
+            console.log('ERRRROR');
+        }
+    })
+}
+
+googleApiCall(beachInput);
