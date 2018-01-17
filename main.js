@@ -1,4 +1,8 @@
 $(document).ready(init);
+
+//init -
+//@Params -
+//@Returns -
 function init(){
     $('.locationInput').attr('autocomplete','off');
     $(".searchButton").on("click", ()=>{
@@ -9,12 +13,9 @@ function init(){
     });
 }
 
-
-
-
-
-
-
+//googleGeoLoc - Ajax call with Google Geo Location when user clicks the search button
+//@Params - input value which is a string the from search box
+//@Returns - beach location data and calls flickr ajax function
 function googleGeoLoc(name){
     $.ajax({
         dataType: 'json',
@@ -45,11 +46,6 @@ function googleGeoLoc(name){
         }
     })
 };
-
-
-
-
-
 
 
 function weatherApi(lat, long){
@@ -105,94 +101,6 @@ function weatherApi(lat, long){
         }
     })
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /***************************************************************************************************
  * makePhotoURL - creates a s based on input fields in the form and adds the object to global student array
