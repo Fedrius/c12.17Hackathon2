@@ -11,12 +11,12 @@ $(document).ready(init);
  */
 function init(){
     playSearchMusic();
+    $('.muteButton').click(muteSound);
     $('.locationInput').attr('autocomplete','off');
     $(".searchButton").on("click", ()=>{
         let location = $(".locationInput").val();
         $(".locationInput").val("");
         googleGeoLoc(location);         //for ajax call
-
     });
 }
 
@@ -240,6 +240,9 @@ function resetPage(){
 // Audio Javascript
 var searchBackgroundSound = new Audio("sounds/searchPageWaves.wav");
 searchBackgroundSound.volume = .5;
+var birdChirp= new Audio("sounds/birdchirp.wav");
+birdChirp.volume = .5;
+
 
 function playSearchMusic(){
     searchBackgroundSound.pause();
@@ -247,12 +250,25 @@ function playSearchMusic(){
     searchBackgroundSound.play();
     searchBackgroundSound.loop = true;
 }
+function stopSearchMusic(){
+    searchBackgroundSound.pause();
+    searchBackgroundSound.currentTime = 0;
+    searchBackgroundSound.loop = true;
+}
+function playBirdChirp(){
+    birdChirp.pause();
+    birdChirp.currentTime = 0;
+    birdChirp.play();
+}
 
 function muteSound(){
     if(searchBackgroundSound.volume === 0){
         searchBackgroundSound.volume = .5;
+        birdChirp.volume = .5;
     }
     else{
         searchBackgroundSound.volume = 0;
+        birdChirp.volume = 0;
     }
 }
+

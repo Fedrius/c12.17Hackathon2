@@ -20,6 +20,20 @@
     justify-content: center;
     align-items: center;
 }
+.muteButton{
+    position: absolute;
+    width: 2.5%;
+    height: 2.5%;
+    color: seashell;
+    font-size: 2vmin;
+    text-align: center;
+    right: 5%;
+    top: 5%;
+    background:none;
+    border:none;
+    margin:0;
+    padding:0;
+}
 
 .formContainer{
     /*border: 2px solid white;*/
@@ -311,6 +325,9 @@
 .modalButton{
     height: 5%;
     width: 10%;
+}
+.muteButton{
+
 }
 
 
