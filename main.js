@@ -246,15 +246,23 @@ var sealBeachClickHandler = function() {
 let beachInput = 'newport beach'; //currently just a placeholder
 let beachObject = {};
 
-function googleApiCall(name){
+function googleGeoLoc(name){
     $.ajax({
         dataType: 'json',
         url: 'http://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyDbDr73Tuj2WLSNXkSc2P8mH2JdF0xjAeo&address=' + name,
         method: 'get',
         success: function(response){
-            console.log(response['results'][0]['address_components'][0]['long_name']);
-            console.log(response['results'][0]['geometry']['location']['lat']);
-            console.log(response['results'][0]['geometry']['location']['lng']);
+
+            //store these variables
+            console.log(response['results'][0]['address_components'][0]['long_name']); //string
+            console.log(response['results'][0]['geometry']['location']['lat']); //num
+            console.log(response['results'][0]['geometry']['location']['lng']); //num
+
+            beachObject.name = response['results'][0]['address_components'][0]['long_name'];
+            beachObject.latLong = [];
+            beachObject.latLong.push(response['results'][0]['geometry']['location']['lat']);
+            beachObject.latLong.push(response['results'][0]['geometry']['location']['lng']);
+            console.log(beachObject);
         },
         error: function(response){
             console.log(response);
@@ -262,5 +270,3 @@ function googleApiCall(name){
         }
     })
 }
-
-googleApiCall(beachInput);
