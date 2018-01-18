@@ -15,6 +15,7 @@ $(document).ready(init);
  */
 function init(){
     playTitleMusic();
+
     $('.muteButton').click(muteSound);
     $('.titleMuteButton').click(muteSound);
     $('.locationInput').attr('autocomplete','off');
@@ -32,6 +33,7 @@ function init(){
         if(location.length <= 2){
             return;
         }
+        loading();
         $(".locationInput").val("");
         googleGeoLoc(location);         //for ajax call
         setTimeout(function(){
@@ -39,7 +41,7 @@ function init(){
                 $(".errorModal").show();
             }
             counter = 0;
-
+            doneLoading();
 
         },5000)
     });
@@ -50,30 +52,38 @@ function init(){
             if(location.length <= 2){
                 return;
             }
+            loading();
             $(".locationInput").val("");
             googleGeoLoc(location);         //for ajax call
             setTimeout(function(){
                 if(counter <4){
                     $(".errorModal").show();
                 }
-
                 counter = 0;
-
-
+                doneLoading();
             },5000)
-
         }
+
     });
 
     $(".returnToMain").on("click", ()=>{
         $(".dataPageContainer").removeClass("visible");
         $(".dataPageContainer").addClass("hidden");
-
+        doneLoading();
 
     })
 
 }
 
+// to change icon when page is loading;
+function loading() {
+    $(".searchButton").css("background-image", "url('')");
+    $(".searchButton").css("background-image", "url('images/loader.gif')");
+};
+function doneLoading(){
+    $(".searchButton").css("background-image", "url('')");
+    $(".searchButton").css("background-image", "url('images/searchicon.png')");
+};
 /***************************************************************************************************
  * googleGeoLoc - Ajax call with Google Geo Location when user clicks the search button
  * @param name user input value which is a string the from search box
