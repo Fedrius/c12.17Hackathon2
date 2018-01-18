@@ -43,6 +43,14 @@ function init(){
             googleGeoLoc(location);         //for ajax call
         }
     });
+
+    $(".returnToMain").on("click", ()=>{
+        $(".dataPageContainer").removeClass("visible");
+        $(".dataPageContainer").addClass("hidden");
+
+
+    })
+
 }
 
 /***************************************************************************************************
@@ -78,6 +86,7 @@ function googleGeoLoc(name){
             flickrClickHandler(beachFlickr);
 
 
+
         },
         error: function(response){
             console.log(response);
@@ -86,13 +95,11 @@ function googleGeoLoc(name){
     })
 };
 
-
 /***************************************************************************************************
- * weatherApi - ajax call that appends all of the relevant surf and weather conditions onto the DOM
+ * localTemp - ajax call retreiving forecast for given city and attaching to DOM
  * @param (number, number) two - Latitude and Longitude coordinates of the beach location
  * @return undefined none
  */
-
 function localTemp(lat, long){
     $.ajax({
         dataType: "json",
@@ -107,13 +114,16 @@ function localTemp(lat, long){
             }
         },
         error: function(result){
-            console.log(result);
             console.log("error");
         }
     })
 }
 
-
+/***************************************************************************************************
+ * weatherApi - ajax call that appends all of the relevant surf and weather conditions onto the DOM
+ * @param (number, number) two - Latitude and Longitude coordinates of the beach location
+ * @return undefined none
+ */
 function weatherApi(lat, long){
     $.ajax({
         dataType: "json",
@@ -191,6 +201,7 @@ function weatherApi(lat, long){
         var makePhotoDiv = definePhotoDiv.css('background-image', 'url(' + beachPhoto + ')').attr('onclick','showModal()');
         $('.pictureInfoDataContainer').append(makePhotoDiv);
     }
+    $(".dataPageContainer").removeClass("hidden");
     $(".dataPageContainer").addClass("visible");
 
 
