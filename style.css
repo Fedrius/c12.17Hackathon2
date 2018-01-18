@@ -506,6 +506,13 @@ h2 {
     width: 10%;
     text-align: center;
 }
+.modalButton:hover{
+    transform: scale(1.1);
+    cursor: pointer;
+}
+.modalButton:active{
+    transform: scale(.95);
+}
 .buttonContainer{
     position: absolute;
     display: flex;
@@ -567,7 +574,7 @@ h2 {
 }
 
 .errorModal {
-    display: flex;
+    display: none;
     position: fixed;
     z-index: 25;
     left: 0;
@@ -579,7 +586,7 @@ h2 {
     background-color: rgba(0,0,0,0.4);
 }
 .errorContent {
-    display: none;
+    display: flex;
     font-size: 5vmin;
     justify-content: center;
     flex-direction: column;
@@ -588,7 +595,7 @@ h2 {
     border: 1px solid black;
     border-radius: 10px;
     box-shadow: 10px 10px 18px 0px rgba(0,0,0,0.75);
-    background-color: rgba(240,255,255,0.5);
+    background-color: rgba(240, 255, 255, 0.63);
     height: 20%;
 }
 .errorButton {
@@ -600,3 +607,11 @@ h2 {
     border:none;
     border-radius: 5px;
 }
+.errorButton:hover{
+    transform: scale(1.1);
+    cursor: pointer;
+}
+.errorButton:active{
+    transform: scale(.95);
+}
+
