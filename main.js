@@ -255,6 +255,7 @@ function showModal(){
  */
  function closeModal(){
     $('.pictureModal').hide();
+    $('.errorModal').hide();
 }
 
 function resetPage(){
