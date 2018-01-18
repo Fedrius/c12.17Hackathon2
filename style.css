@@ -131,26 +131,6 @@
     z-index: 5;
     visibility: visible;
 }
-.muteButton{
-    position: absolute;
-    width: 2.5%;
-    height: 2.5%;
-    color: seashell;
-    font-size: 2vmin;
-    text-align: center;
-    right: 5%;
-    top: 2%;
-    background:none;
-    border:none;
-    margin:0;
-    padding:0;
-}
-.muteButton:hover {
-    cursor: pointer;
-    color: #1b6d85;
-    border-color: #1b6d85;
-    transform: scale(1.1);
-}
 
 .formContainer{
     /*border: 2px solid white;*/
@@ -475,15 +455,67 @@ h2 {
 .modalButton{
     height: 5%;
     width: 10%;
+    text-align: center;
+}
+.buttonContainer{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    right: 5%;
+    top: 2%;
 }
 .muteButton{
-
+    position: relative;
+    width: 2.5%;
+    height: 2.5%;
+    color: seashell;
+    font-size: 2vmin;
+    text-align: center;
+    background:none;
+    border:none;
+    margin:0;
+    padding:0;
+}
+.muteButton:hover {
+    cursor: pointer;
+    color: #1b6d85;
+    border-color: #1b6d85;
+    transform: scale(1.1);
+}
+.titleMuteButton{
+    position: absolute;
+    width: 2.5%;
+    height: 2.5%;
+    color: lightskyblue;
+    font-size: 2vmin;
+    text-align: center;
+    right: 5%;
+    top: 2%;
+    background:none;
+    border:none;
+    margin:0;
+    padding:0;
+}
+.titleMuteButton:hover {
+    cursor: pointer;
+    color: #1b6d85;
+    border-color: #1b6d85;
+    transform: scale(1.1);
 }
 
 .returnToMain {
-    position: absolute;
-    top: 5%;
-    right: 2%;
+    position: relative;
+    background:none;
+    border:none;
+    margin:0;
+    padding:0;
+    color: seashell;
+}
+.returnToMain:hover{
+    cursor: pointer;
+    color: #1b6d85;
+    border-color: #1b6d85;
+    transform: scale(1.1);
 }
 
 
