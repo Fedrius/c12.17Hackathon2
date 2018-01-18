@@ -257,12 +257,6 @@ function showModal(){
     $('.pictureModal').hide();
 }
 
-function resetPage(){
-    $('.pictureInfoDataContainer div').remove();
-
-
-}
-
 // Audio Javascript
 /***************************************************************************************************
  * searchBackgroundSound - global variable that creates a new audio sound for the search page
