@@ -39,6 +39,14 @@ function init(){
             googleGeoLoc(location);         //for ajax call
         }
     });
+
+    $(".returnToMain").on("click", ()=>{
+        $(".dataPageContainer").removeClass("visible");
+        $(".dataPageContainer").addClass("hidden");
+
+
+    })
+
 }
 
 /***************************************************************************************************
@@ -72,6 +80,7 @@ function googleGeoLoc(name){
             localTemp(beachObject.lat, beachObject.long);
             weatherApi(beachObject.lat, beachObject.long);
             flickrClickHandler(beachFlickr);
+
 
 
         },
@@ -188,6 +197,7 @@ function weatherApi(lat, long){
         var makePhotoDiv = definePhotoDiv.css('background-image', 'url(' + beachPhoto + ')').attr('onclick','showModal()');
         $('.pictureInfoDataContainer').append(makePhotoDiv);
     }
+    $(".dataPageContainer").removeClass("hidden");
     $(".dataPageContainer").addClass("visible");
 
 

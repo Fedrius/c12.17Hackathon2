@@ -34,6 +34,18 @@
     to { opacity: 1; visibility: visible; transform: translate(0%)}
 
 }
+@keyframes fadeOutBottom {
+    from {
+        opacity: 1;
+        transform: translateY(0%);
+        visibility: visible;
+    }
+    to {
+        opacity: 0;
+        transform: translateY(100%);
+        visibility: hidden
+    }
+}
 
 .overlay{                        /*ENTIRE PAGE HERE, overlay for transitions*/
     position: absolute;
@@ -221,10 +233,15 @@
     width: 100vw;
     /*background: linear-gradient(120deg, #ece837, #ec8c53);*/
     /*background-image: url("images/infoBeachImage.jpg");*/
+    animation-name: fadeOutBottom;
+    animation-duration: .7s;
+    transition-timing-function: ease-in;
     background-image: url("https://wonderopolis.org/wp-content/uploads/2014/07/dreamstime_xl_22656707-custom.jpg");
     background-size: cover;
     visibility: hidden;
+    /*z-index: 100;*/
 }
+
 .dataPageContainer.visible{
     /*border: 2px solid red;*/
     position: absolute;
@@ -239,6 +256,21 @@
     transition-timing-function: ease-in;
     z-index: 10;
     visibility: visible;
+}
+.dataPageContainer.hidden{
+    /*border: 2px solid red;*/
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    /*background: linear-gradient(120deg, #ece837, #ec8c53);*/
+    /*background-image: url("images/infoBeachImage.jpg");*/
+    animation-name: fadeOutBottom;
+    animation-duration: .7s;
+    transition-timing-function: linear;
+    background-image: url("https://wonderopolis.org/wp-content/uploads/2014/07/dreamstime_xl_22656707-custom.jpg");
+    background-size: cover;
+    visibility: hidden;
+    z-index: 10;
 }
 
 .headerContainer {
@@ -329,7 +361,16 @@ h2 {
     justify-content: space-around;
     flex-direction: column;
     align-items: center;
-
+    cursor: pointer;
+}
+.tempBox:hover{
+    transform: scale(1.1);
+    /*box-shadow: .01em .01em .01em .01em black;*/
+    border-radius: 15%;
+    color: #0fb8ad;
+}
+.tempBox:active{
+    transform: scale(.95);
 }
 .tempTime{
     /*border: 1px solid purple;*/
@@ -444,6 +485,13 @@ h2 {
     background-size: cover;
     border-radius: 5px;
     box-shadow: 10px 10px 18px 0px rgba(0,0,0,0.75);
+}
+.photoDiv:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+}
+.photoDiv:active{
+    transform: scale(.9);
 }
 .pictureModal {
     display: none;
