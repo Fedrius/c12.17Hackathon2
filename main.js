@@ -36,7 +36,7 @@ function init(){
         googleGeoLoc(location);         //for ajax call
         setTimeout(function(){
             if(counter <4){
-
+                $(".errorModal").show();
             }
             counter = 0;
 
@@ -54,7 +54,7 @@ function init(){
             googleGeoLoc(location);         //for ajax call
             setTimeout(function(){
                 if(counter <4){
-
+                    $(".errorModal").show();
                 }
 
                 counter = 0;
