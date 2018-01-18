@@ -12,10 +12,14 @@ $(document).ready(init);
 function init(){
     playTitleMusic();
     $('.muteButton').click(muteSound);
+    $('.titleMuteButton').click(muteSound);
     $('.locationInput').attr('autocomplete','off');
     $(".logoContainer").on("click", ()=>{
         $(".titlePageContainer").addClass("hidden");
         $(".mainPageContainer").addClass("visible");
+        stopTitleMusic();
+        playTakePlunge();
+        playSearchMusic();
     });
 
 
@@ -266,7 +270,7 @@ function resetPage(){
  * @return undefined none
  */
 var searchBackgroundSound = new Audio("sounds/searchPageWaves.wav");
-searchBackgroundSound.volume = .5;
+searchBackgroundSound.volume = .3;
 /***************************************************************************************************
  * birdChirp - global variable that creates a new audio sound for hovering over the search button
  * @param undefined none
@@ -289,7 +293,7 @@ titleMusicSound.volume = .5;
  * @return undefined none
  */
 var takePlungeSound = new Audio("sounds/takePlunge.wav");
-takePlungeSound.volumne = .5;
+takePlungeSound.volumne = .8;
 /***************************************************************************************************
  * seagull - global variable that creates a seagull sound for mouseentering input field
  * @param undefined none
@@ -377,11 +381,11 @@ function playTakePlunge(){
  */
 function muteSound(){
     if(titleMusicSound.volume === 0){
-        searchBackgroundSound.volume = .5;
+        searchBackgroundSound.volume = .3;
         birdChirp.volume = .5;
         titleMusicSound.volume = .5;
         seagull.volume = .5;
-        takePlungeSound.volume = .5;
+        takePlungeSound.volume = .8;
     }
     else{
         searchBackgroundSound.volume = 0;

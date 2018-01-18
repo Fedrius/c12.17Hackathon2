@@ -11,10 +11,12 @@
     <div class="overlay"></div>
     <div class="titlePageContainer">
         <div class="logoContainer"></div>
+        <button class="titleMuteButton">Mute</button>
     </div>
     <div class="mainPageContainer">
-        <button class="muteButton">Mute</button>
-
+        <div class="buttonContainer">
+            <button class="muteButton">Mute</button>
+        </div>
         <div class="formContainer">
             <form onmouseenter="playSeagull()" class="inputForm">
                 <input class="locationInput" type="text" name="search" placeholder="Search..">
@@ -40,12 +42,10 @@
                 <div class="moonImg"></div>
                 <div class="sunsetTime"></div>
             </div>
-
-            <button class="muteButton">Mute</button>
-
-
-            <button class="returnToMain">GET BACK!</button>
-
+            <div class="buttonContainer">
+                <button class="muteButton">Mute</button>
+                <button class="returnToMain">Back</button>
+            </div>
         </div>
 
         <div class="weatherInfoContainer">
@@ -110,7 +110,6 @@
     <div class="pictureModal">
         <div class="pictureContent">
             <button class="modalButton" onclick="closeModal()">Close</button>
-            <p></p>
         </div>
     </div>
 
