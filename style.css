@@ -376,11 +376,12 @@ h2 {
     /*border: 1px solid purple;*/
 }
 .tempPic{
-    height: 30%;
-    width: 30%;
+    height: 40%;
+    width: 35%;
     /*border: 1px solid green;*/
     background-repeat: no-repeat;
     background-size: cover;
+    border-radius: 5px;
 }
 .infoContainer{
     /*border: 3px solid blue;*/
