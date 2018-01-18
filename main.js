@@ -2,6 +2,10 @@
  * Listen for the document to load and initializes the application
  */
 $(document).ready(init);
+/**
+ * Global variable set
+ */
+    var counter = 0;
 
 /***************************************************************************************************
  * init - adds clicks handlers on search button, keypress for location, clickhandler for main page logo
@@ -30,10 +34,17 @@ function init(){
         }
         $(".locationInput").val("");
         googleGeoLoc(location);         //for ajax call
+        setTimeout(function(){
+            if(counter <4){
+
+            }
+            counter = 0;
+
+
+        },5000)
     });
     $(".locationInput").keypress(event=>{
         if (event.which === 13){
-            console.log('enter was pressed');
             event.preventDefault();
             let location = $(".locationInput").val();
             if(location.length <= 2){
@@ -41,6 +52,16 @@ function init(){
             }
             $(".locationInput").val("");
             googleGeoLoc(location);         //for ajax call
+            setTimeout(function(){
+                if(counter <4){
+
+                }
+
+                counter = 0;
+
+
+            },5000)
+
         }
     });
 
@@ -86,7 +107,7 @@ function googleGeoLoc(name){
             flickrClickHandler(beachFlickr);
 
 
-
+            counter++;
         },
         error: function(response){
             console.log(response);
@@ -112,6 +133,8 @@ function localTemp(lat, long){
                 var tempAtHour = tempHour.tempF;
                 $(`.temp${tempIndex-1} .tempTemp`).html(tempAtHour+ "&#x2109");
             }
+            counter++;
+
         },
         error: function(result){
             console.log("error");
@@ -130,7 +153,7 @@ function weatherApi(lat, long){
         url: `https://api.worldweatheronline.com/premium/v1/marine.ashx?key=ee5b80f43e9149f79be22719181601&num_of_days=1&tp=3&format=json&q=${lat}, ${long}&tide=yes`,
         method: "get",
         success: function(result){
-            console.log("success");
+
 
             //putting dom elements here that need to be cleared later
             $(".sunriseTime").text("");
@@ -171,6 +194,7 @@ function weatherApi(lat, long){
             $(".swellData").text(timeOfDayStats[0].swellHeight + "ft, " + timeOfDayStats[0].swellDir);
             $(".waterTempData").html(timeOfDayStats[0].waterTemp+"&#x2109");
             $(".windData").text(timeOfDayStats[0].windSpeed+"mph, "+ timeOfDayStats[0].windDir);
+
             $(".tempBox").on("click", function(){
                 var weatherAtTime = timeOfDayStats[this.id];
                 $(".dataTitle").text('');  //clear text
@@ -178,7 +202,9 @@ function weatherApi(lat, long){
                 $(".waterTempData").html(weatherAtTime.waterTemp+"&#x2109");
                 $(".windData").text(weatherAtTime.windSpeed+"mph, "+ weatherAtTime.windDir);
             });
-        console.log(timeOfDayStats);
+        // console.log(timeOfDayStats);
+            counter++;
+
 
         },
         error: function(result){
@@ -201,9 +227,11 @@ function weatherApi(lat, long){
         var makePhotoDiv = definePhotoDiv.css('background-image', 'url(' + beachPhoto + ')').attr('onclick','showModal()');
         $('.pictureInfoDataContainer').append(makePhotoDiv);
     }
-    $(".dataPageContainer").removeClass("hidden");
-    $(".dataPageContainer").addClass("visible");
+    setTimeout(function(){
+        $(".dataPageContainer").removeClass("hidden");
+        $(".dataPageContainer").addClass("visible");
 
+    },300);
 
 };
 /***************************************************************************************************
@@ -231,6 +259,8 @@ function weatherApi(lat, long){
                 beachPhotoArrayData.push(url);
             }
             makePhotoDivs(beachPhotoArrayData);
+            counter++;
+
         },
         error: function() {
             console.log(false);
