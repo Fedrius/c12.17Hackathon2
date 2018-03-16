@@ -127,7 +127,7 @@ function googleGeoLoc(name){
 };
 
 /***************************************************************************************************
- * localTemp - ajax call retreiving forecast for given city and attaching to DOM
+ * localTemp - ajax call retrieving forecast for given city and attaching to DOM
  * @param (number, number) two - Latitude and Longitude coordinates of the beach location
  * @return undefined none
  */
@@ -224,7 +224,7 @@ function weatherApi(lat, long){
 }
 
 /***************************************************************************************************
- * makePhotoDivs - dynamically creates and appends divs onto the pictureInforDataContainer div
+ * makePhotoDivs - dynamically creates and appends divs onto the pictureInfoDataContainer div
  * @param {array} one
  * @return undefined
  * @calls undefined
@@ -245,7 +245,7 @@ function weatherApi(lat, long){
 
 };
 /***************************************************************************************************
- * flickrClickHandler - ajax call to flickr API which creates a data object which holds encrypted URL information
+ * flickrClickHandler - ajax call to flickr API which creates the URL's from the encrypted data object that flickr's API returns.
  * @param {string} the string of the beach name to be inputted into the flickr ajax search call
  * @return undefined
  * @calls makePhotoURL
