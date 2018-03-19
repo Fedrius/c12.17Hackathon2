@@ -398,6 +398,7 @@ h2 {
 }
 .tideInfoCategories{
     /* border: 2px solid blue; */
+    padding-left: 3%;
     font-size: 4vmin;
     height: 90%;
     width: 50%;
@@ -414,6 +415,7 @@ h2 {
 }
 .tideInfoData{
     /* border: 2px solid green; */
+    padding-left: 3%;
     font-size: 4vmin;
     height: 90%;
     width: 50%;
