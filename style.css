@@ -700,12 +700,19 @@ h2 {
 }
 
 @media screen and (min-width: 451px) and (max-width: 1024px){
+    .tempTime, .tempTemp {
+        font-size: 2.8vmin;
+    }
     .tempBox{
         width: 12%;
     }
 
     .tempPic{
         width: 80%;
+    }
+
+    .sunrise, .sunset{
+        font-size: 2.8vmin;
     }
 }
 
