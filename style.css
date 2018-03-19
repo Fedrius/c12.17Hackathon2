@@ -622,6 +622,11 @@ h2 {
 
 /*Media Queries*/
 @media screen and (max-width: 475px){
+    .logoContainer {
+        height: 35%;
+        width: 65%;
+        left: 20.4%;
+    }
     .dataMuteButton, .returnToMain{
         display: none;
     }
