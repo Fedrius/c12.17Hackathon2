@@ -545,7 +545,7 @@ h2 {
     position: absolute;
     width: 2.5%;
     height: 2.5%;
-    color: seashell;
+    color: black;
     font-size: 2vmin;
     text-align: center;
     right: 5%;
@@ -625,8 +625,12 @@ h2 {
     /*Title Page*/
     .muteButton, .titleMuteButton{
         font-size: 4vmin;
+        color: seashell;
     }
 
+    .titleMuteButton {
+        right: 10%;
+    }
     .logoContainer {
         height: 35%;
         width: 65%;
