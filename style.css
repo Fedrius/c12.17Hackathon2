@@ -299,6 +299,7 @@ h2 {
     /*border: 1px solid blue;*/
 }
 
+
 .sunset {
     /*border: 1px solid salmon;*/
     height: 100%;
@@ -544,7 +545,7 @@ h2 {
     position: absolute;
     width: 2.5%;
     height: 2.5%;
-    color: lightskyblue;
+    color: seashell;
     font-size: 2vmin;
     text-align: center;
     right: 5%;
@@ -618,3 +619,56 @@ h2 {
     transform: scale(.95);
 }
 
+
+/*Media Queries*/
+@media screen and (max-width: 475px){
+    .dataMuteButton, .returnToMain{
+        display: none;
+    }
+
+    .sunriseTitle, .sunriseTime{
+        font-size: 4.4vmin;
+    }
+
+    .sunsetTitle, .sunsetTime{
+        font-size: 4.4vmin;
+    }
+
+    .beachName{
+        font-size: 6vmin;
+    }
+
+    .beachLocation{
+        font-size: 4.5vmin;
+    }
+
+    .tempBox{
+        width: 14%;
+    }
+
+    .tempTime{
+        font-size: 3.7vmin;
+    }
+
+    .tempPic{
+        width: 110%;
+        height: 45%;
+    }
+
+    .infoContainer{
+        flex-direction: column;
+    }
+
+    .tideInfoContainer{
+        width: 90%;
+    }
+
+    .pictureInfoContainer{
+        height: 65%;
+        width: 90%;
+    }
+
+    .photoDiv{
+        pointer-events: none;
+    }
+}
