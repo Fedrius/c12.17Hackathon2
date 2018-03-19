@@ -622,11 +622,24 @@ h2 {
 
 /*Media Queries*/
 @media screen and (max-width: 475px){
+    /*Title Page*/
+    .muteButton, .titleMuteButton{
+        font-size: 4vmin;
+    }
+
     .logoContainer {
         height: 35%;
         width: 65%;
         left: 20.4%;
     }
+
+    .muteButton {
+
+    }
+
+    /*Search Page/Main Page*/
+
+    /*Data Results Page*/
     .dataMuteButton, .returnToMain{
         display: none;
     }
