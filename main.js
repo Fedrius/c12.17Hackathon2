@@ -14,8 +14,8 @@ $(document).ready(init);
  * @calls on click of search button calls googleGeoLoc(location);
  */
 function init(){
+    checkSoundOnLoad();
     playTitleMusic();
-
     $('.muteButton').click(muteSound);
     $('.titleMuteButton').click(muteSound);
     $('.locationInput').attr('autocomplete','off');
@@ -416,24 +416,45 @@ function playTakePlunge(){
     takePlungeSound.play();
 }
 /***************************************************************************************************
- * muteSound - click handler that stops all sounds.
+ * muteSound - click handler that stops all sounds and changes display of mute button depending on if its muted or not
  * @param undefined none
  * @return undefined
  */
-function muteSound(){
-    if(titleMusicSound.volume === 0){
-        searchBackgroundSound.volume = .3;
-        birdChirp.volume = .5;
-        titleMusicSound.volume = .5;
-        seagull.volume = .5;
-        takePlungeSound.volume = .8;
-    }
-    else{
+
+function checkSoundOnLoad(){
+    if(localStorage.sound === "off"){
         searchBackgroundSound.volume = 0;
         birdChirp.volume = 0;
         titleMusicSound.volume = 0;
         seagull.volume = 0;
         takePlungeSound.volume = 0;
+        $(".muteButton, .titleMuteButton").text("Sound");
+    }
+
+}
+
+function muteSound(){
+    if(titleMusicSound.volume === 0){
+        localStorage.setItem("sound", "on");
+        searchBackgroundSound.volume = .3;
+        birdChirp.volume = .5;
+        titleMusicSound.volume = .5;
+        seagull.volume = .5;
+        takePlungeSound.volume = .8;
+        $(".muteButton, .titleMuteButton").text("Mute");
+
+    }
+    else{
+        localStorage.setItem("sound", "off");
+        searchBackgroundSound.volume = 0;
+        birdChirp.volume = 0;
+        titleMusicSound.volume = 0;
+        seagull.volume = 0;
+        takePlungeSound.volume = 0;
+        $(".muteButton, .titleMuteButton").text("Sound");
+
+
+
     }
 }
 
