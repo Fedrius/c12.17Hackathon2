@@ -160,7 +160,7 @@ function localTemp(lat, long){
 function weatherApi(lat, long){
     $.ajax({
         dataType: "json",
-        url: `https://api.worldweatheronline.com/premium/v1/marine.ashx?key=ee5b80f43e9149f79be22719181601&num_of_days=1&tp=3&format=json&q=${lat}, ${long}&tide=yes`,
+        url: `https://api.worldweatheronline.com/premium/v1/marine.ashx?key=8430e70df2d54ab89d3193134181903&num_of_days=1&tp=3&format=json&q=${lat}, ${long}&tide=yes`,
         method: "get",
         success: function(result){
 
