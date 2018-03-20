@@ -58,7 +58,7 @@
     z-index: 8;
 }
 
-.titlePageContainer{                  /*ENTIRE PAGE HERE */
+.titlePageContainer {                  /*ENTIRE PAGE HERE */
     position: absolute;
     height: 100vh;
     width: 100vw;
@@ -70,22 +70,49 @@
     align-items: center;
     z-index: 6;
 }
-.logoContainer{
-    height: 40%;
-    width: 30%;
-    position: absolute;
-    left: 36.4%;
-    /*border: 1px solid black;*/
-    background-image: url("images/surfsup.gif");
-    background-repeat: no-repeat;
-    background-size: contain ;
+
+.titleFont {
+    font-family: 'Original Surfer', cursive;
+    font-size: 12vmin;
+    text-align: center;
 }
 
-.logoContainer:hover{
+.titleInfo {
+    font-family: 'Original Surfer', cursive;
+    font-size: 5vmin;
+    text-align: center;
+    margin: 2% 2% 0 2%;
+}
+
+.titleStartInfo {
+    font-family: 'Original Surfer', cursive;
+    font-size: 4vmin;
+    text-align: center;
+}
+
+.logoContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.titleLogo {
+    /*height: 40%;*/
+    width: 30%;
+    margin-top: 15px;
+    /*position: absolute;*/
+    /*left: 36.4%;*/
+    /*border: 1px solid black;*/
+    /*background-image: url("images/surfsup.gif");*/
+    /*background-repeat: no-repeat;*/
+    /*background-size: contain ;*/
+}
+
+.titleLogo:hover{
     transform: scale(1.1);
     cursor: pointer;
 }
-.logoContainer:active{
+.titleLogo:active{
     transform: scale(.95);
 }
 
@@ -237,13 +264,11 @@
     z-index: 10;
     visibility: visible;
 }
+
 .dataPageContainer.hidden{
-    /*border: 2px solid red;*/
     position: absolute;
     height: 100vh;
     width: 100vw;
-    /*background: linear-gradient(120deg, #ece837, #ec8c53);*/
-    /*background-image: url("images/infoBeachImage.jpg");*/
     animation-name: fadeOutBottom;
     animation-duration: .7s;
     transition-timing-function: linear;
@@ -268,7 +293,7 @@
 }
 
 h1 {
-    font-size: 5vmin;
+    /*font-size: 5vmin;*/
 }
 
 h2 {
@@ -543,10 +568,10 @@ h2 {
 }
 .titleMuteButton{
     position: absolute;
-    width: 2.5%;
-    height: 2.5%;
+    /*width: 2.5%;*/
+    /*height: 2.5%;*/
     color: seashell;
-    font-size: 2vmin;
+    font-size: 4vmin;
     text-align: center;
     right: 5%;
     top: 2%;
@@ -670,5 +695,9 @@ h2 {
 
     .photoDiv{
         pointer-events: none;
+    }
+
+    .titleLogo {
+        width: 75%;
     }
 }
