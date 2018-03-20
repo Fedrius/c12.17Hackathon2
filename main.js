@@ -27,7 +27,6 @@ function init(){
         playSearchMusic();
     });
 
-
     $(".searchButton").on("click", ()=>{
         let location = $(".locationInput").val();
         if(location.length <= 2){
@@ -45,6 +44,7 @@ function init(){
 
         },5000)
     });
+
     $(".locationInput").keypress(event=>{
         if (event.which === 13){
             event.preventDefault();
@@ -63,27 +63,25 @@ function init(){
                 doneLoading();
             },5000)
         }
-
     });
 
     $(".returnToMain").on("click", ()=>{
         $(".dataPageContainer").removeClass("visible");
         $(".dataPageContainer").addClass("hidden");
         doneLoading();
-
     })
-
 }
 
 // to change icon when page is loading;
 function loading() {
     $(".searchButton").css("background-image", "url('')");
     $(".searchButton").css("background-image", "url('images/loader.gif')");
-};
+}
+
 function doneLoading(){
     $(".searchButton").css("background-image", "url('')");
     $(".searchButton").css("background-image", "url('images/searchicon.png')");
-};
+}
 /***************************************************************************************************
  * googleGeoLoc - Ajax call with Google Geo Location when user clicks the search button
  * @param name user input value which is a string the from search box
@@ -124,7 +122,7 @@ function googleGeoLoc(name){
             console.log('ERRRROR');
         }
     })
-};
+}
 
 /***************************************************************************************************
  * localTemp - ajax call retreiving forecast for given city and attaching to DOM
@@ -242,8 +240,7 @@ function weatherApi(lat, long){
         $(".dataPageContainer").addClass("visible");
 
     },300);
-
-};
+}
 /***************************************************************************************************
  * flickrClickHandler - ajax call to flickr API which creates a data object which holds encrypted URL information
  * @param {string} the string of the beach name to be inputted into the flickr ajax search call
