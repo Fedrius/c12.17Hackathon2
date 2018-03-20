@@ -649,7 +649,7 @@ h2 {
 @media screen and (max-width: 414px){
     /*Title Page*/
     .muteButton, .titleMuteButton{
-        font-size: 4vmin;
+        font-size: 3vmin;
         color: seashell;
     }
 
@@ -658,14 +658,13 @@ h2 {
     }
     .logoContainer {
         height: 35%;
-        width: 65%;
+        width: 100%;
         left: 20.4%;
     }
 
-    .muteButton {
-
+    .titleLogo{
+        width: 60%;
     }
-
     /*Search Page/Main Page*/
 
     /*Data Results Page*/
@@ -731,16 +730,17 @@ h2 {
 @media screen and (min-width: 415px) and (max-width: 599px) {
     /*Title Page*/
     .muteButton, .titleMuteButton{
-        font-size: 4vmin;
+        font-size: 3vmin;
         color: seashell;
     }
 
     .titleMuteButton {
         right: 10%;
+        color: seashell;
     }
     .logoContainer {
         height: 35%;
-        width: 65%;
+        width: 100%;
         left: 20.4%;
     }
     /*Data Results Page*/
@@ -816,6 +816,17 @@ h2 {
 
 
 @media screen and (min-width: 600px) and (max-width: 1024px){
+    .muteButton, .titleMuteButton{
+        font-size: 3vmin;
+        color: seashell;
+    }
+
+    .titleLogo{
+        width: 55%;
+    }
+    .titleMuteButton {
+        right: 10%;
+    }
     .headerContainer {
         height: 15%;
     }
@@ -853,6 +864,15 @@ h2 {
 }
 
 @media screen and (min-width: 1025px) and (max-width: 1320px) {
+    .titleLogo{
+        width: 50%;
+    }
+
+    .titleMuteButton {
+        right: 10%;
+        color: seashell;
+    }
+
     .infoContainer{
         height: 65%;
     }
@@ -885,6 +905,11 @@ h2 {
 }
 
 @media screen and (min-width: 1321px) {
+    .titleMuteButton {
+        right: 10%;
+        color: seashell;
+    }
+
     .weatherInfoContainer {
         height: 25%;
     }
