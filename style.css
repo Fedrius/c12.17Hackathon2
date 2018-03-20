@@ -383,7 +383,7 @@ h2 {
 }
 .tempPic{
     height: 40%;
-    width: 35%;
+    width: 40%;
     /*border: 1px solid green;*/
     background-repeat: no-repeat;
     background-size: cover;
@@ -646,7 +646,7 @@ h2 {
 
 
 /*Media Queries*/
-@media screen and (max-width: 475px){
+@media screen and (max-width: 450px){
     /*Title Page*/
     .muteButton, .titleMuteButton{
         font-size: 4vmin;
@@ -702,6 +702,10 @@ h2 {
         height: 45%;
     }
 
+    .tempTemp{
+        font-size: 4.3vmin;
+    }
+
     .infoContainer{
         flex-direction: column;
     }
@@ -723,3 +727,34 @@ h2 {
         width: 75%;
     }
 }
+
+@media screen and (min-width: 451px) and (max-width: 1024px){
+    .tempTime, .tempTemp {
+        font-size: 2.8vmin;
+    }
+    .tempBox{
+        width: 12%;
+    }
+
+    .tempPic{
+        width: 80%;
+    }
+
+    .sunrise, .sunset{
+        font-size: 2.8vmin;
+    }
+}
+
+@media screen and (min-width: 1025px) and (max-width: 1400px) {
+    .tempBox {
+        width: 12%;
+    }
+
+    .tempPic {
+        width: 60%;
+    }
+}
+
+
+
+
