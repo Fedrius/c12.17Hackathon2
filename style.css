@@ -373,7 +373,8 @@ h2 {
     transform: scale(1.1);
     /*box-shadow: .01em .01em .01em .01em black;*/
     border-radius: 15%;
-    color: #0fb8ad;
+    color: #0fb8ae;
+    text-shadow: 1px 1px black;
 }
 .tempBox:active{
     transform: scale(.95);
