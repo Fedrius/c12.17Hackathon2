@@ -621,7 +621,7 @@ h2 {
 
 
 /*Media Queries*/
-@media screen and (max-width: 450px){
+@media screen and (max-width: 414px){
     /*Title Page*/
     .muteButton, .titleMuteButton{
         font-size: 4vmin;
@@ -664,6 +664,82 @@ h2 {
         font-size: 4.5vmin;
     }
 
+    .weatherInfoContainer {
+        height: 18%;
+    }
+    .tempBox{
+        width: 16%;
+    }
+
+    .tempTime{
+        font-size: 3.7vmin;
+    }
+
+    .tempPic{
+        width: 108%;
+        height: 50%;
+    }
+
+    .tempTemp{
+        font-size: 4.3vmin;
+    }
+
+    .infoContainer{
+        flex-direction: column;
+        height: 65%;
+    }
+
+    .tideInfoContainer{
+        width: 90%;
+    }
+
+    .pictureInfoContainer{
+        height: 65%;
+        width: 90%;
+    }
+
+    .photoDiv{
+        pointer-events: none;
+    }
+}
+
+@media screen and (min-width: 415px) and (max-width: 599px) {
+    /*Title Page*/
+    .muteButton, .titleMuteButton{
+        font-size: 4vmin;
+        color: seashell;
+    }
+
+    .titleMuteButton {
+        right: 10%;
+    }
+    .logoContainer {
+        height: 35%;
+        width: 65%;
+        left: 20.4%;
+    }
+    /*Data Results Page*/
+
+    .dataMuteButton, .returnToMain{
+        display: none;
+    }
+
+    .sunriseTitle, .sunriseTime{
+        font-size: 4vmin;
+    }
+
+    .sunsetTitle, .sunsetTime{
+        font-size: 4vmin;
+    }
+
+    .beachName{
+        font-size: 6vmin;
+    }
+
+    .beachLocation{
+        font-size: 4.5vmin;
+    }
+
     .tempBox{
         width: 14%;
     }
@@ -681,14 +757,24 @@ h2 {
         font-size: 4.3vmin;
     }
 
+    .weatherInfoContainer {
+        height: 22%;
+    }
+
     .infoContainer{
         flex-direction: column;
+        height: 63%;
     }
 
     .tideInfoContainer{
         width: 90%;
     }
-
+    .tideInfoHeader {
+        font-size: 4vmin;
+    }
+    .tideInfoCategories, .tideInfoData {
+        font-size: 3.5vmin
+    }
     .pictureInfoContainer{
         height: 65%;
         width: 90%;
@@ -699,12 +785,19 @@ h2 {
     }
 }
 
-@media screen and (min-width: 451px) and (max-width: 1024px){
+
+@media screen and (min-width: 600px) and (max-width: 1024px){
+    .headerContainer {
+        height: 15%;
+    }
+    .weatherInfoContainer{
+        height: 25%;
+    }
     .tempTime, .tempTemp {
         font-size: 2.8vmin;
     }
     .tempBox{
-        width: 12%;
+        width: 16%;
     }
 
     .tempPic{
@@ -714,17 +807,85 @@ h2 {
     .sunrise, .sunset{
         font-size: 2.8vmin;
     }
+    .infoContainer{
+        height: 60%;
+    }
+    .tideInfoDataContainer {
+        height: 87%;
+    }
+
+    .pictureInfoContainer{
+        height: 90%;
+    }
+    .pictureContent{
+        width: 60%;
+        height: 55%;
+    }
 }
 
-@media screen and (min-width: 1025px) and (max-width: 1400px) {
+@media screen and (min-width: 1025px) and (max-width: 1320px) {
+    .infoContainer{
+        height: 65%;
+    }
+    .tideInfoDataContainer {
+        height: 87%;
+    }
+
+    .pictureInfoContainer{
+        height: 90%;
+    }
+    .pictureContent{
+        width: 60%;
+        height: 55%;
+    }
+
+    .weatherInfoContainer{
+        height: 25%;
+    }
     .tempBox {
-        width: 12%;
+        width: 16%;
     }
 
     .tempPic {
         width: 60%;
     }
+
+    .infoContainer{
+        height: 60%;
+    }
 }
+
+@media screen and (min-width: 1321px) {
+    .weatherInfoContainer {
+        height: 25%;
+    }
+
+    .infoContainer{
+        height: 60%;
+    }
+    .tideInfoDataContainer {
+        height: 87%;
+    }
+
+    .pictureInfoContainer{
+        height: 90%;
+    }
+    .pictureContent{
+        width: 60%;
+        height: 55%;
+    }
+
+    .tempBox {
+        width: 12%;
+    }
+
+    .tempPic {
+        width: 50%;
+    }
+}
+
+
+
 
 
 
