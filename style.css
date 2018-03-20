@@ -568,9 +568,9 @@ h2 {
 }
 .titleMuteButton{
     position: absolute;
-    /*width: 2.5%;*/
-    /*height: 2.5%;*/
-    color: seashell;
+    width: 2.5%;
+    height: 2.5%;
+    color: lightskyblue;
     font-size: 4vmin;
     text-align: center;
     right: 5%;
@@ -647,6 +647,28 @@ h2 {
 
 /*Media Queries*/
 @media screen and (max-width: 475px){
+    /*Title Page*/
+    .muteButton, .titleMuteButton{
+        font-size: 4vmin;
+        color: seashell;
+    }
+
+    .titleMuteButton {
+        right: 10%;
+    }
+    .logoContainer {
+        height: 35%;
+        width: 65%;
+        left: 20.4%;
+    }
+
+    .muteButton {
+
+    }
+
+    /*Search Page/Main Page*/
+
+    /*Data Results Page*/
     .dataMuteButton, .returnToMain{
         display: none;
     }
