@@ -70,32 +70,27 @@
     align-items: center;
     z-index: 6;
 }
-
 .titleFont {
     font-family: 'Original Surfer', cursive;
     font-size: 12vmin;
     text-align: center;
 }
-
 .titleInfo {
     font-family: 'Original Surfer', cursive;
     font-size: 5vmin;
     text-align: center;
     margin: 2% 2% 0 2%;
 }
-
 .titleStartInfo {
     font-family: 'Original Surfer', cursive;
     font-size: 4vmin;
     text-align: center;
 }
-
 .logoContainer {
     display: flex;
     align-items: center;
     justify-content: center;
 }
-
 .titleLogo {
     /*height: 40%;*/
     width: 30%;
@@ -107,7 +102,6 @@
     /*background-repeat: no-repeat;*/
     /*background-size: contain ;*/
 }
-
 .titleLogo:hover{
     transform: scale(1.1);
     cursor: pointer;
@@ -115,8 +109,6 @@
 .titleLogo:active{
     transform: scale(.95);
 }
-
-
 .titlePageContainer.hidden{
     height: 40%;
     width: 30%;
@@ -134,11 +126,7 @@
     /*z-index: 6;*/
     visibility: hidden;
 }
-
-
-
                                     /*ENTIRE PAGE HERE */
-
 .mainPageContainer{
     /*border: 1px solid black;*/
     position: absolute;
@@ -170,7 +158,6 @@
     z-index: 5;
     visibility: visible;
 }
-
 .formContainer{
     /*border: 2px solid white;*/
     /*border-radius: 5%;*/
@@ -181,7 +168,6 @@
     justify-content: space-between;
     box-shadow: .1em .1em .1em .1em black;
 }
-
 .inputForm{
     width: 100%;
     height: 100%;
@@ -190,7 +176,6 @@
     width: 100%;
     cursor: auto;
 }
-
 .locationInput{
     font-family: 'Concert One', cursive;
     width: 20%;
@@ -207,12 +192,10 @@
 .locationInput:hover{
     /*background-color: black;*/
 }
-
 .locationInput:focus {
     width: 100%;
     cursor: auto;
 }
-
 .searchButton{
     height: 100%;
     width: 6%;
@@ -230,8 +213,6 @@
 .searchButton:active{
     transform: scale(.98);
 }
-
-
 /*DataPage*/                        /*ENTIRE PAGE HERE*/
 .dataPageContainer{
     /*border: 2px solid red;*/
@@ -248,7 +229,6 @@
     visibility: hidden;
     /*z-index: 100;*/
 }
-
 .dataPageContainer.visible{
     /*border: 2px solid red;*/
     position: absolute;
@@ -264,7 +244,6 @@
     z-index: 10;
     visibility: visible;
 }
-
 .dataPageContainer.hidden{
     position: absolute;
     height: 100vh;
@@ -277,7 +256,6 @@
     visibility: hidden;
     z-index: 10;
 }
-
 .headerContainer {
     /*border: 1px solid black;*/
     display: flex;
@@ -285,17 +263,14 @@
     width: 100%;
     height: 15%;
 }
-
 .mainTitle {
     text-align: center;
     height: 100%;
     font-family: 'Concert One', cursive;
 }
-
 h1 {
     /*font-size: 5vmin;*/
 }
-
 h2 {
     font-size: 3vmin;
 }
@@ -343,8 +318,6 @@ h2 {
 .sunriseTime{
     /*border: 1px solid blue;*/
 }
-
-
 .sunset {
     /*border: 1px solid salmon;*/
     height: 100%;
@@ -356,7 +329,6 @@ h2 {
     align-items: center;
     font-size: 2.4vmin;
 }
-
 .moonImg{
     height: 45%;
     width: 50%;
@@ -369,7 +341,6 @@ h2 {
 .sunsetTime{
     /*border: 1px solid blue;*/
 }
-
 .weatherInfoContainer {
     display: flex;
     font-size: 2.3vmin;
@@ -378,7 +349,6 @@ h2 {
     background-color: rgba(240,255,255,0.3);
     box-shadow: 10px 10px 27px 1px rgba(211,214,214,1);
 }
-
 .tempBox {
     /*border: 1px solid black;*/
     height: 100%;
@@ -407,7 +377,6 @@ h2 {
     width: 60%;
     /*border: 1px solid green;*/
 }
-
 .tempPicImage{
     height: 100%;
     width: 100%;
@@ -419,7 +388,6 @@ h2 {
     align-items: center;
     height: 68%;
 }
-
 .tideInfoContainer {
     /*border: 1px solid black;*/
     width: 80%;
@@ -429,7 +397,6 @@ h2 {
     justify-content: flex-start;
     align-items: flex-start;
 }
-
 .tideInfoHeader{
     width: 100%;
     height: 10%;
@@ -538,6 +505,7 @@ h2 {
     background-color: rgba(0,0,0,0.4);
 }
 .pictureContent {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items:flex-end;
@@ -551,6 +519,21 @@ h2 {
     width: 50%;
     height: 50%;
     font-size: 2em;
+}
+.closeModal {
+    position: absolute;
+    top: 1px;
+    right: 12px;
+    color: #f1f1f1;
+    font-size: 5vmin;
+    /*font-weight: bold;*/
+    transition: 0.3s;
+}
+.closeModal:hover,
+.closeModal:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
 }
 .modalButton{
     height: 5%;

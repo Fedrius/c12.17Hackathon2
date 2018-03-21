@@ -75,6 +75,8 @@ function init(){
         $(".dataPageContainer").removeClass("visible");
         $(".dataPageContainer").addClass("hidden");
     })
+  
+    $(".pictureModal").on("click", closeModal)
 }
 
 // to change icon when page is loading;
