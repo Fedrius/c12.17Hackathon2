@@ -167,10 +167,10 @@ function weatherApi(lat, long){
             $(".sunriseTime").text("");
             $(".sunsetTime").text("");
             $(".tideData").text("");
-            $(`.temp .tempPic`).css("background-image", "");
+            // $(`.temp .tempPicImage`).attr('src', "");
             // $(`.temp .tempTemp`).text("");
 
-
+            console.log(result);
             //find all weather data
             var weatherArray = result.data.weather[0];
             var sunrise = weatherArray.astronomy[0].sunrise;
@@ -181,16 +181,13 @@ function weatherApi(lat, long){
             var tideHeight = tideArray.tideHeight_mt;
             var tideType = tideArray.tide_type;
             $(".tideData").text(tideHeight + " meters, " + tideType);
-
             var timeOfDayStats = [];            //array to hold objects
 
             for (var hourlyIndex = 2; hourlyIndex < 7; hourlyIndex++){
                 var statsObj = {};
                 var hourObj = result.data.weather[0].hourly[hourlyIndex];
                 var imageDirect = result.data.weather[0].hourly[hourlyIndex].weatherIconUrl[0].value;
-                $(`.temp${hourlyIndex-1} .tempPic`).css("background-image", 'url('+imageDirect+')');
-
-
+                $(`.temp${hourlyIndex-1} .tempPicImage`).attr("src", imageDirect);
                 statsObj.windSpeed = hourObj.windspeedMiles;
                 statsObj.windDir = hourObj.winddir16Point;
                 statsObj.swellHeight = hourObj.swellHeight_ft;
