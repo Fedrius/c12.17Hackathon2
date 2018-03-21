@@ -1039,7 +1039,7 @@ h2 {
         height: 17%;
     }
     .weatherInfoContainer{
-        height: 20%;
+        height: 23%;
     }
     .tempBox {
         width: 16%;
@@ -1072,6 +1072,10 @@ h2 {
     .newSearchButton:hover{
         transform: scale(1.1);
         cursor: pointer;
+    }
+
+    .headerContainer{
+        height: 15%;
     }
 
     .weatherInfoContainer {
