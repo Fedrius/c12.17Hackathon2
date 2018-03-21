@@ -383,12 +383,14 @@ h2 {
     /*border: 1px solid purple;*/
 }
 .tempPic{
-    height: 40%;
-    width: 40%;
+    height: 45%;
+    width: 60%;
     /*border: 1px solid green;*/
-    background-repeat: no-repeat;
-    background-size: cover;
-    border-radius: 5px;
+}
+
+.tempPicImage{
+    height: 100%;
+    width: 100%;
 }
 .infoContainer{
     /*border: 3px solid blue;*/
@@ -647,7 +649,7 @@ h2 {
 
 
 /*Media Queries*/
-@media screen and (max-width: 414px){
+@media screen and  (max-width: 300px){
     /*Title Page*/
     .muteButton, .titleMuteButton{
         font-size: 3vmin;
@@ -674,11 +676,11 @@ h2 {
     }
 
     .sunriseTitle, .sunriseTime{
-        font-size: 4.4vmin;
+        font-size: 5.2vmin;
     }
 
     .sunsetTitle, .sunsetTime{
-        font-size: 4.4vmin;
+        font-size: 5.2vmin;
     }
 
     .beachName{
@@ -697,16 +699,95 @@ h2 {
     }
 
     .tempTime{
-        font-size: 3.7vmin;
+        font-size: 4.4vmin;
     }
 
     .tempPic{
-        width: 108%;
-        height: 50%;
+        width: 70%;
     }
 
     .tempTemp{
-        font-size: 4.3vmin;
+        font-size: 4.4vmin;
+    }
+
+    .infoContainer{
+        flex-direction: column;
+        height: 65%;
+    }
+
+    .tideInfoContainer{
+        width: 90%;
+    }
+
+    .pictureInfoContainer{
+        height: 65%;
+        width: 90%;
+    }
+
+    .photoDiv{
+        pointer-events: none;
+    }
+}
+
+@media screen and (min-width: 301px) and (max-width: 414px){
+    /*Title Page*/
+    .muteButton, .titleMuteButton{
+        font-size: 3vmin;
+        color: seashell;
+    }
+
+    .titleMuteButton {
+        right: 10%;
+    }
+    .logoContainer {
+        height: 35%;
+        width: 100%;
+        left: 20.4%;
+    }
+
+    .titleLogo{
+        width: 60%;
+    }
+    /*Search Page/Main Page*/
+
+    /*Data Results Page*/
+    .dataMuteButton, .returnToMain{
+        display: none;
+    }
+
+    .sunriseTitle, .sunriseTime{
+        font-size: 4.5vmin;
+    }
+
+    .sunsetTitle, .sunsetTime{
+        font-size: 4.5vmin;
+    }
+
+    .beachName{
+        font-size: 6vmin;
+    }
+
+    .beachLocation{
+        font-size: 4.5vmin;
+    }
+
+    .weatherInfoContainer {
+        height: 18%;
+    }
+    .tempBox{
+        width: 16%;
+    }
+
+    .tempTime{
+        font-size: 3.4vmin;
+    }
+
+    .tempPic{
+        width: 70%;
+    }
+
+    .tempTemp{
+        font-size: 3.4vmin;
     }
 
     .infoContainer{
@@ -751,11 +832,11 @@ h2 {
     }
 
     .sunriseTitle, .sunriseTime{
-        font-size: 4vmin;
+        font-size: 3.6vmin;
     }
 
     .sunsetTitle, .sunsetTime{
-        font-size: 4vmin;
+        font-size: 3.6vmin;
     }
 
     .beachName{
@@ -771,16 +852,15 @@ h2 {
     }
 
     .tempTime{
-        font-size: 3.7vmin;
+        font-size: 3.6vmin;
     }
 
     .tempPic{
-        width: 110%;
-        height: 45%;
+        width: 70%;
     }
 
     .tempTemp{
-        font-size: 4.3vmin;
+        font-size: 4vmin;
     }
 
     .weatherInfoContainer {
@@ -796,7 +876,7 @@ h2 {
         width: 90%;
     }
     .tideInfoHeader {
-        font-size: 4vmin;
+        font-size: 3.6vmin;
     }
     .tideInfoCategories, .tideInfoData {
         font-size: 3.5vmin
@@ -828,6 +908,11 @@ h2 {
     .titleMuteButton {
         right: 10%;
     }
+
+    .buttonContainer{
+        right: 2%;
+    }
+
     .headerContainer {
         height: 15%;
     }
@@ -842,7 +927,7 @@ h2 {
     }
 
     .tempPic{
-        width: 80%;
+        width: 75%;
     }
 
     .sunrise, .sunset{
@@ -874,6 +959,10 @@ h2 {
         color: seashell;
     }
 
+    .buttonContainer{
+        right: 2%;
+    }
+
     .infoContainer{
         height: 65%;
     }
@@ -896,9 +985,9 @@ h2 {
         width: 16%;
     }
 
-    .tempPic {
-        width: 60%;
-    }
+    /*.tempPic {*/
+        /*width: 70%;*/
+    /*}*/
 
     .infoContainer{
         height: 60%;
@@ -909,6 +998,10 @@ h2 {
     .titleMuteButton {
         right: 10%;
         color: seashell;
+    }
+
+    .buttonContainer{
+        right: 2%;
     }
 
     .weatherInfoContainer {
