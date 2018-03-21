@@ -70,6 +70,11 @@ function init(){
         $(".dataPageContainer").addClass("hidden");
         doneLoading();
     })
+
+    $(".newSearchButton").on("click", ()=>{
+        $(".dataPageContainer").removeClass("visible");
+        $(".dataPageContainer").addClass("hidden");
+    })
 }
 
 // to change icon when page is loading;

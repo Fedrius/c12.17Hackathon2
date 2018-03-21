@@ -300,6 +300,26 @@ h2 {
     font-size: 3vmin;
 }
 
+.newSearchContainer{
+    display: block;
+    margin-top: 7%;
+}
+
+.newSearchButton{
+    font-size: 2.5vmin;
+    padding: 6px;
+    background-color: black;
+    opacity: .15;
+    color: white;
+    display: inline-block;
+    width: 70%;
+    border: 1px solid #fff;
+    text-align: center;
+    outline: none;
+    text-decoration: none;
+    font-family: Helvetica;
+}
+
 .sunrise {
     /*border: 1px solid salmon;*/
     height: 100%;
@@ -691,6 +711,17 @@ h2 {
         font-size: 4.5vmin;
     }
 
+    .newSearchContainer{
+        display: block;
+    }
+
+    .newSearchButton{
+        font-size: 3.5vmin;
+        padding: 8px;
+        background-color: black;
+        opacity: .15;
+        color: white;
+    }
     .weatherInfoContainer {
         height: 18%;
     }
@@ -703,7 +734,7 @@ h2 {
     }
 
     .tempPic{
-        width: 70%;
+        width: 75%;
     }
 
     .tempTemp{
@@ -734,6 +765,18 @@ h2 {
     .muteButton, .titleMuteButton{
         font-size: 3vmin;
         color: seashell;
+    }
+
+    .newSearchContainer{
+        display: block;
+    }
+
+    .newSearchButton{
+        font-size: 3.5vmin;
+        padding: 6px;
+        background-color: black;
+        opacity: .15;
+        color: white;
     }
 
     .titleMuteButton {
@@ -783,7 +826,7 @@ h2 {
     }
 
     .tempPic{
-        width: 70%;
+        width: 80%;
     }
 
     .tempTemp{
@@ -903,6 +946,7 @@ h2 {
 
 
 @media screen and (min-width: 600px) and (max-width: 1024px){
+    /*Title Page*/
     .muteButton, .titleMuteButton{
         font-size: 3vmin;
         color: seashell;
@@ -918,7 +962,7 @@ h2 {
     .buttonContainer{
         right: 2%;
     }
-
+    /*Data Page*/
     .headerContainer {
         height: 15%;
     }
@@ -956,6 +1000,7 @@ h2 {
 }
 
 @media screen and (min-width: 1025px) and (max-width: 1320px) {
+    /*Title Page*/
     .titleLogo{
         width: 50%;
     }
@@ -967,6 +1012,11 @@ h2 {
 
     .buttonContainer{
         right: 2%;
+    }
+    /*Data Page*/
+    .newSearchButton:hover{
+        transform: scale(1.1);
+        cursor: pointer;
     }
 
     .infoContainer{
@@ -1001,6 +1051,7 @@ h2 {
 }
 
 @media screen and (min-width: 1321px) {
+    /*Title Page*/
     .titleMuteButton {
         right: 10%;
         color: seashell;
@@ -1008,6 +1059,11 @@ h2 {
 
     .buttonContainer{
         right: 2%;
+    }
+    /*Data Page*/
+    .newSearchButton:hover{
+        transform: scale(1.1);
+        cursor: pointer;
     }
 
     .weatherInfoContainer {
