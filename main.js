@@ -71,6 +71,11 @@ function init(){
         doneLoading();
     })
 
+    $(".newSearchButton").on("click", ()=>{
+        $(".dataPageContainer").removeClass("visible");
+        $(".dataPageContainer").addClass("hidden");
+    })
+  
     $(".pictureModal").on("click", closeModal)
 }
 

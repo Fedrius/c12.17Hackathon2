@@ -274,6 +274,27 @@ h1 {
 h2 {
     font-size: 3vmin;
 }
+
+.newSearchContainer{
+    display: block;
+    margin-top: 3%;
+}
+
+.newSearchButton{
+    font-size: 2.5vmin;
+    padding: 6px;
+    background-color: black;
+    opacity: .15;
+    color: white;
+    display: inline-block;
+    width: 70%;
+    border: 1px solid #fff;
+    text-align: center;
+    outline: none;
+    text-decoration: none;
+    font-family: Helvetica;
+}
+
 .sunrise {
     /*border: 1px solid salmon;*/
     height: 100%;
@@ -657,6 +678,10 @@ h2 {
         display: none;
     }
 
+    .headerContainer{
+        height: 20%;
+    }
+
     .sunriseTitle, .sunriseTime{
         font-size: 5.2vmin;
     }
@@ -673,8 +698,19 @@ h2 {
         font-size: 4.5vmin;
     }
 
+    .newSearchContainer{
+        display: block;
+    }
+
+    .newSearchButton{
+        font-size: 3.5vmin;
+        padding: 8px;
+        background-color: black;
+        opacity: .15;
+        color: white;
+    }
     .weatherInfoContainer {
-        height: 18%;
+        height: 20%;
     }
     .tempBox{
         width: 16%;
@@ -685,7 +721,7 @@ h2 {
     }
 
     .tempPic{
-        width: 70%;
+        width: 75%;
     }
 
     .tempTemp{
@@ -694,7 +730,7 @@ h2 {
 
     .infoContainer{
         flex-direction: column;
-        height: 65%;
+        height: 60%;
     }
 
     .tideInfoContainer{
@@ -718,6 +754,18 @@ h2 {
         color: seashell;
     }
 
+    .newSearchContainer{
+        display: block;
+    }
+
+    .newSearchButton{
+        font-size: 3.5vmin;
+        padding: 6px;
+        background-color: black;
+        opacity: .15;
+        color: white;
+    }
+
     .titleMuteButton {
         right: 10%;
     }
@@ -737,6 +785,9 @@ h2 {
         display: none;
     }
 
+    .headerContainer{
+        height: 20%;
+    }
     .sunriseTitle, .sunriseTime{
         font-size: 4.5vmin;
     }
@@ -746,7 +797,7 @@ h2 {
     }
 
     .beachName{
-        font-size: 6vmin;
+        font-size: 5.5vmin;
     }
 
     .beachLocation{
@@ -754,7 +805,7 @@ h2 {
     }
 
     .weatherInfoContainer {
-        height: 18%;
+        height: 20%;
     }
     .tempBox{
         width: 16%;
@@ -765,7 +816,7 @@ h2 {
     }
 
     .tempPic{
-        width: 70%;
+        width: 80%;
     }
 
     .tempTemp{
@@ -774,7 +825,7 @@ h2 {
 
     .infoContainer{
         flex-direction: column;
-        height: 65%;
+        height: 60%;
     }
 
     .tideInfoContainer{
@@ -812,6 +863,9 @@ h2 {
         left: 20.4%;
     }
     /*Data Results Page*/
+    .headerContainer{
+        height: 20%;
+    }
 
     .dataMuteButton, .returnToMain{
         display: none;
@@ -826,11 +880,11 @@ h2 {
     }
 
     .beachName{
-        font-size: 6vmin;
+        font-size: 4.2vmin;
     }
 
     .beachLocation{
-        font-size: 4.5vmin;
+        font-size: 3.8vmin;
     }
 
     .tempBox{
@@ -850,12 +904,12 @@ h2 {
     }
 
     .weatherInfoContainer {
-        height: 22%;
+        height: 20%;
     }
 
     .infoContainer{
         flex-direction: column;
-        height: 63%;
+        height: 60%;
     }
 
     .tideInfoContainer{
@@ -885,6 +939,7 @@ h2 {
 
 
 @media screen and (min-width: 600px) and (max-width: 1024px){
+    /*Title Page*/
     .muteButton, .titleMuteButton{
         font-size: 3vmin;
         color: seashell;
@@ -900,12 +955,12 @@ h2 {
     .buttonContainer{
         right: 2%;
     }
-
+    /*Data Page*/
     .headerContainer {
-        height: 15%;
+        height: 20%;
     }
     .weatherInfoContainer{
-        height: 25%;
+        height: 20%;
     }
     .tempTime, .tempTemp {
         font-size: 2.8vmin;
@@ -938,6 +993,7 @@ h2 {
 }
 
 @media screen and (min-width: 1025px) and (max-width: 1320px) {
+    /*Title Page*/
     .titleLogo{
         width: 50%;
     }
@@ -950,9 +1006,22 @@ h2 {
     .buttonContainer{
         right: 2%;
     }
+    /*Data Page*/
+    .headerContainer{
+        height: 20%;
+    }
+
+    .newSearchContainer{
+        margin-top: 3%;
+    }
+
+    .newSearchButton:hover{
+        transform: scale(1.1);
+        cursor: pointer;
+    }
 
     .infoContainer{
-        height: 65%;
+        height: 60%;
     }
     .tideInfoDataContainer {
         height: 87%;
@@ -966,8 +1035,11 @@ h2 {
         height: 55%;
     }
 
+    .headerContainer {
+        height: 17%;
+    }
     .weatherInfoContainer{
-        height: 25%;
+        height: 20%;
     }
     .tempBox {
         width: 16%;
@@ -983,6 +1055,7 @@ h2 {
 }
 
 @media screen and (min-width: 1321px) {
+    /*Title Page*/
     .titleMuteButton {
         right: 10%;
         color: seashell;
@@ -990,6 +1063,15 @@ h2 {
 
     .buttonContainer{
         right: 2%;
+    }
+    /*Data Page*/
+    .newSearchContainer{
+        margin-top: 3%;
+    }
+
+    .newSearchButton:hover{
+        transform: scale(1.1);
+        cursor: pointer;
     }
 
     .weatherInfoContainer {
