@@ -6,6 +6,8 @@ $(document).ready(init);
  * Global variable set
  */
     var counter = 0;
+    var localTime;
+    var hourlyIndex;
 
 /***************************************************************************************************
  * init - adds clicks handlers on search button, keypress for location, clickhandler for main page logo
@@ -15,6 +17,7 @@ $(document).ready(init);
  */
 function init(){
     checkSoundOnLoad();
+    setLocalTime();
     playTitleMusic();
     $('.muteButton').click(muteSound);
     $('.titleMuteButton').click(muteSound);
@@ -80,6 +83,7 @@ function init(){
 }
 
 // to change icon when page is loading;
+
 function loading() {
     $(".searchButton").css("background-image", "url('')");
     $(".searchButton").css("background-image", "url('images/loader.gif')");
@@ -89,6 +93,77 @@ function doneLoading(){
     $(".searchButton").css("background-image", "url('')");
     $(".searchButton").css("background-image", "url('images/searchicon.png')");
 }
+
+// sets local time to the current hour
+function setLocalTime() {
+    localTime = new Date().getHours();
+    console.log(localTime);
+    if(localTime >= 0 && localTime < 3){
+        hourlyIndex = 0;
+        $(".temp1 .tempTime").text("12:00am");
+        $(".temp2 .tempTime").text("3:00am");
+        $(".temp3 .tempTime").text("6:00am");
+        $(".temp4 .tempTime").text("9:00am");
+        $(".temp5 .tempTime").text("Noon");
+    }
+    else if(localTime >= 3 && localTime < 6){
+        hourlyIndex = 1;
+        $(".temp1 .tempTime").text("3:00am");
+        $(".temp2 .tempTime").text("6:00am");
+        $(".temp3 .tempTime").text("9:00am");
+        $(".temp4 .tempTime").text("Noon");
+        $(".temp5 .tempTime").text("3:00pm");
+    }
+    else if(localTime >= 6 && localTime < 9){
+        hourlyIndex = 2;
+        $(".temp1 .tempTime").text("6:00am");
+        $(".temp2 .tempTime").text("9:00am");
+        $(".temp3 .tempTime").text("Noon");
+        $(".temp4 .tempTime").text("3:00pm");
+        $(".temp5 .tempTime").text("6:00pm");
+    }
+    else if(localTime >= 9 && localTime < 12){
+        $(".temp1 .tempTime").text("9:00am");
+        $(".temp2 .tempTime").text("Noon");
+        $(".temp3 .tempTime").text("3:00pm");
+        $(".temp4 .tempTime").text("6:00pm");
+        $(".temp5 .tempTime").text("9:00pm");
+        hourlyIndex = 3;
+    }
+    else if(localTime >= 12 && localTime < 15){
+        $(".temp1 .tempTime").text("Noon");
+        $(".temp2 .tempTime").text("3:00pm");
+        $(".temp3 .tempTime").text("6:00pm");
+        $(".temp4 .tempTime").text("9:00pm");
+        $(".temp5 .tempTime").text("12:00am");
+        hourlyIndex = 4;
+    }
+    else if(localTime >= 15 && localTime < 18){
+        $(".temp1 .tempTime").text("3:00pm");
+        $(".temp2 .tempTime").text("6:00pm");
+        $(".temp3 .tempTime").text("9:00pm");
+        $(".temp4 .tempTime").text("12:00am");
+        $(".temp5 .tempTime").text("3:00am");
+        hourlyIndex = 5;
+    }
+    else if(localTime >= 18 && localTime < 21){
+        $(".temp1 .tempTime").text("6:00pm");
+        $(".temp2 .tempTime").text("9:00pm");
+        $(".temp3 .tempTime").text("12:00am");
+        $(".temp4 .tempTime").text("3:00am");
+        $(".temp5 .tempTime").text("6:00am");
+        hourlyIndex = 6;
+    }
+    else {
+        $(".temp1 .tempTime").text("9:00pm");
+        $(".temp2 .tempTime").text("12:00am");
+        $(".temp3 .tempTime").text("3:00am");
+        $(".temp4 .tempTime").text("6:00am");
+        $(".temp5 .tempTime").text("9:00am");
+        hourlyIndex = 7;
+    }
+}
+
 /***************************************************************************************************
  * googleGeoLoc - Ajax call with Google Geo Location when user clicks the search button
  * @param name user input value which is a string the from search box
@@ -139,17 +214,29 @@ function googleGeoLoc(name){
 function localTemp(lat, long){
     $.ajax({
         dataType: "json",
-        url: `https://api.worldweatheronline.com/premium/v1/weather.ashx?key=8430e70df2d54ab89d3193134181903&format=json&q=${lat}, ${long}&num_of_days=1`,
+        url: `https://api.worldweatheronline.com/premium/v1/weather.ashx?key=8430e70df2d54ab89d3193134181903&format=json&q=${lat}, ${long}&num_of_days=3`,
         method: 'get',
         success: function(result){
+            console.log(result);
             $(`.temp .tempTemp`).text("");
-            for(var tempIndex = 2; tempIndex < 7; tempIndex++){
-                var tempHour = result.data.weather[0].hourly[tempIndex];
-                var tempAtHour = tempHour.tempF;
-                $(`.temp${tempIndex-1} .tempTemp`).html(tempAtHour+ "&#x2109");
+            var tempArray = [];
+            // for(var tempIndex = 2; tempIndex < 7; tempIndex++){
+            //     var tempHour = result.data.weather[0].hourly[tempIndex];
+            //     var tempAtHour = tempHour.tempF;
+            //     $(`.temp${tempIndex-1} .tempTemp`).html(tempAtHour+ "&#x2109");
+            // }
+            for(var dayIndex = 0; dayIndex <= 1; dayIndex++) {
+                for (var tempIndex = 0; tempIndex <= 7; tempIndex++) {
+                    var tempHour = result.data.weather[dayIndex].hourly[tempIndex];
+                    tempArray.push(tempHour);
+                }
             }
-            counter++;
+            console.log(tempArray);
+            for(var temperatureIndex = hourlyIndex, weatherIndex = 1;  temperatureIndex < hourlyIndex +5; temperatureIndex++, weatherIndex++) {
+                    $(`.temp${weatherIndex} .tempTemp`).html(tempArray[temperatureIndex].tempF + "&#x2109");
+                }
 
+            counter++;
         },
         error: function(result){
             console.log("error");
@@ -165,10 +252,10 @@ function localTemp(lat, long){
 function weatherApi(lat, long){
     $.ajax({
         dataType: "json",
-        url: `https://api.worldweatheronline.com/premium/v1/marine.ashx?key=8430e70df2d54ab89d3193134181903&num_of_days=1&tp=3&format=json&q=${lat}, ${long}&tide=yes`,
+        url: `https://api.worldweatheronline.com/premium/v1/marine.ashx?key=8430e70df2d54ab89d3193134181903&num_of_days=3&tp=3&format=json&q=${lat}, ${long}&tide=yes`,
         method: "get",
         success: function(result){
-
+            console.log(result);
 
             //putting dom elements here that need to be cleared later
             $(".sunriseTime").text("");
