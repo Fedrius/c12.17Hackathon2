@@ -747,7 +747,7 @@ h2 {
     }
 }
 
-@media screen and (min-width: 301px) and (max-width: 414px){
+@media screen and (min-width: 301px) and (max-width: 415px){
     /*Title Page*/
     .muteButton, .titleMuteButton{
         font-size: 3vmin;
@@ -780,10 +780,17 @@ h2 {
     }
 
     /***Search Page/Main Page***/
-    .searchPageContent{
+    .searchPageContent {
         margin-bottom: 50%;
     }
 
+    .searchButton {
+        max-width: 10vmin;
+    }
+
+    .locationInput {
+        font-size: 4vmin;
+    }
 
     /*Data Results Page*/
     .dataMuteButton, .returnToMain{
@@ -871,6 +878,14 @@ h2 {
     /***Search Page/Main Page***/
     .searchPageContent{
         margin-bottom: 50%;
+    }
+
+    .searchButton {
+        max-width: 10vmin;
+    }
+
+    .locationInput {
+        font-size: 4vmin;
     }
 
     /*Data Results Page*/
