@@ -69,6 +69,10 @@
     justify-content: center;
     align-items: center;
     z-index: 6;
+
+    color: rgba(0,0,0,0.8);
+    text-shadow: 2px 8px 6px rgba(0,0,0,0.2),
+    0px -5px 35px rgba(255,255,255,0.3);
 }
 .titleFont {
     font-family: 'Original Surfer', cursive;
@@ -156,9 +160,19 @@
     z-index: 5;
     visibility: visible;
 }
+.searchPageContent{
+    max-width: 70%;
+    width: 100%;
+    margin-bottom: 15%;
+}
+.mainPageTitlePos{
+    margin-bottom: 5%;
+    color: rgba(0,0,0,0.8);
+    text-shadow: 2px 8px 6px rgba(0,0,0,0.2),
+    0px -5px 35px rgba(255,255,255,0.3);
+}
 .formContainer{
     width: 100%;
-    max-width: 55%;
     background-color: rgba(128, 128, 128, 0.3);
     display: flex;
     justify-content: space-between;
@@ -764,7 +778,12 @@ h2 {
     .titleLogo{
         width: 60%;
     }
-    /*Search Page/Main Page*/
+
+    /***Search Page/Main Page***/
+    .searchPageContent{
+        margin-bottom: 50%;
+    }
+
 
     /*Data Results Page*/
     .dataMuteButton, .returnToMain{
@@ -848,6 +867,12 @@ h2 {
         width: 100%;
         left: 20.4%;
     }
+
+    /***Search Page/Main Page***/
+    .searchPageContent{
+        margin-bottom: 50%;
+    }
+
     /*Data Results Page*/
     .headerContainer{
         height: 20%;
@@ -941,6 +966,13 @@ h2 {
     .buttonContainer{
         right: 2%;
     }
+
+    /***Search Page/Main Page***/
+    .searchPageContent{
+        margin-bottom: 28%;
+        max-width: 60%;
+    }
+
     /*Data Page*/
     .headerContainer {
         height: 20%;
@@ -992,6 +1024,13 @@ h2 {
     .buttonContainer{
         right: 2%;
     }
+
+    /*Search Page/main page*/
+    .searchPageContent{
+        max-width: 55%;
+        margin-bottom: 18%;
+    }
+
     /*Data Page*/
     .headerContainer{
         height: 20%;
@@ -1050,6 +1089,12 @@ h2 {
     .buttonContainer{
         right: 2%;
     }
+
+    /*Search Page/main page*/
+    .searchPageContent{
+        max-width: 55%;
+    }
+
     /*Data Page*/
     .newSearchContainer{
         margin-top: 3%;
