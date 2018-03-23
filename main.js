@@ -232,8 +232,8 @@ function localTemp(lat, long){
                 }
             }
             console.log(tempArray);
-            for(var temperatureIndex = hourlyIndex, weatherIndex = 1;  temperatureIndex < hourlyIndex +5; temperatureIndex++, weatherIndex++) {
-                    $(`.temp${weatherIndex} .tempTemp`).html(tempArray[temperatureIndex].tempF + "&#x2109");
+            for(var temperatureIndex = hourlyIndex, timeIndex = 1;  temperatureIndex < hourlyIndex +5; temperatureIndex++, timeIndex++) {
+                    $(`.temp${timeIndex} .tempTemp`).html(tempArray[temperatureIndex].tempF + "&#x2109");
                 }
 
             counter++;
@@ -255,7 +255,7 @@ function weatherApi(lat, long){
         url: `https://api.worldweatheronline.com/premium/v1/marine.ashx?key=8430e70df2d54ab89d3193134181903&num_of_days=3&tp=3&format=json&q=${lat}, ${long}&tide=yes`,
         method: "get",
         success: function(result){
-            console.log(result);
+            console.log("weather result", result);
 
             //putting dom elements here that need to be cleared later
             $(".sunriseTime").text("");
@@ -265,34 +265,44 @@ function weatherApi(lat, long){
             // $(`.temp .tempTemp`).text("");
 
             console.log(result);
-            //find all weather data
-            var weatherArray = result.data.weather[0];
-            var sunrise = weatherArray.astronomy[0].sunrise;
+            var sunrise = result.data.weather[0].astronomy[0].sunrise;
             $(".sunriseTime").text(sunrise);
-            var sunset = weatherArray.astronomy[0].sunset;
+            var sunset = result.data.weather[0].astronomy[0].sunset;
             $(".sunsetTime").text(sunset);
+
             var tideArray = result.data.weather[0].tides[0].tide_data[1];
             var tideHeight = tideArray.tideHeight_mt;
             var tideType = tideArray.tide_type;
             $(".tideData").text(tideHeight + " meters, " + tideType);
             var timeOfDayStats = [];            //array to hold objects
 
-            for (var hourlyIndex = 2; hourlyIndex < 7; hourlyIndex++){
-                var statsObj = {};
-                var hourObj = result.data.weather[0].hourly[hourlyIndex];
-                var imageDirect = result.data.weather[0].hourly[hourlyIndex].weatherIconUrl[0].value;
-                $(`.temp${hourlyIndex-1} .tempPicImage`).attr("src", imageDirect);
-                statsObj.windSpeed = hourObj.windspeedMiles;
-                statsObj.windDir = hourObj.winddir16Point;
-                statsObj.swellHeight = hourObj.swellHeight_ft;
-                statsObj.swellDir = hourObj.swellDir16Point;
-                statsObj.waterTemp = hourObj.tempF;
-                timeOfDayStats.push(statsObj);
+            //find all weather data and put into weatherArray
+            var weatherArray = [];
+            for(var weatherDayIndex = 0; weatherDayIndex <= 1; weatherDayIndex++) {
+                for (var timePeriodIndex = 0; timePeriodIndex <= 7; timePeriodIndex++) {
+                    var weatherHour = result.data.weather[weatherDayIndex].hourly[timePeriodIndex];
+                    weatherArray.push(weatherHour);
+                }
             }
-            $(".dataTitle").text('');  //clear text
-            $(".swellData").text(timeOfDayStats[0].swellHeight + "ft, " + timeOfDayStats[0].swellDir);
-            $(".waterTempData").html(timeOfDayStats[0].waterTemp+"&#x2109");
-            $(".windData").text(timeOfDayStats[0].windSpeed+"mph, "+ timeOfDayStats[0].windDir);
+            console.log("Weather Array: ", weatherArray);
+
+            for(var conditionIndex = hourlyIndex, timeIndex = 1;  conditionIndex < hourlyIndex +5; conditionIndex++, timeIndex++) {
+                var statsObj = {};
+                var imageDirect = weatherArray[conditionIndex].weatherIconUrl[0].value;
+                $(`.temp${timeIndex} .tempPicImage`).attr("src", imageDirect);
+
+                statsObj.windSpeed = weatherArray[conditionIndex].windspeedMiles;
+                statsObj.windDir = weatherArray[conditionIndex].winddir16Point;
+                statsObj.swellHeight = weatherArray[conditionIndex].swellHeight_ft;
+                statsObj.swellDir = weatherArray[conditionIndex].swellDir16Point;
+                statsObj.waterTemp = weatherArray[conditionIndex].tempF;
+                timeOfDayStats.push(statsObj);
+                console.log("time of day stats: ", timeOfDayStats);
+                $(".dataTitle").text('');  //clear text
+                $(".swellData").text(timeOfDayStats[0].swellHeight + "ft, " + timeOfDayStats[0].swellDir);
+                $(".waterTempData").html(timeOfDayStats[0].waterTemp + "&#x2109");
+                $(".windData").text(timeOfDayStats[0].windSpeed + "mph, " + timeOfDayStats[0].windDir);
+            }
 
             $(".tempBox").on("click", function(){
                 var weatherAtTime = timeOfDayStats[this.id];
@@ -301,10 +311,8 @@ function weatherApi(lat, long){
                 $(".waterTempData").html(weatherAtTime.waterTemp+"&#x2109");
                 $(".windData").text(weatherAtTime.windSpeed+"mph, "+ weatherAtTime.windDir);
             });
-        // console.log(timeOfDayStats);
+
             counter++;
-
-
         },
         error: function(result){
             console.log("ajax call failed");
