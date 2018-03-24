@@ -20,13 +20,23 @@
 @keyframes fadeOutShrink {
     from {
         opacity: 1;
-        transform: scale(1) translateY(69%);
+        transform: scale(1) translateX(0%) translateY(0%);
         visibility: visible
     }
     to {
         opacity: 0;
-        transform: scale(0) translate(-100%);
+        transform: scale(0) translateX(-300%) translateY(-500%);
         visibility: hidden
+    }
+}
+@keyframes vanish{
+    from{
+        opacity: 0;
+        visibility: hidden;
+    }
+    to {
+        opacity: 0;
+        visibility: hidden;
     }
 }
 @keyframes fadeInRight {
@@ -99,6 +109,7 @@
     /*height: 40%;*/
     width: 30%;
     margin-top: 15px;
+    margin-left: 3%;
     /*position: absolute;*/
     /*left: 36.4%;*/
     /*border: 1px solid black;*/
@@ -114,20 +125,30 @@
     transform: scale(.95);
 }
 .titlePageContainer.hidden{
-    height: 40%;
-    width: 30%;
+    /* height: 40%;
+    width: 30%; */
     position: absolute;
-    left: 36.4%;
-    /*border: 1px solid black;*/
+    color: rgba(0,0,0,0);
+    /* left: 36.4%; */
+    /* background-image: url("images/surfsup.gif"); */
+    /*background-repeat: no-repeat;
+    background-size: contain ; */
+    animation-name: vanish;
+    animation-duration: 1.3s;
+    transition-timing-function: ease-out;
+    visibility: hidden;
+}
+.flyOff{
+    position: absolute;
+    left: 36.5%;
+    top: 47%;
     background-image: url("images/surfsup.gif");
-    /*background-image: url("images/SurfsUpBackground.jpg");*/
     background-repeat: no-repeat;
     background-size: contain ;
     animation-name: fadeOutShrink;
     animation-duration: 1.3s;
-    /*transition-duration: 10s;*/
     transition-timing-function: ease-out;
-    /*z-index: 6;*/
+    z-index: 900;
     visibility: hidden;
 }
                                     /*ENTIRE PAGE HERE */
@@ -375,6 +396,8 @@ h2 {
 .tempPic{
     height: 45%;
     width: 60%;
+    display: flex;
+    justify-content: center;
     /*border: 1px solid green;*/
 }
 .tempPicImage{
@@ -671,6 +694,21 @@ h2 {
     .titleLogo{
         width: 60%;
     }
+    .flyOff{
+    position: absolute;
+    left: 10%;
+    /* top: 47%; */
+    width: 90%;
+    height: 20%;
+    /* background-image: url("images/surfsup.gif"); */
+    background-repeat: no-repeat;
+    background-size: contain ;
+    animation-name: fadeOutShrink;
+    animation-duration: 1.3s;
+    transition-timing-function: ease-out;
+    z-index: 900;
+    visibility: hidden;
+}
     /*Search Page/Main Page*/
 
     /*Data Results Page*/
@@ -778,6 +816,20 @@ h2 {
     .titleLogo{
         width: 60%;
     }
+    .flyOff{
+        position: absolute;
+        left: 14%;
+        top: 40%;
+        width: 85%;
+        height: 34%;
+        background-repeat: no-repeat;
+        background-size: contain ;
+        animation-name: fadeOutShrink;
+        animation-duration: 1.3s;
+        transition-timing-function: ease-out;
+        z-index: 900;
+        visibility: hidden;
+    }
 
     /***Search Page/Main Page***/
     .searchPageContent {
@@ -857,7 +909,62 @@ h2 {
         pointer-events: none;
     }
 }
+@media screen and (max-width: 1024px) and (min-width: 400px) and (orientation:landscape){
+    .tempPicImage{
+        width: 47%;
+    }
+}
 
+
+@media screen and (max-width: 416px) and (min-height: 700px){
+    .flyOff{
+        position: absolute;
+        left: 10%;
+        top: 42%;
+        width: 85%;
+        height: 24%;
+        background-repeat: no-repeat;
+        background-size: contain ;
+        animation-name: fadeOutShrink;
+        animation-duration: 1.3s;
+        transition-timing-function: ease-out;
+        z-index: 900;
+        visibility: hidden;
+    }
+}
+@media screen and (min-width: 301px) and (max-width: 415px) and (min-height: 730px){
+    .flyOff{
+        position: absolute;
+        left: 11%;
+        top: 43%;
+        width: 76%;
+        height: 25%;
+        background-repeat: no-repeat;
+        background-size: contain ;
+        animation-name: fadeOutShrink;
+        animation-duration: 1.3s;
+        transition-timing-function: ease-out;
+        z-index: 900;
+        visibility: hidden;
+    }
+}
+@media screen and (max-width: 300px) and (min-height: 700px){
+    .flyOff{
+        position: absolute;
+        left: 13%;
+        top: 43%;
+        width: 80%;
+        height: 24%;
+        background-repeat: no-repeat;
+        background-size: contain ;
+        animation-name: fadeOutShrink;
+        animation-duration: 1.3s;
+        transition-timing-function: ease-out;
+        z-index: 900;
+        visibility: hidden;
+    }
+}
+    
 @media screen and (min-width: 415px) and (max-width: 599px) {
     /*Title Page*/
     .muteButton, .titleMuteButton{
@@ -873,6 +980,20 @@ h2 {
         height: 35%;
         width: 100%;
         left: 20.4%;
+    }
+    .flyOff{
+        position: absolute;
+        left: 10%;
+        top: 40%;
+        /* width: 70%;
+        height: 70%; */
+        background-repeat: no-repeat;
+        background-size: contain ;
+        animation-name: fadeOutShrink;
+        animation-duration: 1.3s;
+        transition-timing-function: ease-out;
+        z-index: 900;
+        visibility: hidden;
     }
 
     /***Search Page/Main Page***/
@@ -963,7 +1084,6 @@ h2 {
     }
 }
 
-
 @media screen and (min-width: 600px) and (max-width: 1024px){
     /*Title Page*/
     .muteButton, .titleMuteButton{
@@ -972,7 +1092,7 @@ h2 {
     }
 
     .titleLogo{
-        width: 55%;
+        width: 45%;
     }
     .titleMuteButton {
         right: 10%;
@@ -980,6 +1100,20 @@ h2 {
 
     .buttonContainer{
         right: 2%;
+    }
+    .flyOff{
+        position: absolute;
+        left: 25%;
+        top: 42%;
+        /* width: 85%;
+        height: 20%; */
+        background-repeat: no-repeat;
+        background-size: contain ;
+        animation-name: fadeOutShrink;
+        animation-duration: 1.3s;
+        transition-timing-function: ease-out;
+        z-index: 900;
+        visibility: hidden;
     }
 
     /***Search Page/Main Page***/
@@ -1024,8 +1158,51 @@ h2 {
         height: 55%;
     }
 }
+@media screen and (min-width: 375px) and (max-width: 667px) and (orientation: landscape) {
+    .titleLogo{
+        width: 42%;
+        margin-left: 3%;
+    }
+    .flyOff{
+        position: absolute;
+        left: 23%;
+        top: 30%;
+        width: 50%;
+        height: 55%;
+        background-repeat: no-repeat;
+        background-size: contain ;
+        animation-name: fadeOutShrink;
+        animation-duration: 1.3s;
+        transition-timing-function: ease-out;
+        z-index: 900;
+        visibility: hidden;
+    }
+
+    .tempPicImage{
+        width: 47%;
+    }
+    .tempPic{
+        display: flex;
+        justify-content: center;
+    }
+}
+
 
 @media screen and (min-width: 1025px) and (max-width: 1320px) {
+    .flyOff{
+        position: absolute;
+        left: 30%;
+        top: 45%;
+        /* width: 85%;
+        height: 20%; */
+        background-repeat: no-repeat;
+        background-size: contain ;
+        animation-name: fadeOutShrink;
+        animation-duration: 1.3s;
+        transition-timing-function: ease-out;
+        z-index: 900;
+        visibility: hidden;
+    }
     /*Title Page*/
     .titleLogo{
         width: 50%;
@@ -1151,6 +1328,7 @@ h2 {
         width: 50%;
     }
 }
+
 
 
 
