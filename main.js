@@ -256,6 +256,8 @@ function weatherApi(lat, long){
         method: "get",
         success: function(result){
             console.log("weather result", result);
+            var weatherArray = [];
+            var timeOfDayStats = [];
 
             //putting dom elements here that need to be cleared later
             $(".sunriseTime").text("");
@@ -274,10 +276,8 @@ function weatherApi(lat, long){
             var tideHeight = tideArray.tideHeight_mt;
             var tideType = tideArray.tide_type;
             $(".tideData").text(tideHeight + " meters, " + tideType);
-            var timeOfDayStats = [];            //array to hold objects
 
             //find all weather data and put into weatherArray
-            var weatherArray = [];
             for(var weatherDayIndex = 0; weatherDayIndex <= 1; weatherDayIndex++) {
                 for (var timePeriodIndex = 0; timePeriodIndex <= 7; timePeriodIndex++) {
                     var weatherHour = result.data.weather[weatherDayIndex].hourly[timePeriodIndex];
