@@ -280,7 +280,7 @@ function weatherApi(lat, long){
             var sunset = result.data.weather[0].astronomy[0].sunset;
             $(".sunsetTime").text(sunset);
 
-            var tideArray = result.data.weather[0].tides[0].tide_data[1];
+            var tideArray = result.data.weather[0].tides[0].tide_data[0];
             var tideHeight = tideArray.tideHeight_mt;
             var tideType = tideArray.tide_type;
             $(".tideData").text(tideHeight + " meters, " + tideType);
