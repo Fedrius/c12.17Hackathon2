@@ -24,10 +24,18 @@ function init(){
     $('.locationInput').attr('autocomplete','off');
     $(".logoContainer").on("click", ()=>{
         $(".titlePageContainer").addClass("hidden");
+        let flyAway= $("<img>").attr({
+            src: "images/surfsup.gif",
+            class: "flyOff"
+        });
         $(".mainPageContainer").addClass("visible");
+        $("body").append(flyAway);
         stopTitleMusic();
         playTakePlunge();
         playSearchMusic();
+        setTimeout(()=>{
+            $("body > .flyOff").remove();
+        }, 1000) 
     });
 
     $(".searchButton").on("click", ()=>{
