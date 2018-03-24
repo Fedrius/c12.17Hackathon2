@@ -915,6 +915,9 @@ h2 {
     .tempPicImage{
         width: 47%;
     }
+     h1 {
+        font-size: 5vmin;
+    }
 }
 
 
