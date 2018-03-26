@@ -24,6 +24,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.post('/signUp', (req,res,next)=>{
     console.log("It worked!");
+    console.log(req.body);
+    const { username, email, password, confirmPassword } = req.body;
+    let query = 'INSERT INTO users SET ?';
+    let inserts = { username, email, password };
+    db.query(query, inserts, (err, results, fields) => {
+        if (err) return next(err)
+        res.json(results)
+    });
     return;
 })
 

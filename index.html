@@ -183,15 +183,15 @@
     
                     <form class="form-horizontal" role="form" method="POST" action="">
                         <div class="form-group">
-                            <label class="col-sm-2 control-label" for="inputEmail" name="email">Email</label>
+                            <label class="col-sm-2 control-label" for="userName">Username</label>
                             <div class="col-sm-10">
-                                <input type="email" class="form-control" id="inputEmail" placeholder="Email" />
+                                <input type="text" class="form-control" id="userName" placeholder="Username" name="username" />
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label" for="inputPassword">Password</label>
                             <div class="col-sm-10">
-                                <input type="password" class="form-control" id="inputPassword" placeholder="Password" />
+                                <input type="password" class="form-control" id="inputPassword" placeholder="Password" name="password" />
                             </div>
                         </div>
                         <div class="form-group">
@@ -229,29 +229,38 @@
                 <!-- Modal Body -->
                 <div class="modal-body">
     
-                    <form class="form-horizontal" role="form" method="POST" action="/signUp">
+                    <form id="signUpForm" class="form-horizontal" role="form" method="POST" action="/signUp">
                         <div class="form-group">
-                            <label class="col-sm-2 control-label" for="inputEmail" name="email">Email</label>
+                            <label class="col-sm-2 control-label" for="inputName">Username</label>
                             <div class="col-sm-10">
-                                <input type="email" class="form-control" id="signUpEmail" placeholder="Email" />
+                                <input type="text" class="form-control" id="signUpUserName" placeholder="Username" name="username" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="inputEmail">Email</label>
+                            <div class="col-sm-10">
+                                <input type="email" class="form-control" id="signUpEmail" placeholder="Email" name="email"/>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label" for="inputPassword">Password</label>
                             <div class="col-sm-10">
-                                <input type="password" class="form-control" id="signUpPassword" placeholder="Password" />
+                                <input type="password" class="form-control" id="signUpPassword" placeholder="Password" name="password" />
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label" for="inputPassword">Confirm Password</label>
                             <div class="col-sm-10">
-                                <input type="password" class="form-control" id="signUpConfirmPassword" placeholder="Confirm Password" />
+                                <input type="password" class="form-control" id="signUpConfirmPassword" placeholder="Confirm Password" name="confirmPassword"/>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
-                                <button type="submit" class="btn btn-default">Sign Up</button>
+                                <button type="button" class="btn btn-default" onClick="validateSignUp()">Sign Up</button>
                             </div>
+                        </div>
+                        <div id="signUpErrors">
+
                         </div>
                     </form>
                 </div>

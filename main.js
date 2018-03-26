@@ -9,6 +9,20 @@ $(document).ready(init);
     var localTime;
     var hourlyIndex;
 
+    // active counters for warnings on signInForms
+
+    let signInWarnings={
+        username: false,
+        password: false
+    };
+    let signUpWarnings = {
+        username: false,
+        email: false,
+        passwordLen: false,
+        passwordMatch: false,
+        incompleteForm: false
+    }
+
 /***************************************************************************************************
  * init - adds clicks handlers on search button, keypress for location, clickhandler for main page logo
  * @param none
@@ -561,8 +575,67 @@ function muteSound(){
         takePlungeSound.volume = 0;
         $(".muteButton, .titleMuteButton").text("Sound");
 
-
-
     }
 }
+
+
+
+
+
+// ajax calls and functions for Sign Up and Sign In
+
+function validateSignUp(){
+    let username = $("#signUpUserName").val();
+    let email = $("#signUpEmail").val();
+    let password = $("#signUpPassword").val();
+    let confirmPassword = $("#signUpConfirmPassword").val();
+    $("#signUpErrors").empty();
+    signUpWarnings = {
+        username: false,
+        email: false,
+        passwordLen: false,
+        passwordMatch: false,
+        incompleteForm: false
+    }
+    if(!username.length || !email.length || !password.length || !confirmPassword.length){
+        formIncomplete();
+        return;
+    }
+    if(username.length>15){
+        userNameTooLong();
+    }
+    if(password !== confirmPassword){
+        passwordMismatch();
+    }
+    if(username.length<16 && password===confirmPassword){
+        console.log("success");
+    }
+
+
+}
+function userNameTooLong(){
+    if (signUpWarnings.username) {
+        return;
+    }
+    let response = $("<div>").css('color', 'red').text("Username must be less than 16 characters")
+    $("#signUpErrors").append(response);
+    signUpWarnings.username = true;
+}
+function passwordMismatch(){
+    if (signUpWarnings.passwordMatch) {
+        return;
+    }
+    let response = $("<div>").css('color', 'red').text("Passwords do not match")
+    $("#signUpErrors").append(response);
+    signUpWarnings.passwordMatch = true;
+}
+function formIncomplete(){
+    if (signUpWarnings.formIncomplete) {
+        return;
+    }
+    let response = $("<div>").css('color', 'red').text("Please fill out all values")
+    $("#signUpErrors").append(response);
+    signUpWarnings.formIncomplete = true;
+}
+
 
