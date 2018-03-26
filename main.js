@@ -400,6 +400,10 @@ function showModal(){
  function closeModal(){
     $('.pictureModal').hide();
     $('.errorModal').hide();
+    $('.signInModal').hide();
+}
+function showSignInModal() {
+    $('.signInModal').show();
 }
 
 function resetPage(){
