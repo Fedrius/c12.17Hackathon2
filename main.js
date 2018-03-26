@@ -382,6 +382,11 @@ function weatherApi(lat, long){
     };
     $.ajax(ajaxConfig);
 }
+
+function showSigninModal(){
+     $('.signinModal').show();
+}
+
 /***************************************************************************************************
  * showModal - a click handler that targets the current picture div and opens up a modal which enlarges the image clicked.
  * @param undefined none
