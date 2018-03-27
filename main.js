@@ -711,8 +711,14 @@ function signInUser(username, password){
         data: inserts,
         success: function (result) {
             console.log("result: ", result)
+            $('.signUpBtn').hide();
+            $('.signOutBtn').show();
+            $(".searchPageContent").find('h3').remove();
+            let welcomeMessage = $("<h3>").addClass("text-center").text(`Welcome, ${result.username}`)
             $('#closeSignInModal').trigger('click');
-            
+            $("#signInUserName").val("");
+            $("#signInPassword").val("");
+            $(".searchPageContent").prepend(welcomeMessage);
         },
         error: function (result) {
             let response = $("<div>").css('color', 'red').text("Invalid UserName/Password").addClass("alert alert-danger")
@@ -723,9 +729,25 @@ function signInUser(username, password){
     };
     $.ajax(ajaxConfig);
 }
-
+// log out of current session and session store
 function signOut(){
-    console.log("signing out");
+    var ajaxConfig = {
+        dataType: 'json',
+        url: "signOut",
+        method: "get",
+        success: function (result) {
+            // console.log("result: ", result)
+            $('.signUpBtn').show();
+            $('.signOutBtn').hide();
+            $(".searchPageContent").find('h3').remove();
+           
+        },
+        error: function (result) {
+            console.log("failure signing out", result);
+        }
+    };
+    $.ajax(ajaxConfig);
+
 }
 
 

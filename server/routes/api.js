@@ -53,16 +53,19 @@ module.exports= function(app, db){
     app.post("/signIn", passport.authenticate('local-signIn'), (req,res)=>{
         // console.log("locals", res.locals)
 
-        
+
         // console.log("session info signIn: ", req.session);
         // console.log("user: ", req.user);
         // console.log(req.isAuthenticated());
-        
-
-
-
+     
         return res.json(req.user)
-    
+    });
+    app.get("/signOut", (req,res,next)=>{
+        console.log("signOUt called")
+        req.logout();
+        req.session.destroy(()=>{
+            res.json("success")
+        })
     })
 
 

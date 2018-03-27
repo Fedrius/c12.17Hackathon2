@@ -34,6 +34,7 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     store: sessionStore,
+    cookie: {maxAge: 604800800},
     // cookie: {secure:true} if https uncomment this
 }));
 app.use(passport.initialize());
@@ -52,15 +53,16 @@ passport.use('local-signIn', new LocalStrategy(
     function(username, password, done){
         // console.log("username, ", username);
         // console.log("password", password);
-        db.query("SELECT id, password FROM users WHERE username = ?", [username], (err, results, fields)=>{
+        db.query("SELECT id, password, username FROM users WHERE username = ?", [username], (err, results, fields)=>{
             if(err) return done(err);
             
             if(results.length ===0){
-                console.log("teste")
+                console.log("test")
                 return done(null, false, { message: 'Incorrect Username' })
             }
-            let storedPassword = results[0].password    
-            return bcrypt.compareSync(password, storedPassword) ? done(null, {id:results[0].id, username}) : done(null, false, {message: 'Incorrect Password'});
+            let storedPassword = results[0].password 
+            console.log('results', results[0])   
+            return bcrypt.compareSync(password, storedPassword) ? done(null, { id: results[0].id, username: results[0].username}) : done(null, false, {message: 'Incorrect Password'});
         })
         
     }
@@ -69,7 +71,7 @@ passport.use('local-signIn', new LocalStrategy(
 
 passport.serializeUser(function (user, done) {
     console.log("SERIALIZE", user)
-    done(null, user);
+    done(null, user.id);
 });
 
 // passport.deserializeUser(function (id, done) {
@@ -77,9 +79,9 @@ passport.serializeUser(function (user, done) {
 //         done(null, id);
 // });
 passport.deserializeUser(function (id, done) {
-    console.log("DESERIALIZE")
+    console.log("DESERIALIZE", id)
     let sql = "SELECT * FROM users WHERE id = ?";
-    let inserts = [id.id];
+    let inserts = [id];
     db.query(sql, inserts,
         function (err, results, fields) {
             done(err, results[0].id)
