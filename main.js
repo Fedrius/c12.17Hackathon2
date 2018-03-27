@@ -13,7 +13,8 @@ $(document).ready(init);
 
     let signInWarnings={
         username: false,
-        password: false
+        password: false,
+        incompleteForm: false
     };
     let signUpWarnings = {
         username: false,
@@ -614,7 +615,7 @@ function validateSignUp(){
 
 // functions to handle errors on SignUp
 function userNameTooLong(){
-    if (signUpWarnings.username) {
+    if (signUpWarnings.username === true) {
         return;
     }
     let response = $("<div>").css('color', 'red').text("Username must be less than 16 characters").addClass("alert alert-danger")
@@ -622,7 +623,7 @@ function userNameTooLong(){
     signUpWarnings.username = true;
 }
 function passwordMismatch(){
-    if (signUpWarnings.passwordMatch) {
+    if (signUpWarnings.passwordMatch === true) {
         return;
     }
     let response = $("<div>").css('color', 'red').text("Passwords do not match").addClass("alert alert-danger")
@@ -630,14 +631,14 @@ function passwordMismatch(){
     signUpWarnings.passwordMatch = true;
 }
 function formIncomplete(){
-    if (signUpWarnings.formIncomplete) {
+    if (signUpWarnings.incompleteForm === true) {
         return;
     }
     let response = $("<div>").css('color', 'red').text("Please fill out all values").addClass("alert alert-danger")
     $("#signUpErrors").append(response);
     signUpWarnings.formIncomplete = true;
 }
-
+// function to add new user to the database
 function addNewUser(username, email, password, confirmPassword){
     $("#signUpErrors").empty();
     let inserts = {username, email, password, confirmPassword}
@@ -659,13 +660,15 @@ function addNewUser(username, email, password, confirmPassword){
                 $("#signUpErrors").append(response);
             }
             else{
-                console.log("success adding user", result)
                 $("#signUpUserName").val("");
                 $("#signUpEmail").val("");
                 $("#signUpPassword").val("");
                 $("#signUpConfirmPassword").val("");
 
                 $('#closeSignUpModal').trigger('click');
+                $('.signInContainer').trigger('click');
+                let response = $("<div>").css('color', 'green').text(`Welcome, ${username}. Sign in to verify your account!`).addClass("alert alert-success");
+                $('#signInErrors').append(response);
                 return;
             }
         },
@@ -675,6 +678,71 @@ function addNewUser(username, email, password, confirmPassword){
         }
     };
     $.ajax(ajaxConfig);
+}
+
+// sign in user validation
+function validateSignIn() {
+    let username = $("#signInUserName").val();
+    let password = $("#signInPassword").val();
+    $("#signInErrors").empty();
+    signInWarnings = {
+        username: false,
+        password: false,
+        incompleteForm: false
+    };
+    if (!username.length ||  !password.length ) {
+        let response = $("<div>").css('color', 'red').text("Please fill out all values").addClass("alert alert-danger")
+        $("#signInErrors").append(response);
+        signUpWarnings.formIncomplete = true;
+        return;
+    }
+    else{
+        signInUser(username, password);
+    }   
+}
+// sign in user and session start
+function signInUser(username, password){
+    $("#signInErrors").empty();
+    let inserts = {username, password};
+    var ajaxConfig = {
+        dataType: 'json',
+        url: "signIn",
+        method: "post",
+        data: inserts,
+        success: function (result) {
+            console.log("result: ", result)
+            $('#closeSignInModal').trigger('click');
+            
+        },
+        error: function (result) {
+            let response = $("<div>").css('color', 'red').text("Invalid UserName/Password").addClass("alert alert-danger")
+            $("#signInErrors").append(response);
+            // console.log("failure signing in", result);
+
+        }
+    };
+    $.ajax(ajaxConfig);
+}
+
+function signOut(){
+    console.log("signing out");
+}
+
+
+
+
+// clear each form
+function clearSignUpForm(){
+    $("#signUpUserName").val("");
+    $("#signUpEmail").val("");
+    $("#signUpPassword").val("");
+    $("#signUpConfirmPassword").val("");
+    $("#signUpErrors").empty();
+}
+function clearSignInForm() {
+    $("#signInUserName").val("");
+    $("#signInPassword").val("");
+    $("#signInErrors").empty();
 }
 
 
