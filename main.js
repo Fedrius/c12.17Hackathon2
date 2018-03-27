@@ -654,6 +654,10 @@ function addNewUser(username, email, password, confirmPassword){
                }
                 return;
             }
+            else if(result.sqlMessage){
+                let response = $("<div>").css('color', 'red').text(`${result.sqlMessage}`).addClass("alert alert-danger")
+                $("#signUpErrors").append(response);
+            }
             else{
                 console.log("success adding user", result)
                 $("#signUpUserName").val("");

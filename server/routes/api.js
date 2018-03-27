@@ -33,8 +33,15 @@ module.exports= function(app, db){
             let query = 'INSERT INTO users SET ?';
             let inserts = { username, email, password };
             db.query(query, inserts, (err, results, fields) => {
-                if (err) return next(err)
-                res.json(results)
+                if (err){
+                    console.log("ERROR: ", err)
+                    res.json(err)
+                    return next(err)
+                } 
+                else{
+                    res.json(results)
+                }
+                
             });
             return;
 
