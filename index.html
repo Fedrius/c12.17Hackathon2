@@ -3,8 +3,15 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>Surfs Up</title>
+    
     <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
-    <script src="main.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+    
+
+    <script src="main.js"></script>     
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Original+Surfer|Concert+One" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -26,6 +33,13 @@
         <button class="titleMuteButton">Mute</button>
     </div>
     <div class="mainPageContainer">
+        <div class="signInContainer" data-toggle="modal" data-target="#signInModal">
+            <div class="signUpBtn">Sign In</div>
+        </div>
+        <div class="signUpContainer" data-toggle="modal" data-target="#signUpModal">
+            <div class="signUpBtn">Sign Up</div>
+        </div>
+       
         <div class="buttonContainer">
             <button class="muteButton">Mute</button>
         </div>
@@ -149,6 +163,118 @@
             <button class='errorButton' onclick="closeModal()">Close</button>
         </div>
     </div>
+    <!--Sign In Modal-->
+    <div class="modal fade" id="signInModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        Sign In
+                    </h4>
+                </div>
+    
+                <!-- Modal Body -->
+                <div class="modal-body">
+    
+                    <form class="form-horizontal" role="form" method="POST" action="">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="userName">Username</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="userName" placeholder="Username" name="username" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="inputPassword">Password</label>
+                            <div class="col-sm-10">
+                                <input type="password" class="form-control" id="inputPassword" placeholder="Password" name="password" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-default">Sign in</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+    
+                <!-- Modal Footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        Close
+                    </button>            
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Sign Up Modal-->
+    <div class="modal fade" id="signUpModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        Sign Up
+                    </h4>
+                </div>
+    
+                <!-- Modal Body -->
+                <div class="modal-body">
+    
+                    <form id="signUpForm" class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="inputName">Username</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="signUpUserName" placeholder="Username" name="username" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="inputEmail">Email</label>
+                            <div class="col-sm-10">
+                                <input type="email" class="form-control" id="signUpEmail" placeholder="Email" name="email"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="inputPassword">Password</label>
+                            <div class="col-sm-10">
+                                <input type="password" class="form-control" id="signUpPassword" placeholder="Password" name="password" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="inputPassword">Confirm Password</label>
+                            <div class="col-sm-10">
+                                <input type="password" class="form-control" id="signUpConfirmPassword" placeholder="Confirm Password" name="confirmPassword"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="button" class="btn btn-default" onClick="validateSignUp()">Sign Up</button>
+                            </div>
+                        </div>
+                        <div id="signUpErrors">
 
+                        </div>
+                    </form>
+                </div>
+    
+                <!-- Modal Footer -->
+                <div class="modal-footer">
+                    <button id="closeSignUpModal" type="button" class="btn btn-default" data-dismiss="modal">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   
 </body>
 </html>

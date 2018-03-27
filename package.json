@@ -1,0 +1,30 @@
+{
+  "name": "Surfs Up",
+  "version": "1.0.0",
+  "description": "Application to show you weather and surf conditions at any beach!",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fedrius/c12.17Hackathon2.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Fedrius/c12.17Hackathon2/issues"
+  },
+  "homepage": "https://github.com/Fedrius/c12.17Hackathon2#readme",
+  "dependencies": {
+    "bcrypt": "^1.0.3",
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.18.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.16.3",
+    "express-session": "^1.15.6",
+    "express-validator": "^5.0.3",
+    "morgan": "^1.9.0",
+    "mysql": "^2.15.0"
+  }
+}

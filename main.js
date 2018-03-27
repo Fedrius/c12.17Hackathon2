@@ -9,6 +9,20 @@ $(document).ready(init);
     var localTime;
     var hourlyIndex;
 
+    // active counters for warnings on signInForms
+
+    let signInWarnings={
+        username: false,
+        password: false
+    };
+    let signUpWarnings = {
+        username: false,
+        email: false,
+        passwordLen: false,
+        passwordMatch: false,
+        incompleteForm: false
+    }
+
 /***************************************************************************************************
  * init - adds clicks handlers on search button, keypress for location, clickhandler for main page logo
  * @param none
@@ -400,6 +414,10 @@ function showModal(){
  function closeModal(){
     $('.pictureModal').hide();
     $('.errorModal').hide();
+    $('.signInModal').hide();
+}
+function showSignInModal() {
+    $('.signInModal').show();
 }
 
 function resetPage(){
@@ -557,8 +575,104 @@ function muteSound(){
         takePlungeSound.volume = 0;
         $(".muteButton, .titleMuteButton").text("Sound");
 
-
-
     }
 }
+
+
+
+
+
+// ajax calls and functions for Sign Up and Sign In
+
+function validateSignUp(){
+    let username = $("#signUpUserName").val();
+    let email = $("#signUpEmail").val();
+    let password = $("#signUpPassword").val();
+    let confirmPassword = $("#signUpConfirmPassword").val();
+    $("#signUpErrors").empty();
+    signUpWarnings = {
+        username: false,
+        email: false,
+        passwordLen: false,
+        passwordMatch: false,
+        incompleteForm: false
+    }
+    if(!username.length || !email.length || !password.length || !confirmPassword.length){
+        formIncomplete();
+        return;
+    }
+    if(username.length>15){
+        userNameTooLong();
+    }
+    if(password !== confirmPassword){
+        passwordMismatch();
+    }
+    if(username.length<16 && password===confirmPassword){
+        addNewUser(username, email, password, confirmPassword);
+    }
+}
+
+// functions to handle errors on SignUp
+function userNameTooLong(){
+    if (signUpWarnings.username) {
+        return;
+    }
+    let response = $("<div>").css('color', 'red').text("Username must be less than 16 characters").addClass("alert alert-danger")
+    $("#signUpErrors").append(response);
+    signUpWarnings.username = true;
+}
+function passwordMismatch(){
+    if (signUpWarnings.passwordMatch) {
+        return;
+    }
+    let response = $("<div>").css('color', 'red').text("Passwords do not match").addClass("alert alert-danger")
+    $("#signUpErrors").append(response);
+    signUpWarnings.passwordMatch = true;
+}
+function formIncomplete(){
+    if (signUpWarnings.formIncomplete) {
+        return;
+    }
+    let response = $("<div>").css('color', 'red').text("Please fill out all values").addClass("alert alert-danger")
+    $("#signUpErrors").append(response);
+    signUpWarnings.formIncomplete = true;
+}
+
+function addNewUser(username, email, password, confirmPassword){
+    $("#signUpErrors").empty();
+    let inserts = {username, email, password, confirmPassword}
+    var ajaxConfig = {
+        dataType: 'json',
+        url: "signUp",
+        method: "post",
+        data: inserts,
+        success: function (result) {
+            if (Array.isArray(result)) {
+               for(let error of result){
+                   let response = $("<div>").css('color', 'red').text(`${error.msg}`).addClass("alert alert-danger")
+                   $("#signUpErrors").append(response);
+               }
+                return;
+            }
+            else{
+                console.log("success adding user", result)
+                $("#signUpUserName").val("");
+                $("#signUpEmail").val("");
+                $("#signUpPassword").val("");
+                $("#signUpConfirmPassword").val("");
+
+                $('#closeSignUpModal').trigger('click');
+                return;
+            }
+        },
+        error: function (result) {
+            console.log("failure adding user", result);
+            
+        }
+    };
+    $.ajax(ajaxConfig);
+}
+
+
+
 
