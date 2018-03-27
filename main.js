@@ -608,16 +608,16 @@ function validateSignUp(){
         passwordMismatch();
     }
     if(username.length<16 && password===confirmPassword){
-        console.log("success");
+        addNewUser(username, email, password, confirmPassword);
     }
-
-
 }
+
+// functions to handle errors on SignUp
 function userNameTooLong(){
     if (signUpWarnings.username) {
         return;
     }
-    let response = $("<div>").css('color', 'red').text("Username must be less than 16 characters")
+    let response = $("<div>").css('color', 'red').text("Username must be less than 16 characters").addClass("alert alert-danger")
     $("#signUpErrors").append(response);
     signUpWarnings.username = true;
 }
@@ -625,7 +625,7 @@ function passwordMismatch(){
     if (signUpWarnings.passwordMatch) {
         return;
     }
-    let response = $("<div>").css('color', 'red').text("Passwords do not match")
+    let response = $("<div>").css('color', 'red').text("Passwords do not match").addClass("alert alert-danger")
     $("#signUpErrors").append(response);
     signUpWarnings.passwordMatch = true;
 }
@@ -633,9 +633,46 @@ function formIncomplete(){
     if (signUpWarnings.formIncomplete) {
         return;
     }
-    let response = $("<div>").css('color', 'red').text("Please fill out all values")
+    let response = $("<div>").css('color', 'red').text("Please fill out all values").addClass("alert alert-danger")
     $("#signUpErrors").append(response);
     signUpWarnings.formIncomplete = true;
 }
+
+function addNewUser(username, email, password, confirmPassword){
+    $("#signUpErrors").empty();
+    let inserts = {username, email, password, confirmPassword}
+    var ajaxConfig = {
+        dataType: 'json',
+        url: "signUp",
+        method: "post",
+        data: inserts,
+        success: function (result) {
+            if (Array.isArray(result)) {
+               for(let error of result){
+                   let response = $("<div>").css('color', 'red').text(`${error.msg}`).addClass("alert alert-danger")
+                   $("#signUpErrors").append(response);
+               }
+                return;
+            }
+            else{
+                console.log("success adding user", result)
+                $("#signUpUserName").val("");
+                $("#signUpEmail").val("");
+                $("#signUpPassword").val("");
+                $("#signUpConfirmPassword").val("");
+
+                $('#closeSignUpModal').trigger('click');
+                return;
+            }
+        },
+        error: function (result) {
+            console.log("failure adding user", result);
+            
+        }
+    };
+    $.ajax(ajaxConfig);
+}
+
+
 
 
