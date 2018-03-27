@@ -596,11 +596,29 @@ h2 {
     left: 4%;
     top: 2%;
 }
+.signOutContainer {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    left: 4%;
+    top: 2%;
+}
 .signUpBtn{
     font-size: 2vmin;
     color: seashell;
 }
+.signOutBtn{
+    font-size: 2vmin;
+    color: seashell;
+    display: none;
+}
 .signUpBtn:hover {
+    cursor: pointer;
+    color: #1b6d85;
+    border-color: #1b6d85;
+    transform: scale(1.1);
+}
+.signOutBtn:hover {
     cursor: pointer;
     color: #1b6d85;
     border-color: #1b6d85;

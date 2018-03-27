@@ -1,5 +1,7 @@
 const bcrypt = require('bcrypt-nodejs');
-const crypt= {
+const passport = require('passport');
+
+const crypt = {
     createHash: function (password) {
         return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
     },
@@ -8,6 +10,7 @@ const crypt= {
         return bcrypt.compareSync(password, storedPassword);
     }
 }
+
 
 module.exports= function(app, db){
 
@@ -33,14 +36,33 @@ module.exports= function(app, db){
             let query = 'INSERT INTO users SET ?';
             let inserts = { username, email, password };
             db.query(query, inserts, (err, results, fields) => {
-                if (err) return next(err)
-                res.json(results)
+                if (err){
+                    console.log("ERROR: ", err)
+                    res.json(err)
+                    return next(err)
+                } 
+                else{
+                    res.json(results)
+                }
+                
             });
             return;
-
         }
+    });
+
+    app.post("/signIn", passport.authenticate('local-signIn'), (req,res)=>{
+        // console.log("locals", res.locals)
+
+        
+        // console.log("session info signIn: ", req.session);
+        // console.log("user: ", req.user);
+        // console.log(req.isAuthenticated());
+        
 
 
+
+        return res.json(req.user)
+    
     })
 
 
