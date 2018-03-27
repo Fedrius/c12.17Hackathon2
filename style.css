@@ -731,7 +731,7 @@ h2 {
 /*Media Queries*/
 @media screen and  (max-width: 300px){
     /*Title Page*/
-    .muteButton, .titleMuteButton, .signUpBtn{
+    .muteButton, .titleMuteButton, .signUpBtn, .signOutBtn{
         font-size: 3vmin;
         color: seashell;
     }
@@ -841,7 +841,7 @@ h2 {
 
 @media screen and (min-width: 301px) and (max-width: 415px){
     /*Title Page*/
-    .muteButton, .titleMuteButton, .signUpBtn{
+    .muteButton, .titleMuteButton, .signUpBtn, .signOutBtn{
         font-size: 3vmin;
         color: seashell;
     }
@@ -1026,7 +1026,7 @@ h2 {
     
 @media screen and (min-width: 415px) and (max-width: 599px) {
     /*Title Page*/
-    .muteButton, .titleMuteButton, .signUpBtn{
+    .muteButton, .titleMuteButton, .signUpBtn, .signOutBtn{
         font-size: 3vmin;
         color: seashell;
     }
@@ -1145,7 +1145,7 @@ h2 {
 
 @media screen and (min-width: 600px) and (max-width: 1024px){
     /*Title Page*/
-    .muteButton, .titleMuteButton, .signUpBtn{
+    .muteButton, .titleMuteButton, .signUpBtn, .signOutBtn{
         font-size: 3vmin;
         color: seashell;
     }
