@@ -65,6 +65,7 @@ module.exports= function(app, db){
         req.logout();
         req.session.destroy(()=>{
             res.json("success")
+            
         })
     })
 
