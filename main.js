@@ -437,7 +437,7 @@ titleMusicSound.volume = .5;
  * @param undefined none
  * @return undefined none
  */
-var takePlungeSound = new Audio("sounds/takePlunge.wav");
+var takePlungeSound = new Audio("sounds/takeplunge.wav");
 takePlungeSound.volumne = .8;
 /***************************************************************************************************
  * seagull - global variable that creates a seagull sound for mouseentering input field
