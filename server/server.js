@@ -84,7 +84,7 @@ passport.deserializeUser(function (id, done) {
     let inserts = [id];
     db.query(sql, inserts,
         function (err, results, fields) {
-            done(err, results[0].id)
+            done(err, [results[0].id, results[0].username])
         }
     );
 });

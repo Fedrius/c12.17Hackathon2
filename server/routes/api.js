@@ -51,13 +51,6 @@ module.exports= function(app, db){
     });
 
     app.post("/signIn", passport.authenticate('local-signIn'), (req,res)=>{
-        // console.log("locals", res.locals)
-
-
-        // console.log("session info signIn: ", req.session);
-        // console.log("user: ", req.user);
-        // console.log(req.isAuthenticated());
-     
         return res.json(req.user)
     });
     app.get("/signOut", (req,res,next)=>{
@@ -65,7 +58,36 @@ module.exports= function(app, db){
         req.logout();
         req.session.destroy(()=>{
             res.json("success")
+            
         })
+    })
+    app.post("/checkUser", (req,res,next)=>{
+        console.log("is user valid: ", req.user);
+        res.json({auth: req.isAuthenticated(), data: req.user});
+    });
+    app.post("/addToHistory", (req,res,next)=>{
+        console.log("adding to history");
+        if(req.isAuthenticated()){
+            let { beachName } = req.body;
+            console.log("sql data: ", beachName, req.user[0])
+            let query = 'INSERT INTO searches SET ?';
+            let inserts = { beachName, id:req.user[0] };
+            db.query(query, inserts, (err, results, fields) => {
+                if (err) {
+                    console.log("ERROR adding to search history: ", err)
+                    res.json(err)
+                    return next(err)
+                }
+                else {
+                    res.json(results)
+                }
+
+            });
+            return;
+        }
+        else{
+            res.json("no logged in users")
+        }
     })
 
 

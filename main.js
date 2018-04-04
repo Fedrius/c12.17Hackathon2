@@ -103,6 +103,7 @@ function init(){
     })
   
     $(".pictureModal").on("click", closeModal)
+    checkValidUser();
 }
 
 // to change icon when page is loading;
@@ -218,6 +219,8 @@ function googleGeoLoc(name){
             localTemp(beachObject.lat, beachObject.long);
             weatherApi(beachObject.lat, beachObject.long);
             flickrClickHandler(beachFlickr);
+            console.log('adding to history call here');
+            addToHistory(name);
 
 
             counter++;
@@ -240,7 +243,6 @@ function localTemp(lat, long){
         url: `https://api.worldweatheronline.com/premium/v1/weather.ashx?key=8430e70df2d54ab89d3193134181903&format=json&q=${lat}, ${long}&num_of_days=3`,
         method: 'get',
         success: function(result){
-            console.log(result);
             $(`.temp .tempTemp`).text("");
             var tempArray = [];
             // for(var tempIndex = 2; tempIndex < 7; tempIndex++){
@@ -254,7 +256,7 @@ function localTemp(lat, long){
                     tempArray.push(tempHour);
                 }
             }
-            console.log(tempArray);
+            // console.log(tempArray);
             for(var temperatureIndex = hourlyIndex, timeIndex = 1;  temperatureIndex < hourlyIndex +5; temperatureIndex++, timeIndex++) {
                     $(`.temp${timeIndex} .tempTemp`).html(tempArray[temperatureIndex].tempF + "&#x2109");
                 }
@@ -278,7 +280,7 @@ function weatherApi(lat, long){
         url: `https://api.worldweatheronline.com/premium/v1/marine.ashx?key=8430e70df2d54ab89d3193134181903&num_of_days=3&tp=3&format=json&q=${lat}, ${long}&tide=yes`,
         method: "get",
         success: function(result){
-            console.log("weather result", result);
+            // console.log("weather result", result);
             var weatherArray = [];
             var timeOfDayStats = [];
 
@@ -289,7 +291,7 @@ function weatherApi(lat, long){
             // $(`.temp .tempPicImage`).attr('src', "");
             // $(`.temp .tempTemp`).text("");
 
-            console.log(result);
+            // console.log(result);
             var sunrise = result.data.weather[0].astronomy[0].sunrise;
             $(".sunriseTime").text(sunrise);
             var sunset = result.data.weather[0].astronomy[0].sunset;
@@ -307,7 +309,7 @@ function weatherApi(lat, long){
                     weatherArray.push(weatherHour);
                 }
             }
-            console.log("Weather Array: ", weatherArray);
+            // console.log("Weather Array: ", weatherArray);
 
             for(var conditionIndex = hourlyIndex, timeIndex = 1;  conditionIndex < hourlyIndex +5; conditionIndex++, timeIndex++) {
                 var statsObj = {};
@@ -320,7 +322,7 @@ function weatherApi(lat, long){
                 statsObj.swellDir = weatherArray[conditionIndex].swellDir16Point;
                 statsObj.waterTemp = weatherArray[conditionIndex].tempF;
                 timeOfDayStats.push(statsObj);
-                console.log("time of day stats: ", timeOfDayStats);
+                // console.log("time of day stats: ", timeOfDayStats);
                 $(".dataTitle").text('');  //clear text
                 $(".swellData").text(timeOfDayStats[0].swellHeight + "ft, " + timeOfDayStats[0].swellDir);
                 $(".waterTempData").html(timeOfDayStats[0].waterTemp + "&#x2109");
@@ -747,7 +749,48 @@ function signOut(){
         }
     };
     $.ajax(ajaxConfig);
+}
+function checkValidUser(){
+    var ajaxConfig = {
+        dataType: 'json',
+        url: "checkUser",
+        method: "post",
+        success: function (result) {
+            console.log("user is valid: ", result)
+            if(result.auth){
+                let username = result.data[1];
+                $('.signUpBtn').hide();
+                $('.signOutBtn').show();
+                $(".searchPageContent").find('h3').remove();
+                let welcomeMessage = $("<h3>").addClass("text-center").text(`Welcome, ${username}`)
+                $('#closeSignInModal').trigger('click');
+                $("#signInUserName").val("");
+                $("#signInPassword").val("");
+                $(".searchPageContent").prepend(welcomeMessage);
+            }
+        },
+        error: function (result) {
+            console.log("user is not valid: ", result);
+        }
+    };
+    $.ajax(ajaxConfig);
+}
 
+function addToHistory(beachName) {
+    let inserts = {beachName};
+    var ajaxConfig = {
+        dataType: 'json',
+        url: "addToHistory",
+        data: inserts,
+        method: "post",
+        success: function (result) {
+            console.log("saved search to history ", result)
+        },
+        error: function (result) {
+            console.log("error saving result", result);
+        }
+    };
+    $.ajax(ajaxConfig);
 }
 
 
