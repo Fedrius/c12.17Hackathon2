@@ -74,10 +74,6 @@ passport.serializeUser(function (user, done) {
     done(null, user.id);
 });
 
-// passport.deserializeUser(function (id, done) {
-//         console.log("DESERIALIZE")
-//         done(null, id);
-// });
 passport.deserializeUser(function (id, done) {
     console.log("DESERIALIZE", id)
     let sql = "SELECT * FROM users WHERE id = ?";

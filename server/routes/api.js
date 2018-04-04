@@ -86,7 +86,7 @@ module.exports= function(app, db){
             return;
         }
         else{
-            res.json("no logged in users")
+            res.json(false)
         }
     })
 
