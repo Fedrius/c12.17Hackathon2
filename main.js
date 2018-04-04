@@ -91,15 +91,11 @@ function init(){
         }
     });
 
-    $(".returnToMain").on("click", ()=>{
-        $(".dataPageContainer").removeClass("visible");
-        $(".dataPageContainer").addClass("hidden");
-        doneLoading();
-    })
-
     $(".newSearchButton").on("click", ()=>{
         $(".dataPageContainer").removeClass("visible");
         $(".dataPageContainer").addClass("hidden");
+        doneLoading();
+        populateHistory();
     })
   
     $(".pictureModal").on("click", closeModal)
@@ -219,7 +215,6 @@ function googleGeoLoc(name){
             localTemp(beachObject.lat, beachObject.long);
             weatherApi(beachObject.lat, beachObject.long);
             flickrClickHandler(beachFlickr);
-            // console.log('adding to history call here');
             addToHistory(name, beachObject.name);
 
 
@@ -721,6 +716,7 @@ function signInUser(username, password){
             $("#signInUserName").val("");
             $("#signInPassword").val("");
             $(".searchPageContent").prepend(welcomeMessage);
+            populateHistory();
         },
         error: function (result) {
             let response = $("<div>").css('color', 'red').text("Invalid UserName/Password").addClass("alert alert-danger")
@@ -739,6 +735,7 @@ function signOut(){
         method: "get",
         success: function (result) {
             // console.log("result: ", result)
+            $('.searchLocations div').remove();
             $('.signUpBtn').show();
             $('.signOutBtn').hide();
             $(".searchPageContent").find('h3').remove();
@@ -767,6 +764,7 @@ function checkValidUser(){
                 $("#signInUserName").val("");
                 $("#signInPassword").val("");
                 $(".searchPageContent").prepend(welcomeMessage);
+                populateHistory();
             }
         },
         error: function (result) {
@@ -796,10 +794,27 @@ function addToHistory(search_query, beachName) {
 function populateHistory(){
     var ajaxConfig = {
         dataType: 'json',
-        url: "addToHistory",
+        url: "getSearchHistory",
         method: "post",
         success: function (result) {
-            console.log("got user history! ", result)
+            console.log("got user history! ", result);
+            $('.searchLocations div').remove();
+            result.map((v,i)=>{
+                let search = $("<div>").text(v.beachName).on('click', ()=>{
+                    loading();
+                    googleGeoLoc(v.search_query);
+                    setTimeout(function () {
+                        if (counter < 4) {
+                            $(".errorModal").show();
+                        }
+                        counter = 0;
+                        doneLoading();
+                    }, 5000)
+                });
+                $('.searchLocations').append(search);
+            })
+            
+
         },
         error: function (result) {
             console.log("error getting history", result);
