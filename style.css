@@ -198,8 +198,13 @@
 }
 .searchLocations{
     overflow-y: auto;
+    overflow-x: hidden;
     font-size: 4vmin;
     height: 200px;
+}
+.searchLocations div:hover{
+    transform: scale(1.02);
+    cursor: pointer;
 }
 .mainPageTitlePos{
     margin-bottom: 5%;
