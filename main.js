@@ -219,8 +219,8 @@ function googleGeoLoc(name){
             localTemp(beachObject.lat, beachObject.long);
             weatherApi(beachObject.lat, beachObject.long);
             flickrClickHandler(beachFlickr);
-            console.log('adding to history call here');
-            addToHistory(name);
+            // console.log('adding to history call here');
+            addToHistory(name, beachObject.name);
 
 
             counter++;
@@ -776,8 +776,8 @@ function checkValidUser(){
     $.ajax(ajaxConfig);
 }
 
-function addToHistory(beachName) {
-    let inserts = {beachName};
+function addToHistory(search_query, beachName) {
+    let inserts = { search_query, beachName};
     var ajaxConfig = {
         dataType: 'json',
         url: "addToHistory",
@@ -793,6 +793,20 @@ function addToHistory(beachName) {
     $.ajax(ajaxConfig);
 }
 
+function populateHistory(){
+    var ajaxConfig = {
+        dataType: 'json',
+        url: "addToHistory",
+        method: "post",
+        success: function (result) {
+            console.log("got user history! ", result)
+        },
+        error: function (result) {
+            console.log("error getting history", result);
+        }
+    };
+    $.ajax(ajaxConfig);
+}
 
 
 

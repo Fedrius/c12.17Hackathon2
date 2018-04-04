@@ -68,10 +68,10 @@ module.exports= function(app, db){
     app.post("/addToHistory", (req,res,next)=>{
         console.log("adding to history");
         if(req.isAuthenticated()){
-            let { beachName } = req.body;
+            let { search_query, beachName } = req.body;
             console.log("sql data: ", beachName, req.user[0])
             let query = 'INSERT INTO searches SET ?';
-            let inserts = { beachName, id:req.user[0] };
+            let inserts = { search_query, beachName, id:req.user[0] };
             db.query(query, inserts, (err, results, fields) => {
                 if (err) {
                     console.log("ERROR adding to search history: ", err)
@@ -90,15 +90,30 @@ module.exports= function(app, db){
         }
     })
 
+    app.post("/getSearchHistory", (req,res,next)=>{
+        console.log("retrieving search History");
+        if (req.isAuthenticated()) {
+            let id = req.user[0]
+            let query = 'SELECT beachName, search_query FROM searches WHERE id = ? GROUP BY beachName ORDER BY max(created) desc LIMIT 10;';
+            let inserts = [id];
+            db.query(query, inserts, (err, results, fields) => {
+                if (err) {
+                    console.log("ERROR getting recent searches: ", err)
+                    res.json(err)
+                    return next(err)
+                }
+                else {
+                    res.json(results)
+                }
 
+            });
+            return;
+        }
+        else {
+            res.json("no logged in users")
+        }
 
-
-
-
-
-
-
-
+    })
 
 }
 

@@ -186,6 +186,21 @@
     width: 100%;
     margin-bottom: 15%;
 }
+.searchHistory{
+    margin-top: 5%;
+    text-align: center;
+    /* font-size: 4vmin; */
+    color: white;
+    text-shadow: .1em .1em .1em black;
+    display: flex;
+    justify-content: center;
+    flex-direction: column
+}
+.searchLocations{
+    overflow-y: auto;
+    font-size: 4vmin;
+    height: 200px;
+}
 .mainPageTitlePos{
     margin-bottom: 5%;
     color: rgba(0,0,0,0.8);
