@@ -201,7 +201,7 @@
     overflow-y: auto;
     font-size: 4vmin;
     height: 200px;
-    color: rgb(233, 229, 229);
+    /* color: rgb(233, 229, 229); */
     background-color: rgba(252, 252, 252, 0.1)
 }
 .searchLocations div:hover{
