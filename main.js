@@ -214,8 +214,8 @@ function googleGeoLoc(name){
 
             localTemp(beachObject.lat, beachObject.long);
             weatherApi(beachObject.lat, beachObject.long);
-            flickrClickHandler(beachFlickr);
-            addToHistory(name, beachObject.name);
+            flickrClickHandler(beachFlickr, name);
+            
 
 
             counter++;
@@ -366,7 +366,8 @@ function weatherApi(lat, long){
  * @return undefined
  * @calls makePhotoURL
  */
- function flickrClickHandler(beachName) {
+ function flickrClickHandler(beachName, query) {
+     console.log('beachname: ', beachName)
     var beachPhotoArrayData = [];
     var flickrSearch = beachName;
     var photoObj;
@@ -384,6 +385,7 @@ function weatherApi(lat, long){
                 let url = `https://farm${farm}.staticflickr.com/${server}/${id}_${secret}.jpg`;
                 beachPhotoArrayData.push(url);
             }
+            addToHistory(query, beachName);
             makePhotoDivs(beachPhotoArrayData);
             counter++;
 
@@ -735,6 +737,7 @@ function signOut(){
         method: "get",
         success: function (result) {
             // console.log("result: ", result)
+            $('.searchHistory').remove();
             $('.searchLocations div').remove();
             $('.signUpBtn').show();
             $('.signOutBtn').hide();
@@ -798,23 +801,29 @@ function populateHistory(){
         method: "post",
         success: function (result) {
             console.log("got user history! ", result);
-            $('.searchLocations div').remove();
-            result.map((v,i)=>{
-                let search = $("<div>").text(v.beachName).on('click', ()=>{
-                    loading();
-                    googleGeoLoc(v.search_query);
-                    setTimeout(function () {
-                        if (counter < 4) {
-                            $(".errorModal").show();
-                        }
-                        counter = 0;
-                        doneLoading();
-                    }, 5000)
-                });
-                $('.searchLocations').append(search);
-            })
-            
-
+            if(result){
+                $('.searchHistory').remove();
+                let searchHist = $("<div>").addClass("searchHistory");
+                let title = $("<h1>").text("Search History");
+                let searchLocations = $("<div>").addClass("searchLocations");
+                searchHist.append(title);
+                searchHist.append(searchLocations);
+                $(".searchPageContent").append(searchHist);
+                result.map((v, i) => {
+                    let search = $("<div>").text(v.beachName).on('click', () => {
+                        loading();
+                        googleGeoLoc(v.search_query);
+                        setTimeout(function () {
+                            if (counter < 4) {
+                                $(".errorModal").show();
+                            }
+                            counter = 0;
+                            doneLoading();
+                        }, 5000)
+                    });
+                    $('.searchLocations').append(search);
+                })
+            }
         },
         error: function (result) {
             console.log("error getting history", result);
