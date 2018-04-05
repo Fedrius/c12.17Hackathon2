@@ -737,6 +737,7 @@ function signOut(){
         method: "get",
         success: function (result) {
             // console.log("result: ", result)
+            $('.searchHistory').remove();
             $('.searchLocations div').remove();
             $('.signUpBtn').show();
             $('.signOutBtn').hide();
@@ -801,7 +802,13 @@ function populateHistory(){
         success: function (result) {
             console.log("got user history! ", result);
             if(result){
-                $('.searchLocations div').remove();
+                $('.searchHistory').remove();
+                let searchHist = $("<div>").addClass("searchHistory");
+                let title = $("<h1>").text("Search History");
+                let searchLocations = $("<div>").addClass("searchLocations");
+                searchHist.append(title);
+                searchHist.append(searchLocations);
+                $(".searchPageContent").append(searchHist);
                 result.map((v, i) => {
                     let search = $("<div>").text(v.beachName).on('click', () => {
                         loading();
