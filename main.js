@@ -117,7 +117,6 @@ function doneLoading(){
 // sets local time to the current hour
 function setLocalTime() {
     localTime = new Date().getHours();
-    console.log(localTime);
     if(localTime >= 0 && localTime < 3){
         hourlyIndex = 0;
         $(".temp1 .tempTime").text("12:00am");
@@ -210,7 +209,6 @@ function googleGeoLoc(name){
             $(".beachName").text(beachObject.name);
             $(".beachLocation").text(beachObject.city + ", " + beachObject.state);
             var beachFlickr = beachObject.name;
-            // console.log(beachObject);
 
             localTemp(beachObject.lat, beachObject.long);
             weatherApi(beachObject.lat, beachObject.long);
@@ -221,8 +219,7 @@ function googleGeoLoc(name){
             counter++;
         },
         error: function(response){
-            console.log(response);
-            console.log('ERRRROR');
+            console.log("error: ", response);
         }
     })
 }
@@ -240,18 +237,12 @@ function localTemp(lat, long){
         success: function(result){
             $(`.temp .tempTemp`).text("");
             var tempArray = [];
-            // for(var tempIndex = 2; tempIndex < 7; tempIndex++){
-            //     var tempHour = result.data.weather[0].hourly[tempIndex];
-            //     var tempAtHour = tempHour.tempF;
-            //     $(`.temp${tempIndex-1} .tempTemp`).html(tempAtHour+ "&#x2109");
-            // }
             for(var dayIndex = 0; dayIndex <= 1; dayIndex++) {
                 for (var tempIndex = 0; tempIndex <= 7; tempIndex++) {
                     var tempHour = result.data.weather[dayIndex].hourly[tempIndex];
                     tempArray.push(tempHour);
                 }
             }
-            // console.log(tempArray);
             for(var temperatureIndex = hourlyIndex, timeIndex = 1;  temperatureIndex < hourlyIndex +5; temperatureIndex++, timeIndex++) {
                     $(`.temp${timeIndex} .tempTemp`).html(tempArray[temperatureIndex].tempF + "&#x2109");
                 }
@@ -259,7 +250,7 @@ function localTemp(lat, long){
             counter++;
         },
         error: function(result){
-            console.log("error");
+            console.log("error ", result);
         }
     })
 }
@@ -275,7 +266,6 @@ function weatherApi(lat, long){
         url: `https://api.worldweatheronline.com/premium/v1/marine.ashx?key=8430e70df2d54ab89d3193134181903&num_of_days=3&tp=3&format=json&q=${lat}, ${long}&tide=yes`,
         method: "get",
         success: function(result){
-            // console.log("weather result", result);
             var weatherArray = [];
             var timeOfDayStats = [];
 
@@ -283,10 +273,7 @@ function weatherApi(lat, long){
             $(".sunriseTime").text("");
             $(".sunsetTime").text("");
             $(".tideData").text("");
-            // $(`.temp .tempPicImage`).attr('src', "");
-            // $(`.temp .tempTemp`).text("");
 
-            // console.log(result);
             var sunrise = result.data.weather[0].astronomy[0].sunrise;
             $(".sunriseTime").text(sunrise);
             var sunset = result.data.weather[0].astronomy[0].sunset;
@@ -304,7 +291,6 @@ function weatherApi(lat, long){
                     weatherArray.push(weatherHour);
                 }
             }
-            // console.log("Weather Array: ", weatherArray);
 
             for(var conditionIndex = hourlyIndex, timeIndex = 1;  conditionIndex < hourlyIndex +5; conditionIndex++, timeIndex++) {
                 var statsObj = {};
@@ -317,7 +303,7 @@ function weatherApi(lat, long){
                 statsObj.swellDir = weatherArray[conditionIndex].swellDir16Point;
                 statsObj.waterTemp = weatherArray[conditionIndex].tempF;
                 timeOfDayStats.push(statsObj);
-                // console.log("time of day stats: ", timeOfDayStats);
+              
                 $(".dataTitle").text('');  //clear text
                 $(".swellData").text(timeOfDayStats[0].swellHeight + "ft, " + timeOfDayStats[0].swellDir);
                 $(".waterTempData").html(timeOfDayStats[0].waterTemp + "&#x2109");
@@ -335,7 +321,7 @@ function weatherApi(lat, long){
             counter++;
         },
         error: function(result){
-            console.log("ajax call failed");
+            console.log("call failed: ", result);
         }
     })
 }
@@ -367,7 +353,6 @@ function weatherApi(lat, long){
  * @calls makePhotoURL
  */
  function flickrClickHandler(beachName, query) {
-     console.log('beachname: ', beachName)
     var beachPhotoArrayData = [];
     var flickrSearch = beachName;
     var photoObj;
@@ -390,8 +375,8 @@ function weatherApi(lat, long){
             counter++;
 
         },
-        error: function() {
-            console.log(false);
+        error: function(data) {
+            console.log("flickr call failed: ", data);
         }
     };
     $.ajax(ajaxConfig);
@@ -709,7 +694,6 @@ function signInUser(username, password){
         method: "post",
         data: inserts,
         success: function (result) {
-            console.log("result: ", result)
             $('.signUpBtn').hide();
             $('.signOutBtn').show();
             $(".searchPageContent").find('h3').remove();
@@ -723,8 +707,6 @@ function signInUser(username, password){
         error: function (result) {
             let response = $("<div>").css('color', 'red').text("Invalid UserName/Password").addClass("alert alert-danger")
             $("#signInErrors").append(response);
-            // console.log("failure signing in", result);
-
         }
     };
     $.ajax(ajaxConfig);
@@ -736,7 +718,6 @@ function signOut(){
         url: "signOut",
         method: "get",
         success: function (result) {
-            // console.log("result: ", result)
             $('.searchHistory').remove();
             $('.searchLocations div').remove();
             $('.signUpBtn').show();
@@ -756,7 +737,6 @@ function checkValidUser(){
         url: "checkUser",
         method: "post",
         success: function (result) {
-            console.log("user is valid: ", result)
             if(result.auth){
                 let username = result.data[1];
                 $('.signUpBtn').hide();
@@ -785,7 +765,7 @@ function addToHistory(search_query, beachName) {
         data: inserts,
         method: "post",
         success: function (result) {
-            console.log("saved search to history ", result)
+
         },
         error: function (result) {
             console.log("error saving result", result);
@@ -800,7 +780,6 @@ function populateHistory(){
         url: "getSearchHistory",
         method: "post",
         success: function (result) {
-            console.log("got user history! ", result);
             if(result){
                 $('.searchHistory').remove();
                 let searchHist = $("<div>").addClass("searchHistory");
