@@ -93,8 +93,21 @@ module.exports= function(app, db){
     app.post("/getSearchHistory", (req,res,next)=>{
         console.log("retrieving search History");
         if (req.isAuthenticated()) {
-            let id = req.user[0]
-            let query = 'SELECT beachName, search_query FROM searches WHERE id = ? GROUP BY beachName ORDER BY max(created) desc LIMIT 10;';
+            let id = req.user[0];
+            let query = 
+                `SELECT * FROM searches
+                INNER JOIN
+                    (SELECT id, beachName, MAX(created) AS MAXDATESTAMP
+                    FROM searches
+                    GROUP BY id, beachName
+                    HAVING id = ?
+                    ) AS latestBeaches
+                ON searches.id = latestBeaches.id
+                AND searches.beachName = latestBeaches.beachName
+                AND searches.created = latestBeaches.MAXDATESTAMP
+                ORDER BY MAXDATESTAMP DESC
+                LIMIT 10`;
+            
             let inserts = [id];
             db.query(query, inserts, (err, results, fields) => {
                 if (err) {
