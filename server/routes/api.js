@@ -95,7 +95,7 @@ module.exports= function(app, db){
         if (req.isAuthenticated()) {
             let id = req.user[0];
             let query = 
-                `SELECT * FROM searches
+                `SELECT searches.beachName, searches.search_query FROM searches
                 INNER JOIN
                     (SELECT id, beachName, MAX(created) AS MAXDATESTAMP
                     FROM searches
