@@ -830,6 +830,7 @@ h2 {
     }
     .tempBox{
         width: 16%;
+        height: 75%;
     }
 
     .tempTime{
@@ -837,7 +838,7 @@ h2 {
     }
 
     .tempPic{
-        width: 75%;
+        width: 90%;
     }
 
     .tempTemp{
@@ -939,7 +940,7 @@ h2 {
     }
 
     .beachName{
-        font-size: 5.5vmin;
+        font-size: 5vmin;
     }
 
     .beachLocation{
@@ -978,6 +979,11 @@ h2 {
 
     .tideInfoHeader {
         margin-bottom: 1%;
+        font-size: 4vmin;
+    }
+
+    .tideInfoCategories, .tideInfoData {
+        padding-bottom: 2%;
     }
 
     .pictureInfoContainer{
@@ -1113,7 +1119,7 @@ h2 {
 
     .tempBox{
         width: 14%;
-        height: 78%;
+        height: 85%;
     }
 
     .tempTime{
