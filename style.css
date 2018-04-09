@@ -1251,13 +1251,22 @@ h2 {
         width: 47%;
     }
      h1 {
-        font-size: 5vmin;
+        font-size: 4vmin;
+    }
+
+    .mainTitle .beachName{
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+
+    .mainTitle .beachLocation {
+        margin-bottom: 5px;
     }
 }
-@media screen and (min-width: 375px) and (max-width: 667px) and (orientation: landscape) {
-    h2{
-        margin-bottom: 3px;
-    }
+@media screen and (min-width: 280px) and (max-width: 667px) and (orientation: landscape) {
+    /*h2{*/
+        /*margin-bottom: 3px;*/
+    /*}*/
     .searchHistory{
         height: 188px;
         margin-top: 5%;
@@ -1295,6 +1304,26 @@ h2 {
     .tempPic{
         display: flex;
         justify-content: center;
+    }
+
+    .mainTitle .beachName{
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+
+    .mainTitle .beachLocation {
+        margin-bottom: 5px;
+        margin-top: 5px;
+        font-size: 3vmin;
+    }
+
+    .infoContainer {
+        flex-direction: row;
+    }
+
+    .pictureInfoContainer {
+        height: 90%;
+        width: 80%;
     }
 
 }
