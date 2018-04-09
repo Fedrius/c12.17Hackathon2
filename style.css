@@ -951,7 +951,7 @@ h2 {
     }
     .tempBox{
         width: 16%;
-        height: 63%;
+        height: 80%;
     }
 
     .tempTime{
@@ -960,6 +960,7 @@ h2 {
 
     .tempPic{
         width: 80%;
+        height: 50%;
     }
 
     .tempTemp{
@@ -1234,6 +1235,10 @@ h2 {
         height: 87%;
     }
 
+    .tideInfoCategories, .tideInfoData {
+        font-size: 3vmin;
+    }
+
     .pictureInfoContainer{
         height: 90%;
     }
@@ -1328,7 +1333,12 @@ h2 {
 
 }
 
+@media screen and (min-width: 601px) and (max-width: 1024px) and (orientation: landscape) {
+    .tideInfoCategories, .tideInfoData {
+        font-size: 3vmin;
+    }
 
+}
 @media screen and (min-width: 1025px) and (max-width: 1320px) {
     .flyOff{
         position: absolute;
@@ -1394,10 +1404,10 @@ h2 {
     }
 
     .headerContainer {
-        height: 17%;
+        height: 20%;
     }
     .weatherInfoContainer{
-        height: 23%;
+        height: 20%;
     }
     .tempBox {
         width: 15%;
@@ -1439,11 +1449,11 @@ h2 {
     }
 
     .headerContainer{
-        height: 15%;
+        height: 20%;
     }
 
     .weatherInfoContainer {
-        height: 25%;
+        height: 20%;
     }
 
     .infoContainer{
@@ -1463,7 +1473,7 @@ h2 {
 
     .tempBox {
         width: 17%;
-        height: 75%;
+        height: 85%;
         margin-top: 5px;
     }
 
