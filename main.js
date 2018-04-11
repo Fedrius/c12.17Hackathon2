@@ -9,6 +9,21 @@ $(document).ready(init);
     var localTime;
     var hourlyIndex;
 
+    // active counters for warnings on signInForms
+
+    let signInWarnings={
+        username: false,
+        password: false,
+        incompleteForm: false
+    };
+    let signUpWarnings = {
+        username: false,
+        email: false,
+        passwordLen: false,
+        passwordMatch: false,
+        incompleteForm: false
+    }
+
 /***************************************************************************************************
  * init - adds clicks handlers on search button, keypress for location, clickhandler for main page logo
  * @param none
@@ -76,18 +91,15 @@ function init(){
         }
     });
 
-    $(".returnToMain").on("click", ()=>{
-        $(".dataPageContainer").removeClass("visible");
-        $(".dataPageContainer").addClass("hidden");
-        doneLoading();
-    })
-
     $(".newSearchButton").on("click", ()=>{
         $(".dataPageContainer").removeClass("visible");
         $(".dataPageContainer").addClass("hidden");
+        doneLoading();
+        populateHistory();
     })
   
     $(".pictureModal").on("click", closeModal)
+    checkValidUser();
 }
 
 // to change icon when page is loading;
@@ -202,7 +214,8 @@ function googleGeoLoc(name){
 
             localTemp(beachObject.lat, beachObject.long);
             weatherApi(beachObject.lat, beachObject.long);
-            flickrClickHandler(beachFlickr);
+            flickrClickHandler(beachFlickr, name);
+            
 
 
             counter++;
@@ -225,7 +238,6 @@ function localTemp(lat, long){
         url: `https://api.worldweatheronline.com/premium/v1/weather.ashx?key=8430e70df2d54ab89d3193134181903&format=json&q=${lat}, ${long}&num_of_days=3`,
         method: 'get',
         success: function(result){
-            console.log(result);
             $(`.temp .tempTemp`).text("");
             var tempArray = [];
             // for(var tempIndex = 2; tempIndex < 7; tempIndex++){
@@ -239,7 +251,7 @@ function localTemp(lat, long){
                     tempArray.push(tempHour);
                 }
             }
-            console.log(tempArray);
+            // console.log(tempArray);
             for(var temperatureIndex = hourlyIndex, timeIndex = 1;  temperatureIndex < hourlyIndex +5; temperatureIndex++, timeIndex++) {
                     $(`.temp${timeIndex} .tempTemp`).html(tempArray[temperatureIndex].tempF + "&#x2109");
                 }
@@ -263,7 +275,7 @@ function weatherApi(lat, long){
         url: `https://api.worldweatheronline.com/premium/v1/marine.ashx?key=8430e70df2d54ab89d3193134181903&num_of_days=3&tp=3&format=json&q=${lat}, ${long}&tide=yes`,
         method: "get",
         success: function(result){
-            console.log("weather result", result);
+            // console.log("weather result", result);
             var weatherArray = [];
             var timeOfDayStats = [];
 
@@ -274,7 +286,7 @@ function weatherApi(lat, long){
             // $(`.temp .tempPicImage`).attr('src', "");
             // $(`.temp .tempTemp`).text("");
 
-            console.log(result);
+            // console.log(result);
             var sunrise = result.data.weather[0].astronomy[0].sunrise;
             $(".sunriseTime").text(sunrise);
             var sunset = result.data.weather[0].astronomy[0].sunset;
@@ -292,7 +304,7 @@ function weatherApi(lat, long){
                     weatherArray.push(weatherHour);
                 }
             }
-            console.log("Weather Array: ", weatherArray);
+            // console.log("Weather Array: ", weatherArray);
 
             for(var conditionIndex = hourlyIndex, timeIndex = 1;  conditionIndex < hourlyIndex +5; conditionIndex++, timeIndex++) {
                 var statsObj = {};
@@ -305,7 +317,7 @@ function weatherApi(lat, long){
                 statsObj.swellDir = weatherArray[conditionIndex].swellDir16Point;
                 statsObj.waterTemp = weatherArray[conditionIndex].tempF;
                 timeOfDayStats.push(statsObj);
-                console.log("time of day stats: ", timeOfDayStats);
+                // console.log("time of day stats: ", timeOfDayStats);
                 $(".dataTitle").text('');  //clear text
                 $(".swellData").text(timeOfDayStats[0].swellHeight + "ft, " + timeOfDayStats[0].swellDir);
                 $(".waterTempData").html(timeOfDayStats[0].waterTemp + "&#x2109");
@@ -354,7 +366,8 @@ function weatherApi(lat, long){
  * @return undefined
  * @calls makePhotoURL
  */
- function flickrClickHandler(beachName) {
+ function flickrClickHandler(beachName, query) {
+     console.log('beachname: ', beachName)
     var beachPhotoArrayData = [];
     var flickrSearch = beachName;
     var photoObj;
@@ -372,6 +385,7 @@ function weatherApi(lat, long){
                 let url = `https://farm${farm}.staticflickr.com/${server}/${id}_${secret}.jpg`;
                 beachPhotoArrayData.push(url);
             }
+            addToHistory(query, beachName);
             makePhotoDivs(beachPhotoArrayData);
             counter++;
 
@@ -400,6 +414,10 @@ function showModal(){
  function closeModal(){
     $('.pictureModal').hide();
     $('.errorModal').hide();
+    $('.signInModal').hide();
+}
+function showSignInModal() {
+    $('.signInModal').show();
 }
 
 function resetPage(){
@@ -557,8 +575,279 @@ function muteSound(){
         takePlungeSound.volume = 0;
         $(".muteButton, .titleMuteButton").text("Sound");
 
-
-
     }
 }
+
+
+
+
+
+// ajax calls and functions for Sign Up and Sign In
+
+function validateSignUp(){
+    let username = $("#signUpUserName").val();
+    let email = $("#signUpEmail").val();
+    let password = $("#signUpPassword").val();
+    let confirmPassword = $("#signUpConfirmPassword").val();
+    $("#signUpErrors").empty();
+    signUpWarnings = {
+        username: false,
+        email: false,
+        passwordLen: false,
+        passwordMatch: false,
+        incompleteForm: false
+    }
+    if(!username.length || !email.length || !password.length || !confirmPassword.length){
+        formIncomplete();
+        return;
+    }
+    if(username.length>15){
+        userNameTooLong();
+    }
+    if(password !== confirmPassword){
+        passwordMismatch();
+    }
+    if(username.length<16 && password===confirmPassword){
+        addNewUser(username, email, password, confirmPassword);
+    }
+}
+
+// functions to handle errors on SignUp
+function userNameTooLong(){
+    if (signUpWarnings.username === true) {
+        return;
+    }
+    let response = $("<div>").css('color', 'red').text("Username must be less than 16 characters").addClass("alert alert-danger")
+    $("#signUpErrors").append(response);
+    signUpWarnings.username = true;
+}
+function passwordMismatch(){
+    if (signUpWarnings.passwordMatch === true) {
+        return;
+    }
+    let response = $("<div>").css('color', 'red').text("Passwords do not match").addClass("alert alert-danger")
+    $("#signUpErrors").append(response);
+    signUpWarnings.passwordMatch = true;
+}
+function formIncomplete(){
+    if (signUpWarnings.incompleteForm === true) {
+        return;
+    }
+    let response = $("<div>").css('color', 'red').text("Please fill out all values").addClass("alert alert-danger")
+    $("#signUpErrors").append(response);
+    signUpWarnings.formIncomplete = true;
+}
+// function to add new user to the database
+function addNewUser(username, email, password, confirmPassword){
+    $("#signUpErrors").empty();
+    let inserts = {username, email, password, confirmPassword}
+    var ajaxConfig = {
+        dataType: 'json',
+        url: "signUp",
+        method: "post",
+        data: inserts,
+        success: function (result) {
+            if (Array.isArray(result)) {
+               for(let error of result){
+                   let response = $("<div>").css('color', 'red').text(`${error.msg}`).addClass("alert alert-danger")
+                   $("#signUpErrors").append(response);
+               }
+                return;
+            }
+            else if(result.sqlMessage){
+                let response = $("<div>").css('color', 'red').text(`${result.sqlMessage}`).addClass("alert alert-danger")
+                $("#signUpErrors").append(response);
+            }
+            else{
+                $("#signUpUserName").val("");
+                $("#signUpEmail").val("");
+                $("#signUpPassword").val("");
+                $("#signUpConfirmPassword").val("");
+
+                $('#closeSignUpModal').trigger('click');
+                $('.signInContainer').trigger('click');
+                let response = $("<div>").css('color', 'green').text(`Welcome, ${username}. Sign in to verify your account!`).addClass("alert alert-success");
+                $('#signInErrors').append(response);
+                return;
+            }
+        },
+        error: function (result) {
+            console.log("failure adding user", result);
+            
+        }
+    };
+    $.ajax(ajaxConfig);
+}
+
+// sign in user validation
+function validateSignIn() {
+    let username = $("#signInUserName").val();
+    let password = $("#signInPassword").val();
+    $("#signInErrors").empty();
+    signInWarnings = {
+        username: false,
+        password: false,
+        incompleteForm: false
+    };
+    if (!username.length ||  !password.length ) {
+        let response = $("<div>").css('color', 'red').text("Please fill out all values").addClass("alert alert-danger")
+        $("#signInErrors").append(response);
+        signUpWarnings.formIncomplete = true;
+        return;
+    }
+    else{
+        signInUser(username, password);
+    }   
+}
+// sign in user and session start
+function signInUser(username, password){
+    $("#signInErrors").empty();
+    let inserts = {username, password};
+    var ajaxConfig = {
+        dataType: 'json',
+        url: "signIn",
+        method: "post",
+        data: inserts,
+        success: function (result) {
+            console.log("result: ", result)
+            $('.signUpBtn').hide();
+            $('.signOutBtn').show();
+            $(".searchPageContent").find('h3').remove();
+            let welcomeMessage = $("<h3>").addClass("text-center").text(`Welcome, ${result.username}`)
+            $('#closeSignInModal').trigger('click');
+            $("#signInUserName").val("");
+            $("#signInPassword").val("");
+            $(".searchPageContent").prepend(welcomeMessage);
+            populateHistory();
+        },
+        error: function (result) {
+            let response = $("<div>").css('color', 'red').text("Invalid UserName/Password").addClass("alert alert-danger")
+            $("#signInErrors").append(response);
+            // console.log("failure signing in", result);
+
+        }
+    };
+    $.ajax(ajaxConfig);
+}
+// log out of current session and session store
+function signOut(){
+    var ajaxConfig = {
+        dataType: 'json',
+        url: "signOut",
+        method: "get",
+        success: function (result) {
+            // console.log("result: ", result)
+            $('.searchHistory').remove();
+            $('.searchLocations div').remove();
+            $('.signUpBtn').show();
+            $('.signOutBtn').hide();
+            $(".searchPageContent").find('h3').remove();
+           
+        },
+        error: function (result) {
+            console.log("failure signing out", result);
+        }
+    };
+    $.ajax(ajaxConfig);
+}
+function checkValidUser(){
+    var ajaxConfig = {
+        dataType: 'json',
+        url: "checkUser",
+        method: "post",
+        success: function (result) {
+            console.log("user is valid: ", result)
+            if(result.auth){
+                let username = result.data[1];
+                $('.signUpBtn').hide();
+                $('.signOutBtn').show();
+                $(".searchPageContent").find('h3').remove();
+                let welcomeMessage = $("<h3>").addClass("text-center").text(`Welcome, ${username}`)
+                $('#closeSignInModal').trigger('click');
+                $("#signInUserName").val("");
+                $("#signInPassword").val("");
+                $(".searchPageContent").prepend(welcomeMessage);
+                populateHistory();
+            }
+        },
+        error: function (result) {
+            console.log("user is not valid: ", result);
+        }
+    };
+    $.ajax(ajaxConfig);
+}
+
+function addToHistory(search_query, beachName) {
+    let inserts = { search_query, beachName};
+    var ajaxConfig = {
+        dataType: 'json',
+        url: "addToHistory",
+        data: inserts,
+        method: "post",
+        success: function (result) {
+            console.log("saved search to history ", result)
+        },
+        error: function (result) {
+            console.log("error saving result", result);
+        }
+    };
+    $.ajax(ajaxConfig);
+}
+
+function populateHistory(){
+    var ajaxConfig = {
+        dataType: 'json',
+        url: "getSearchHistory",
+        method: "post",
+        success: function (result) {
+            console.log("got user history! ", result);
+            if(result){
+                $('.searchHistory').remove();
+                let searchHist = $("<div>").addClass("searchHistory");
+                let title = $("<h1>").text("Search History");
+                let searchLocations = $("<div>").addClass("searchLocations");
+                searchHist.append(title);
+                searchHist.append(searchLocations);
+                $(".searchPageContent").append(searchHist);
+                result.map((v, i) => {
+                    let search = $("<div>").text(v.beachName).on('click', () => {
+                        loading();
+                        googleGeoLoc(v.search_query);
+                        setTimeout(function () {
+                            if (counter < 4) {
+                                $(".errorModal").show();
+                            }
+                            counter = 0;
+                            doneLoading();
+                        }, 5000)
+                    });
+                    $('.searchLocations').append(search);
+                })
+            }
+        },
+        error: function (result) {
+            console.log("error getting history", result);
+        }
+    };
+    $.ajax(ajaxConfig);
+}
+
+
+
+// clear each form
+function clearSignUpForm(){
+    $("#signUpUserName").val("");
+    $("#signUpEmail").val("");
+    $("#signUpPassword").val("");
+    $("#signUpConfirmPassword").val("");
+    $("#signUpErrors").empty();
+}
+function clearSignInForm() {
+    $("#signInUserName").val("");
+    $("#signInPassword").val("");
+    $("#signInErrors").empty();
+}
+
+
+
 
