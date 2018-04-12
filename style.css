@@ -200,7 +200,7 @@
     overflow-x: hidden;
     overflow-y: auto;
     font-size: 4vmin;
-    height: 200px;
+    height: 10em;
     /* color: rgb(233, 229, 229); */
     background-color: rgba(252, 252, 252, 0.1)
 }
@@ -396,8 +396,11 @@ h2 {
 }
 .tempBox {
     /*border: 1px solid black;*/
-    height: 88%;
-    width: 9%;
+    
+    /* height: 88%;           
+    width: 9%; */
+    height: 80%;
+    width: 50%;
     display: flex;
     justify-content: space-around;
     flex-direction: column;
@@ -657,7 +660,7 @@ h2 {
 }
 .muteButton{
     position: relative;
-    width: 2.5%;
+    /* width: 2.5%; */
     height: 2.5%;
     color: seashell;
     font-size: 3vmin;
@@ -675,8 +678,8 @@ h2 {
 }
 .titleMuteButton{
     position: absolute;
-    width: 2.5%;
-    height: 2.5%;
+    /* width: 2.5%;
+    height: 2.5%; */
     color: lightskyblue;
     font-size: 4vmin;
     text-align: center;
@@ -753,7 +756,7 @@ h2 {
 
 
 /*Media Queries*/
-@media screen and  (max-width: 300px){
+@media screen and  (max-width: 320px){
     /*Title Page*/
     .muteButton, .titleMuteButton, .signUpBtn, .signOutBtn{
         font-size: 3vmin;
@@ -864,7 +867,7 @@ h2 {
     }
 }
 
-@media screen and (min-width: 301px) and (max-width: 415px){
+@media screen and (min-device-width: 321px) and (max-device-width: 414px){
     /*Title Page*/
     .muteButton, .titleMuteButton, .signUpBtn, .signOutBtn{
         font-size: 3vmin;
@@ -911,6 +914,14 @@ h2 {
     }
 
     /***Search Page/Main Page***/
+    .muteButton, .titleMuteButton, .signUpBtn, .signOutBtn {
+        font-size: 5vmin;
+    }
+
+    .signUpContainer {
+        left: 25%;
+    }
+
     .searchPageContent {
         margin-bottom: 50%;
     }
@@ -921,6 +932,10 @@ h2 {
 
     .locationInput {
         font-size: 4vmin;
+    }
+
+    .buttonContainer {
+        right: 10%;
     }
 
     /*Data Results Page*/
@@ -948,15 +963,17 @@ h2 {
     }
 
     .weatherInfoContainer {
-        height: 20%;
+        height: 16%;
     }
     .tempBox{
         width: 16%;
-        height: 80%;
+        height: 85%;
     }
 
     .tempTime{
         font-size: 3.4vmin;
+        padding-bottom: 15%;
+        padding-top: 5%;
     }
 
     .tempPic{
@@ -966,11 +983,12 @@ h2 {
 
     .tempTemp{
         font-size: 3.4vmin;
+        padding-top: 10%;
     }
 
     .infoContainer{
         flex-direction: column;
-        height: 60%;
+        height: 64%;
     }
 
     .tideInfoContainer{
@@ -988,7 +1006,7 @@ h2 {
     }
 
     .pictureInfoContainer{
-        height: 65%;
+        height: 60%;
         width: 90%;
     }
 
@@ -996,8 +1014,6 @@ h2 {
         pointer-events: none;
     }
 }
-
-
 
 @media screen and (max-width: 416px) and (min-height: 700px){
     .flyOff{
@@ -1206,7 +1222,7 @@ h2 {
         margin-bottom: 0%;
     }
     .searchHistory{
-        height: 300px;
+        height: 12em;
         margin-top: 3%;
     }
     .tempBox{
@@ -1280,8 +1296,8 @@ h2 {
         /*margin-bottom: 3px;*/
     /*}*/
     .searchHistory{
-        height: 188px;
-        margin-top: 5%;
+        /* height: 0px; */
+        margin-top:3%;
     }
     .searchPageContent{
         max-width: 60%;
