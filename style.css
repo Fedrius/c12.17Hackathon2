@@ -200,7 +200,7 @@
     overflow-x: hidden;
     overflow-y: auto;
     font-size: 4vmin;
-    height: 200px;
+    height: 10em;
     /* color: rgb(233, 229, 229); */
     background-color: rgba(252, 252, 252, 0.1)
 }
@@ -657,7 +657,7 @@ h2 {
 }
 .muteButton{
     position: relative;
-    width: 2.5%;
+    /* width: 2.5%; */
     height: 2.5%;
     color: seashell;
     font-size: 3vmin;
@@ -675,8 +675,8 @@ h2 {
 }
 .titleMuteButton{
     position: absolute;
-    width: 2.5%;
-    height: 2.5%;
+    /* width: 2.5%;
+    height: 2.5%; */
     color: lightskyblue;
     font-size: 4vmin;
     text-align: center;
@@ -884,7 +884,7 @@ h2 {
     }
 
     .titleMuteButton {
-        right: 20%;
+        right: 10%;
     }
     .logoContainer {
         height: 35%;
@@ -1218,7 +1218,7 @@ h2 {
         margin-bottom: 0%;
     }
     .searchHistory{
-        height: 300px;
+        height: 12em;
         margin-top: 3%;
     }
     .tempBox{
@@ -1292,8 +1292,8 @@ h2 {
         /*margin-bottom: 3px;*/
     /*}*/
     .searchHistory{
-        height: 188px;
-        margin-top: 5%;
+        /* height: 0px; */
+        margin-top:3%;
     }
     .searchPageContent{
         max-width: 60%;
