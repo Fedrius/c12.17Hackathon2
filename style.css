@@ -753,7 +753,7 @@ h2 {
 
 
 /*Media Queries*/
-@media screen and  (max-width: 300px){
+@media screen and  (max-width: 320px){
     /*Title Page*/
     .muteButton, .titleMuteButton, .signUpBtn, .signOutBtn{
         font-size: 3vmin;
@@ -864,7 +864,7 @@ h2 {
     }
 }
 
-@media screen and (min-width: 301px) and (max-width: 415px){
+@media screen and (min-device-width: 321px) and (max-device-width: 414px){
     /*Title Page*/
     .muteButton, .titleMuteButton, .signUpBtn, .signOutBtn{
         font-size: 3vmin;
@@ -960,15 +960,17 @@ h2 {
     }
 
     .weatherInfoContainer {
-        height: 20%;
+        height: 16%;
     }
     .tempBox{
         width: 16%;
-        height: 70%;
+        height: 85%;
     }
 
     .tempTime{
         font-size: 3.4vmin;
+        padding-bottom: 15%;
+        padding-top: 5%;
     }
 
     .tempPic{
@@ -978,11 +980,12 @@ h2 {
 
     .tempTemp{
         font-size: 3.4vmin;
+        padding-top: 10%;
     }
 
     .infoContainer{
         flex-direction: column;
-        height: 60%;
+        height: 64%;
     }
 
     .tideInfoContainer{
@@ -999,7 +1002,7 @@ h2 {
     }
 
     .pictureInfoContainer{
-        height: 65%;
+        height: 60%;
         width: 90%;
     }
 
@@ -1007,8 +1010,6 @@ h2 {
         pointer-events: none;
     }
 }
-
-
 
 @media screen and (max-width: 416px) and (min-height: 700px){
     .flyOff{
