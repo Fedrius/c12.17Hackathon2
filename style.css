@@ -884,7 +884,7 @@ h2 {
     }
 
     .titleMuteButton {
-        right: 10%;
+        right: 20%;
     }
     .logoContainer {
         height: 35%;
@@ -911,6 +911,14 @@ h2 {
     }
 
     /***Search Page/Main Page***/
+    .muteButton, .titleMuteButton, .signUpBtn, .signOutBtn {
+        font-size: 5vmin;
+    }
+
+    .signUpContainer {
+        left: 25%;
+    }
+
     .searchPageContent {
         margin-bottom: 50%;
     }
@@ -921,6 +929,10 @@ h2 {
 
     .locationInput {
         font-size: 4vmin;
+    }
+
+    .buttonContainer {
+        right: 10%;
     }
 
     /*Data Results Page*/
@@ -952,7 +964,7 @@ h2 {
     }
     .tempBox{
         width: 16%;
-        height: 80%;
+        height: 70%;
     }
 
     .tempTime{
