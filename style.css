@@ -387,6 +387,7 @@ h2 {
     /*border: 1px solid blue;*/
 }
 .weatherInfoContainer {
+    overflow-x: hidden;
     display: flex;
     font-size: 2.3vmin;
     justify-content: space-around;
@@ -397,10 +398,10 @@ h2 {
 .tempBox {
     /*border: 1px solid black;*/
     
-    /* height: 88%;           
-    width: 9%; */
-    height: 80%;
-    width: 50%;
+    height: 88%;           
+    width: 9%;
+    /* height: 80%;
+    width: 50%; */
     display: flex;
     justify-content: space-around;
     flex-direction: column;
@@ -756,7 +757,7 @@ h2 {
 
 
 /*Media Queries*/
-@media screen and  (max-width: 320px){
+@media screen and  (max-width: 415px){
     /*Title Page*/
     .muteButton, .titleMuteButton, .signUpBtn, .signOutBtn{
         font-size: 3vmin;
@@ -829,7 +830,7 @@ h2 {
         color: white;
     }
     .weatherInfoContainer {
-        height: 20%;
+        height: auto;
     }
     .tempBox{
         width: 16%;
@@ -1151,7 +1152,7 @@ h2 {
     }
 
     .weatherInfoContainer {
-        height: 20%;
+        height: auto;
     }
 
     .infoContainer{
