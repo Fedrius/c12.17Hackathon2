@@ -856,6 +856,7 @@ h2 {
 
     .tideInfoContainer{
         width: 90%;
+        height: 35%;
     }
 
     .pictureInfoContainer{
@@ -964,7 +965,7 @@ h2 {
     }
 
     .weatherInfoContainer {
-        height: 16%;
+        height: auto;
     }
     .tempBox{
         width: 16%;
@@ -1163,6 +1164,7 @@ h2 {
 
     .tideInfoContainer{
         width: 90%;
+        /* height: 35%; */
     }
     .tideInfoHeader {
         font-size: 3.6vmin;
@@ -1235,13 +1237,14 @@ h2 {
         height: 20%;
     }
     .weatherInfoContainer{
-        height: 20%;
+        height: auto;
+        padding-bottom: 2%;
     }
     .tempTime, .tempTemp {
         font-size: 2.8vmin;
     }
     .tempBox{
-        width: 22%;
+        width: 14%;
         height: 84%;
     }
 
