@@ -855,6 +855,7 @@ h2 {
 
     .tideInfoContainer{
         width: 90%;
+        height: 35%;
     }
 
     .pictureInfoContainer{
@@ -963,7 +964,7 @@ h2 {
     }
 
     .weatherInfoContainer {
-        height: 16%;
+        height: 18%;
     }
     .tempBox{
         width: 16%;
@@ -988,7 +989,7 @@ h2 {
 
     .infoContainer{
         flex-direction: column;
-        height: 64%;
+        height: 62%;
     }
 
     .tideInfoContainer{
