@@ -830,7 +830,7 @@ h2 {
         color: white;
     }
     .weatherInfoContainer {
-        height: auto;
+        height: 20%;
     }
     .tempBox{
         width: 16%;
