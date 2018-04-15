@@ -1364,11 +1364,12 @@ h2 {
     .tideInfoCategories, .tideInfoData {
         font-size: 3vmin;
     }
+}
 
-    @media only screen and (min-device-width : 414px) and (max-device-width : 736px) and (orientation : landscape) and (-webkit-min-device-pixel-ratio : 3) {
+    @media only screen and (min-width : 414px) and (max-width : 736px) and (orientation : landscape) and (-webkit-min-device-pixel-ratio : 3) {
         .searchHistory{
             /* height: 0px; */
-            margin-top:3%;
+            margin-top: 3%;
         }
         .searchPageContent{
             max-width: 60%;
@@ -1392,6 +1393,19 @@ h2 {
             transition-timing-function: ease-out;
             z-index: 900;
             visibility: hidden;
+        }
+
+        .sunriseTitle, .sunriseTime{
+            font-size: 2.5vmin;
+        }
+
+        .sunsetTitle, .sunsetTime{
+            font-size: 2.5vmin;
+        }
+
+
+        .tideInfoCategories, .tideInfoData {
+            font-size: 3vmin;
         }
 
         .tempPicImage{
@@ -1432,7 +1446,7 @@ h2 {
 
     }
 
-}
+
 @media screen and (min-width: 1025px) and (max-width: 1320px) {
     .flyOff{
         position: absolute;
