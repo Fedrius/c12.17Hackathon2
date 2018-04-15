@@ -192,7 +192,7 @@ function setLocalTime() {
 function googleGeoLoc(name){
     $.ajax({
         dataType: 'json',
-        url: 'http://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyDbDr73Tuj2WLSNXkSc2P8mH2JdF0xjAeo&address=' + name,
+        url: 'https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyDbDr73Tuj2WLSNXkSc2P8mH2JdF0xjAeo&address=' + name,
         method: 'get',
         success: function(response){
 
