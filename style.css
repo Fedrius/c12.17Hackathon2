@@ -1357,77 +1357,79 @@ h2 {
 
 }
 
-@media only screen and (min-device-width : 414px) and (max-device-width : 736px) and (orientation : landscape) and (-webkit-min-device-pixel-ratio : 3) {
-    .searchHistory{
-        /* height: 0px; */
-        margin-top:3%;
-    }
-    .searchPageContent{
-        max-width: 60%;
-        margin-bottom: 0%;
-    }
 
-    .titleLogo{
-        width: 42%;
-        margin-left: 3%;
-    }
-    .flyOff{
-        position: absolute;
-        left: 23%;
-        top: 30%;
-        width: 50%;
-        height: 55%;
-        background-repeat: no-repeat;
-        background-size: contain ;
-        animation-name: fadeOutShrink;
-        animation-duration: 1.3s;
-        transition-timing-function: ease-out;
-        z-index: 900;
-        visibility: hidden;
-    }
-
-    .tempPicImage{
-        width: 47%;
-    }
-    .tempBox{
-        height: 98%;
-    }
-    .tempPic{
-        display: flex;
-        justify-content: center;
-    }
-
-    .mainTitle .beachName{
-        margin-top: 0px;
-        margin-bottom: 0px;
-    }
-
-    .mainTitle .beachLocation {
-        margin-bottom: 5px;
-        margin-top: 5px;
-        font-size: 3vmin;
-    }
-
-    .infoContainer {
-        flex-direction: row;
-    }
-
-    .tideInfoContainer {
-        width: 50%;
-        height: 100%;
-    }
-
-    .pictureInfoContainer {
-        height: 90%;
-        width: 50%;
-    }
-
-}
 
 
 @media screen and (min-width: 601px) and (max-width: 1024px) and (orientation: landscape) {
     .tideInfoCategories, .tideInfoData {
         font-size: 3vmin;
+    }
+
+    @media only screen and (min-device-width : 414px) and (max-device-width : 736px) and (orientation : landscape) and (-webkit-min-device-pixel-ratio : 3) {
+        .searchHistory{
+            /* height: 0px; */
+            margin-top:3%;
+        }
+        .searchPageContent{
+            max-width: 60%;
+            margin-bottom: 0%;
+        }
+
+        .titleLogo{
+            width: 42%;
+            margin-left: 3%;
+        }
+        .flyOff{
+            position: absolute;
+            left: 23%;
+            top: 30%;
+            width: 50%;
+            height: 55%;
+            background-repeat: no-repeat;
+            background-size: contain ;
+            animation-name: fadeOutShrink;
+            animation-duration: 1.3s;
+            transition-timing-function: ease-out;
+            z-index: 900;
+            visibility: hidden;
+        }
+
+        .tempPicImage{
+            width: 47%;
+        }
+        .tempBox{
+            height: 85%;
+        }
+        .tempPic{
+            display: flex;
+            justify-content: center;
+        }
+
+        .mainTitle .beachName{
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+
+        .mainTitle .beachLocation {
+            margin-bottom: 5px;
+            margin-top: 5px;
+            font-size: 3vmin;
+        }
+
+        .infoContainer {
+            flex-direction: row;
+        }
+
+        .tideInfoContainer {
+            width: 50%;
+            height: 100%;
+        }
+
+        .pictureInfoContainer {
+            height: 90%;
+            width: 50%;
+        }
+
     }
 
 }
