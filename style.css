@@ -1443,6 +1443,10 @@ h2 {
             height: 100%;
         }
 
+        .tideInfoDataContainer {
+            height: 90%;
+        }
+
         .pictureInfoContainer {
             height: 90%;
             width: 50%;
