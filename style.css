@@ -1412,12 +1412,13 @@ h2 {
             width: 47%;
         }
         .tempBox{
-            height: 85%;
+            height: 100%;
             width: 16%;
         }
         .tempPic{
             display: flex;
             justify-content: center;
+            height: 50%;
         }
 
         .mainTitle .beachName{
