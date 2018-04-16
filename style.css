@@ -1420,9 +1420,13 @@ h2 {
         .tempPic{
             display: flex;
             justify-content: center;
-            height: 50%;
-        }
+            height: 40%;
 
+        }
+        .weatherInfoContainer {
+            height: 25%;
+
+        }
         .mainTitle .beachName{
             margin-top: 0px;
             margin-bottom: 0px;
@@ -1436,6 +1440,7 @@ h2 {
 
         .infoContainer {
             flex-direction: row;
+            height: 55%;
         }
 
         .tideInfoContainer {
