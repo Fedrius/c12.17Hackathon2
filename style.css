@@ -1403,7 +1403,9 @@ h2 {
             font-size: 2.5vmin;
         }
 
-
+        .tideInfoHeader {
+            font-size: 3vmin;
+        }
         .tideInfoCategories, .tideInfoData {
             font-size: 3vmin;
         }
