@@ -1145,7 +1145,8 @@ h2 {
     }
 
     .tempPic{
-        width: 70%;
+        width: 80%;
+        height: 45%;
     }
 
     .tempTemp{
@@ -1246,7 +1247,7 @@ h2 {
     }
 
     .tempPic{
-        width: 75%;
+        width: 60%;
     }
 
     .sunrise, .sunset{
@@ -1366,7 +1367,13 @@ h2 {
     }
 }
 
-    @media only screen and (min-device-width : 414px) and (max-device-width : 736px) and (orientation : landscape) and (-webkit-min-device-pixel-ratio : 3) {
+@media screen and (min-width: 748px) and (max-width: 1024px) and (orientation: landscape) {
+    .tempPicImage{
+        width: 65%;
+    }
+}
+
+    @media only screen and (min-device-width : 340px) and (max-device-width : 736px) and (orientation : landscape) and (-webkit-min-device-pixel-ratio : 3) {
         .searchHistory{
             /* height: 0px; */
             margin-top: 3%;
@@ -1411,7 +1418,7 @@ h2 {
         }
 
         .tempPicImage{
-            width: 47%;
+            width: 65%;
         }
         .tempBox{
             height: 100%;
@@ -1420,7 +1427,7 @@ h2 {
         .tempPic{
             display: flex;
             justify-content: center;
-            height: 40%;
+            height: 45%;
 
         }
         .weatherInfoContainer {
