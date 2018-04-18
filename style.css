@@ -1,0 +1,1523 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    user-select: none;
+    user-focus: none;
+    outline: none;
+    font-family: 'Concert One', cursive;
+}
+/*keyframes here*/
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        visibility: visible
+    }
+    to {
+        opacity: 0;
+        visibility: hidden
+    }
+}
+@keyframes fadeOutShrink {
+    from {
+        opacity: 1;
+        transform: scale(1) translateX(0%) translateY(0%);
+        visibility: visible
+    }
+    to {
+        opacity: 0;
+        transform: scale(0) translateX(-300%) translateY(-500%);
+        visibility: hidden
+    }
+}
+@keyframes vanish{
+    from{
+        opacity: 0;
+        visibility: hidden;
+    }
+    to {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+@keyframes fadeInRight {
+    from { opacity: 0; visibility: hidden; transform: translate(-20%) }
+    to { opacity: 1; visibility: visible; transform: translate(0%)}
+
+}
+@keyframes fadeOutBottom {
+    from {
+        opacity: 1;
+        transform: translateY(0%);
+        visibility: visible;
+    }
+    to {
+        opacity: 0;
+        transform: translateY(100%);
+        visibility: hidden
+    }
+}
+
+.overlay{                        /*ENTIRE PAGE HERE, overlay for transitions*/
+    position: absolute;
+    height:100%;
+    width: 100%;
+    background: black;
+    animation-name: fadeOut;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    z-index: 8;
+}
+
+.titlePageContainer {                  /*ENTIRE PAGE HERE */
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    background-image: url("images/SurfsUpBackground.jpg");
+    background-repeat: no-repeat;
+    background-size: cover ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 6;
+
+    color: rgba(0,0,0,0.8);
+    text-shadow: 2px 8px 6px rgba(0,0,0,0.2),
+    0px -5px 35px rgba(255,255,255,0.3);
+}
+.titleFont {
+    font-family: 'Original Surfer', cursive;
+    font-size: 12vmin;
+    text-align: center;
+}
+.titleInfo {
+    font-family: 'Original Surfer', cursive;
+    font-size: 5vmin;
+    text-align: center;
+    margin: 2% 2% 0 2%;
+}
+.titleStartInfo {
+    font-family: 'Original Surfer', cursive;
+    font-size: 4vmin;
+    text-align: center;
+}
+.logoContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.titleLogo {
+    /*height: 40%;*/
+    width: 30%;
+    margin-top: 15px;
+    margin-left: 3%;
+    /*position: absolute;*/
+    /*left: 36.4%;*/
+    /*border: 1px solid black;*/
+    /*background-image: url("images/surfsup.gif");*/
+    /*background-repeat: no-repeat;*/
+    /*background-size: contain ;*/
+}
+.titleLogo:hover{
+    transform: scale(1.1);
+    cursor: pointer;
+}
+.titleLogo:active{
+    transform: scale(.95);
+}
+.titlePageContainer.hidden{
+    /* height: 40%;
+    width: 30%; */
+    position: absolute;
+    color: rgba(0,0,0,0);
+    /* left: 36.4%; */
+    /* background-image: url("images/surfsup.gif"); */
+    /*background-repeat: no-repeat;
+    background-size: contain ; */
+    animation-name: vanish;
+    animation-duration: 1.3s;
+    transition-timing-function: ease-out;
+    visibility: hidden;
+}
+.flyOff{
+    position: absolute;
+    left: 36.5%;
+    top: 47%;
+    background-image: url("images/surfsup.gif");
+    background-repeat: no-repeat;
+    background-size: contain ;
+    animation-name: fadeOutShrink;
+    animation-duration: 1.3s;
+    transition-timing-function: ease-out;
+    z-index: 900;
+    visibility: hidden;
+}
+                                    /*ENTIRE PAGE HERE */
+.mainPageContainer{
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    background-image: url("images/surferBg0.jpg");
+    background-repeat: no-repeat;
+    background-size: cover ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 5;
+    visibility: hidden;
+}
+.mainPageContainer.visible{
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    background-image: url("images/surferBg0.jpg");
+    background-repeat: no-repeat;
+    background-size: cover ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation-name: fadeInRight;
+    animation-duration: .7s;
+    transition-timing-function: ease-in;
+    z-index: 5;
+    visibility: visible;
+}
+.searchPageContent{
+    max-width: 70%;
+    width: 100%;
+    margin-bottom: 7%;
+}
+.searchHistory{
+    margin-top: 5%;
+    text-align: center;
+    /* font-size: 4vmin; */
+    color: white;
+    text-shadow: .1em .1em .1em black;
+    display: flex;
+    justify-content: center;
+    flex-direction: column
+}
+.searchLocations{
+    overflow-x: hidden;
+    overflow-y: auto;
+    font-size: 4vmin;
+    height: 10em;
+    /* color: rgb(233, 229, 229); */
+    background-color: rgba(252, 252, 252, 0.1)
+}
+.searchLocations div:hover{
+    transform: scale(1.02);
+    cursor: pointer;
+}
+.mainPageTitlePos{
+    margin-bottom: 5%;
+    color: rgba(0,0,0,0.8);
+    text-shadow: 2px 8px 6px rgba(0,0,0,0.2),
+    0px -5px 35px rgba(255,255,255,0.3);
+}
+.formContainer{
+    width: 100%;
+    background-color: rgba(128, 128, 128, 0.3);
+    display: flex;
+    justify-content: space-between;
+    box-shadow: .1em .1em .1em .1em black;
+}
+.inputForm{
+    width: 100%;
+    height: 100%;
+}
+.locationInput{
+    font-family: 'Concert One', cursive;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 2.5vmin;
+    background-color: rgba(255, 255, 255, 0.73);
+    padding: .7em 1em .7em 1em;
+    transition: width 0.4s ease-in-out;
+    cursor: pointer;
+}
+.locationInput:focus {
+    width: 100%;
+    cursor: auto;
+}
+.searchButton{
+    border-radius: 10%;
+    width: 100%;
+    max-width: 6vmin;
+    background-color: #38a2b8;
+    background-image: url('images/searchicon.png');
+    background-position: 5% 38%;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    cursor: pointer;
+}
+.searchButton:hover{
+    transform: scale(1.1);
+}
+.searchButton:active{
+    transform: scale(.98);
+}
+/*DataPage*/                        /*ENTIRE PAGE HERE*/
+.dataPageContainer{
+    /*border: 2px solid red;*/
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    /*background: linear-gradient(120deg, #ece837, #ec8c53);*/
+    /*background-image: url("images/infoBeachImage.jpg");*/
+    animation-name: fadeOutBottom;
+    animation-duration: .7s;
+    transition-timing-function: ease-in;
+    background-image: url("https://wonderopolis.org/wp-content/uploads/2014/07/dreamstime_xl_22656707-custom.jpg");
+    background-size: cover;
+    visibility: hidden;
+    /*z-index: 100;*/
+}
+.dataPageContainer.visible{
+    /*border: 2px solid red;*/
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    /*background: linear-gradient(120deg, #ece837, #ec8c53);*/
+    /*background-image: url("images/infoBeachImage.jpg");*/
+    background-image: url("https://wonderopolis.org/wp-content/uploads/2014/07/dreamstime_xl_22656707-custom.jpg");
+    background-size: cover;
+    animation-name: fadeInRight;
+    animation-duration: .7s;
+    transition-timing-function: ease-in;
+    z-index: 10;
+    visibility: visible;
+}
+.dataPageContainer.hidden{
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    animation-name: fadeOutBottom;
+    animation-duration: .7s;
+    transition-timing-function: linear;
+    background-image: url("https://wonderopolis.org/wp-content/uploads/2014/07/dreamstime_xl_22656707-custom.jpg");
+    background-size: cover;
+    visibility: hidden;
+    z-index: 10;
+}
+.headerContainer {
+    /*border: 1px solid black;*/
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    height: 15%;
+}
+.mainTitle {
+    text-align: center;
+    height: 100%;
+    font-family: 'Concert One', cursive;
+}
+h1 {
+    font-size: 4vmin;
+    margin-top: 4px;
+}
+h2 {
+    font-size: 3vmin;
+    margin-top: 10px;
+}
+
+.newSearchContainer{
+    display: block;
+    margin-top: 3%;
+}
+
+.newSearchButton{
+    font-size: 2.5vmin;
+    padding: 6px;
+    background-color: black;
+    opacity: .15;
+    color: white;
+    display: inline-block;
+    width: 69%;
+    border: 1px solid #fff;
+    text-align: center;
+    outline: none;
+    text-decoration: none;
+    font-family: Helvetica;
+}
+
+.sunrise {
+    /*border: 1px solid salmon;*/
+    height: 100%;
+    width: 8%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 2.4vmin;
+}
+.sunImg{
+    height: 45%;
+    width: 50%;
+    /*border: 1px solid red;*/
+    background-image: url("images/sun.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: 45%;
+}
+.sunriseTime{
+    /*border: 1px solid blue;*/
+}
+.sunset {
+    /*border: 1px solid salmon;*/
+    height: 100%;
+    width: 8%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 2.4vmin;
+}
+.moonImg{
+    height: 45%;
+    width: 50%;
+    /*border: 1px solid red;*/
+    background-image: url("images/moon.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: 45%;
+}
+.sunsetTime{
+    /*border: 1px solid blue;*/
+}
+.weatherInfoContainer {
+    overflow-x: hidden;
+    display: flex;
+    font-size: 2.3vmin;
+    justify-content: space-around;
+    height: 16%;
+    background-color: rgba(240,255,255,0.3);
+    box-shadow: 10px 10px 27px 1px rgba(211,214,214,1);
+}
+.tempBox {
+    /*border: 1px solid black;*/
+    
+    height: 88%;           
+    width: 9%;
+    /* height: 80%;
+    width: 50%; */
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+.tempBox:hover{
+    transform: scale(1.1);
+    /*box-shadow: .01em .01em .01em .01em black;*/
+    border-radius: 15%;
+    color: #0fb8ae;
+    text-shadow: 1px 1px black;
+}
+.tempBox:active{
+    transform: scale(.95);
+}
+.tempTime{
+    /*border: 1px solid purple;*/
+}
+.tempPic{
+    height: 65%;
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    /*border: 1px solid green;*/
+}
+.tempPicImage{
+    height: 100%;
+    width: 100%;
+}
+.infoContainer{
+    /*border: 3px solid blue;*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 68%;
+}
+.tideInfoContainer {
+    /*border: 1px solid black;*/
+    width: 80%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+.tideInfoHeader{
+    width: 100%;
+    height: 10%;
+    /*border: 1px solid blue;*/
+    text-align: center;
+    font-size: 5vmin;
+}
+.tideInfoDataContainer{
+    /*border: 5px solid white;*/
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 90%;
+    width: 100%;
+}
+.tideInfoCategories{
+    /* border: 2px solid blue; */
+    padding-left: 3%;
+    font-size: 3.6vmin;
+    height: 90%;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    background-color: rgba(240,255,255,0.3);
+    border-radius: 5px;
+    /*box-shadow: 10px 10px 71px 0px rgba(0,0,0,0.75);*/
+}
+.categoryTitle{
+    /*border: 3px solid crimson;*/
+    height: 16%;
+}
+.tideInfoData{
+    /* border: 2px solid green; */
+    padding-left: 3%;
+    font-size: 3.6vmin;
+    height: 90%;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    background-color: rgba(240,255,255,0.2);
+    border-radius: 5px;
+    /*box-shadow: 10px 10px 71px 0px rgba(0,0,0,0.75);*/
+}
+.dataTitle{
+    /*border: 3px solid crimson;*/
+    height: 16%;
+    color: black;
+}
+.tideData{
+    /*border: 3px solid crimson;*/
+    height: 16%;
+    color: black;
+}
+.pictureInfoContainer {
+    /*border: 1px solid black;*/
+    font-size: 3vmin;
+    width: 80%;
+    height: 100%;
+}
+.pictureInfoHeader{
+    width: 100%;
+    height: 10%;
+    /*border: 1px solid blue;*/
+    text-align: center;
+    font-size: 4vmin;
+}
+.pictureInfoDataContainer{
+    /*border: 5px solid white;*/
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    height: 90%;
+    width: 100%;
+}
+.photoDiv{
+    width: 45%;
+    height: 45%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    background: no-repeat center;
+    background-size: cover;
+    border-radius: 5px;
+    box-shadow: 10px 10px 18px 0px rgba(0,0,0,0.75);
+}
+.photoDiv:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+}
+.photoDiv:active{
+    transform: scale(.9);
+}
+.signInModal{
+    display: none;
+    position: fixed;
+    z-index: 20;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+.pictureModal {
+    display: none;
+    position: fixed;
+    z-index: 20;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+.pictureContent {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items:flex-end;
+    background:  no-repeat center; /*url(./images/surferBg0.jpg)*/
+    background-size: cover;
+    margin: 10% auto; 
+    padding: 20px;
+    border: 1px solid black;
+    border-radius: 10px;
+    box-shadow: 10px 10px 18px 0px rgba(0,0,0,0.75);
+    width: 50%;
+    height: 50%;
+    font-size: 2em;
+}
+.closeModal {
+    position: absolute;
+    top: 1px;
+    right: 12px;
+    color: #f1f1f1;
+    font-size: 5vmin;
+    /*font-weight: bold;*/
+    transition: 0.3s;
+}
+.closeModal:hover,
+.closeModal:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+.modalButton{
+    height: 5%;
+    width: 10%;
+    text-align: center;
+}
+.modalButton:hover{
+    transform: scale(1.1);
+    cursor: pointer;
+}
+.modalButton:active{
+    transform: scale(.95);
+}
+.signUpContainer {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    left: 15%;
+    top: 2%;
+}
+.signInContainer {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    left: 4%;
+    top: 2%;
+}
+.signOutContainer {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    left: 4%;
+    top: 2%;
+}
+.signUpBtn{
+    font-size: 3vmin;
+    color: seashell;
+}
+.signOutBtn{
+    font-size: 3vmin;
+    color: seashell;
+    display: none;
+}
+.signUpBtn:hover {
+    cursor: pointer;
+    color: #1b6d85;
+    border-color: #1b6d85;
+    transform: scale(1.1);
+}
+.signOutBtn:hover {
+    cursor: pointer;
+    color: #1b6d85;
+    border-color: #1b6d85;
+    transform: scale(1.1);
+}
+.buttonContainer{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    right: 5%;
+    top: 2%;
+}
+.muteButton{
+    position: relative;
+    /* width: 2.5%; */
+    height: 2.5%;
+    color: seashell;
+    font-size: 3vmin;
+    text-align: center;
+    background:none;
+    border:none;
+    margin:0;
+    padding:0;
+}
+.muteButton:hover {
+    cursor: pointer;
+    color: #1b6d85;
+    border-color: #1b6d85;
+    transform: scale(1.1);
+}
+.titleMuteButton{
+    position: absolute;
+    /* width: 2.5%;
+    height: 2.5%; */
+    color: lightskyblue;
+    font-size: 4vmin;
+    text-align: center;
+    right: 5%;
+    top: 2%;
+    background:none;
+    border:none;
+    margin:0;
+    padding:0;
+}
+.titleMuteButton:hover {
+    cursor: pointer;
+    color: #1b6d85;
+    border-color: #1b6d85;
+    transform: scale(1.1);
+}
+.returnToMain {
+    position: relative;
+    font-size: 2.5vmin;
+    background:none;
+    border:none;
+    margin:0;
+    padding:0;
+    color: seashell;
+}
+.returnToMain:hover{
+    cursor: pointer;
+    color: #1b6d85;
+    border-color: #1b6d85;
+    transform: scale(1.1);
+}
+
+.errorModal {
+    display: none;
+    position: fixed;
+    z-index: 25;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+.errorContent {
+    display: flex;
+    font-size: 5vmin;
+    justify-content: center;
+    flex-direction: column;
+    margin: 18% auto;
+    /* padding: 20px; */
+    border: 1px solid black;
+    border-radius: 10px;
+    box-shadow: 10px 10px 18px 0px rgba(0,0,0,0.75);
+    background-color: rgba(240, 255, 255, 0.63);
+    height: 20%;
+}
+.errorButton {
+    font-size: 2vmin;
+    height: 20%;
+    width: 15%;
+    margin: 0 auto;
+    /* margin-top: 30px; */
+    border:none;
+    border-radius: 5px;
+}
+.errorButton:hover{
+    transform: scale(1.1);
+    cursor: pointer;
+}
+.errorButton:active{
+    transform: scale(.95);
+}
+
+
+/*Media Queries*/
+@media screen and  (max-width: 415px){
+    /*Title Page*/
+    .muteButton, .titleMuteButton, .signUpBtn, .signOutBtn{
+        font-size: 3vmin;
+        color: seashell;
+    }
+
+    .titleMuteButton {
+        right: 10%;
+    }
+    .logoContainer {
+        height: 35%;
+        width: 100%;
+        left: 20.4%;
+    }
+
+    .titleLogo{
+        width: 60%;
+    }
+    .flyOff{
+    position: absolute;
+    left: 10%;
+    /* top: 47%; */
+    width: 90%;
+    height: 20%;
+    /* background-image: url("images/surfsup.gif"); */
+    background-repeat: no-repeat;
+    background-size: contain ;
+    animation-name: fadeOutShrink;
+    animation-duration: 1.3s;
+    transition-timing-function: ease-out;
+    z-index: 900;
+    visibility: hidden;
+}
+    /*Search Page/Main Page*/
+
+    /*Data Results Page*/
+    .dataMuteButton, .returnToMain{
+        display: none;
+    }
+
+    .headerContainer{
+        height: 20%;
+    }
+
+    .sunriseTitle, .sunriseTime{
+        font-size: 5.2vmin;
+    }
+
+    .sunsetTitle, .sunsetTime{
+        font-size: 5.2vmin;
+    }
+
+    .beachName{
+        font-size: 6vmin;
+    }
+
+    .beachLocation{
+        font-size: 4.5vmin;
+    }
+
+    .newSearchContainer{
+        display: block;
+    }
+
+    .newSearchButton{
+        font-size: 3.5vmin;
+        padding: 8px;
+        background-color: black;
+        opacity: .15;
+        color: white;
+    }
+    .weatherInfoContainer {
+        height: auto;
+    }
+    .tempBox{
+        width: 16%;
+        height: 75%;
+    }
+
+    .tempTime{
+        font-size: 4.4vmin;
+    }
+
+    .tempPic{
+        width: 90%;
+    }
+
+    .tempTemp{
+        font-size: 4.4vmin;
+    }
+
+    .infoContainer{
+        flex-direction: column;
+        height: 60%;
+    }
+
+    .tideInfoContainer{
+        width: 90%;
+        /* height: 35%; */
+    }
+
+    .pictureInfoContainer{
+        height: 65%;
+        width: 90%;
+    }
+
+    .photoDiv{
+        pointer-events: none;
+    }
+}
+
+@media screen and (min-device-width: 321px) and (max-device-width: 414px){
+    /*Title Page*/
+    .muteButton, .titleMuteButton, .signUpBtn, .signOutBtn{
+        font-size: 3vmin;
+        color: seashell;
+    }
+
+    .newSearchContainer{
+        display: block;
+    }
+
+    .newSearchButton{
+        font-size: 3.5vmin;
+        padding: 6px;
+        background-color: black;
+        opacity: .15;
+        color: white;
+    }
+
+    .titleMuteButton {
+        right: 10%;
+    }
+    .logoContainer {
+        height: 35%;
+        width: 100%;
+        left: 20.4%;
+    }
+
+    .titleLogo{
+        width: 60%;
+    }
+    .flyOff{
+        position: absolute;
+        left: 14%;
+        top: 40%;
+        width: 85%;
+        height: 34%;
+        background-repeat: no-repeat;
+        background-size: contain ;
+        animation-name: fadeOutShrink;
+        animation-duration: 1.3s;
+        transition-timing-function: ease-out;
+        z-index: 900;
+        visibility: hidden;
+    }
+
+    /***Search Page/Main Page***/
+    .muteButton, .titleMuteButton, .signUpBtn, .signOutBtn {
+        font-size: 5vmin;
+    }
+
+    .signUpContainer {
+        left: 25%;
+    }
+
+    .searchPageContent {
+        margin-bottom: 50%;
+    }
+
+    .searchButton {
+        max-width: 10vmin;
+    }
+
+    .locationInput {
+        font-size: 4vmin;
+    }
+
+    .buttonContainer {
+        right: 10%;
+    }
+
+    /*Data Results Page*/
+    .dataMuteButton, .returnToMain{
+        display: none;
+    }
+
+    .headerContainer{
+        height: 20%;
+    }
+    .sunriseTitle, .sunriseTime{
+        font-size: 4.5vmin;
+    }
+
+    .sunsetTitle, .sunsetTime{
+        font-size: 4.5vmin;
+    }
+
+    .beachName{
+        font-size: 5vmin;
+    }
+
+    .beachLocation{
+        font-size: 4.5vmin;
+    }
+
+    .weatherInfoContainer {
+        height: auto;
+    }
+    .tempBox{
+        width: 16%;
+        height: 85%;
+    }
+
+    .tempTime{
+        font-size: 3.4vmin;
+        padding-bottom: 15%;
+        padding-top: 5%;
+    }
+
+    .tempPic{
+        width: 80%;
+        height: 50%;
+    }
+
+    .tempTemp{
+        font-size: 3.4vmin;
+        padding-top: 10%;
+    }
+
+    .infoContainer{
+        flex-direction: column;
+        height: 64%;
+    }
+
+    .tideInfoContainer{
+        width: 90%;
+        /* height: 40%; */
+    }
+
+    .tideInfoHeader {
+        margin-bottom: 1%;
+        font-size: 4vmin;
+    }
+
+    .tideInfoCategories, .tideInfoData {
+        padding-bottom: 2%;
+    }
+
+    .pictureInfoContainer{
+        height: 60%;
+        width: 90%;
+    }
+
+    .photoDiv{
+        pointer-events: none;
+    }
+}
+
+@media screen and (max-width: 416px) and (min-height: 700px){
+    .flyOff{
+        position: absolute;
+        left: 10%;
+        top: 42%;
+        width: 85%;
+        height: 24%;
+        background-repeat: no-repeat;
+        background-size: contain ;
+        animation-name: fadeOutShrink;
+        animation-duration: 1.3s;
+        transition-timing-function: ease-out;
+        z-index: 900;
+        visibility: hidden;
+    }
+}
+@media screen and (min-width: 301px) and (max-width: 415px) and (min-height: 730px){
+    .flyOff{
+        position: absolute;
+        left: 11%;
+        top: 43%;
+        width: 76%;
+        height: 25%;
+        background-repeat: no-repeat;
+        background-size: contain ;
+        animation-name: fadeOutShrink;
+        animation-duration: 1.3s;
+        transition-timing-function: ease-out;
+        z-index: 900;
+        visibility: hidden;
+    }
+}
+@media screen and (max-width: 300px) and (min-height: 700px){
+    .flyOff{
+        position: absolute;
+        left: 13%;
+        top: 43%;
+        width: 80%;
+        height: 24%;
+        background-repeat: no-repeat;
+        background-size: contain ;
+        animation-name: fadeOutShrink;
+        animation-duration: 1.3s;
+        transition-timing-function: ease-out;
+        z-index: 900;
+        visibility: hidden;
+    }
+}
+
+    
+@media screen and (min-width: 415px) and (max-width: 599px) {
+    /*Title Page*/
+    .muteButton, .titleMuteButton, .signUpBtn, .signOutBtn{
+        font-size: 3vmin;
+        color: seashell;
+    }
+
+    .titleMuteButton {
+        right: 10%;
+        color: seashell;
+    }
+    .logoContainer {
+        height: 35%;
+        width: 100%;
+        left: 20.4%;
+    }
+    .flyOff{
+        position: absolute;
+        left: 10%;
+        top: 40%;
+        /* width: 70%;
+        height: 70%; */
+        background-repeat: no-repeat;
+        background-size: contain ;
+        animation-name: fadeOutShrink;
+        animation-duration: 1.3s;
+        transition-timing-function: ease-out;
+        z-index: 900;
+        visibility: hidden;
+    }
+
+    /***Search Page/Main Page***/
+    .searchPageContent{
+        margin-bottom: 28%;
+    }
+
+    .searchButton {
+        max-width: 10vmin;
+    }
+
+    .locationInput {
+        font-size: 4vmin;
+    }
+
+    /*Data Results Page*/
+    .headerContainer{
+        height: 20%;
+    }
+
+    .dataMuteButton, .returnToMain{
+        display: none;
+    }
+
+    .sunriseTitle, .sunriseTime{
+        font-size: 3.6vmin;
+    }
+
+    .sunsetTitle, .sunsetTime{
+        font-size: 3.6vmin;
+    }
+
+    .beachName{
+        font-size: 4.2vmin;
+    }
+
+    .beachLocation{
+        font-size: 3.8vmin;
+    }
+
+    .tempBox{
+        width: 14%;
+        height: 85%;
+    }
+
+    .tempTime{
+        font-size: 3.6vmin;
+    }
+
+    .tempPic{
+        width: 70%;
+    }
+
+    .tempTemp{
+        font-size: 4vmin;
+    }
+
+    .weatherInfoContainer {
+        height: auto;
+    }
+
+    .infoContainer{
+        flex-direction: column;
+        height: 60%;
+    }
+
+    .tideInfoContainer{
+        width: 90%;
+        /* height: 35%; */
+    }
+    .tideInfoHeader {
+        font-size: 3.6vmin;
+        margin-bottom: 1%;
+
+    }
+    .tideInfoCategories, .tideInfoData {
+        font-size: 3.5vmin
+    }
+    .pictureInfoContainer{
+        height: 65%;
+        width: 90%;
+    }
+
+    .photoDiv{
+        pointer-events: none;
+    }
+
+    .titleLogo {
+        width: 75%;
+    }
+}
+
+@media screen and (min-width: 600px) and (max-width: 1024px){
+    /*Title Page*/
+    .muteButton, .titleMuteButton, .signUpBtn, .signOutBtn{
+        font-size: 3vmin;
+        color: seashell;
+    }
+
+    .titleLogo{
+        width: 45%;
+    }
+    .titleMuteButton {
+        right: 10%;
+    }
+
+    .buttonContainer{
+        right: 2%;
+    }
+    .flyOff{
+        position: absolute;
+        left: 25%;
+        top: 42%;
+        /* width: 85%;
+        height: 20%; */
+        background-repeat: no-repeat;
+        background-size: contain ;
+        animation-name: fadeOutShrink;
+        animation-duration: 1.3s;
+        transition-timing-function: ease-out;
+        z-index: 900;
+        visibility: hidden;
+    }
+
+    /***Search Page/Main Page***/
+    .searchPageContent{
+        margin-bottom: 0%;
+    }
+    .searchHistory{
+        height: 12em;
+        margin-top: 3%;
+    }
+    .tempBox{
+        height: 76%;
+    }
+
+    /*Data Page*/
+    .headerContainer {
+        height: 20%;
+    }
+    .weatherInfoContainer{
+        height: auto;
+        padding-bottom: 2%;
+    }
+    .tempTime, .tempTemp {
+        font-size: 2.8vmin;
+    }
+    .tempBox{
+        width: 14%;
+        height: 84%;
+    }
+
+    .tempPic{
+        width: 75%;
+    }
+
+    .sunrise, .sunset{
+        font-size: 2.8vmin;
+    }
+    .infoContainer{
+        height: 60%;
+    }
+    .tideInfoDataContainer {
+        height: 87%;
+    }
+
+    .tideInfoCategories, .tideInfoData {
+        font-size: 3vmin;
+    }
+
+    .pictureInfoContainer{
+        height: 90%;
+    }
+    .pictureContent{
+        width: 60%;
+        height: 55%;
+    }
+}
+@media screen and (max-width: 1024px) and (min-width: 400px) and (orientation:landscape){
+
+    .tempBox{
+        height: 82%;
+    }
+    .tempPicImage{
+        width: 47%;
+    }
+     h1 {
+        font-size: 4vmin;
+    }
+
+    .mainTitle .beachName{
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+
+    .mainTitle .beachLocation {
+        margin-bottom: 5px;
+    }
+}
+@media screen and (min-width: 280px) and (max-width: 667px) and (orientation: landscape) {
+    /*h2{*/
+        /*margin-bottom: 3px;*/
+    /*}*/
+    .searchHistory{
+        /* height: 0px; */
+        margin-top:3%;
+    }
+    .searchPageContent{
+        max-width: 60%;
+        margin-bottom: 0%;
+    }
+
+    .titleLogo{
+        width: 42%;
+        margin-left: 3%;
+    }
+    .flyOff{
+        position: absolute;
+        left: 23%;
+        top: 30%;
+        width: 50%;
+        height: 55%;
+        background-repeat: no-repeat;
+        background-size: contain ;
+        animation-name: fadeOutShrink;
+        animation-duration: 1.3s;
+        transition-timing-function: ease-out;
+        z-index: 900;
+        visibility: hidden;
+    }
+
+    .tempPicImage{
+        width: 47%;
+    }
+    .tempBox{
+        height: 98%;
+    }
+    .tempPic{
+        display: flex;
+        justify-content: center;
+    }
+
+    .mainTitle .beachName{
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+
+    .mainTitle .beachLocation {
+        margin-bottom: 5px;
+        margin-top: 5px;
+        font-size: 3vmin;
+    }
+
+    .infoContainer {
+        flex-direction: row;
+    }
+
+    .pictureInfoContainer {
+        height: 90%;
+        width: 80%;
+    }
+
+}
+
+@media screen and (min-width: 601px) and (max-width: 1024px) and (orientation: landscape) {
+    .tideInfoCategories, .tideInfoData {
+        font-size: 3vmin;
+    }
+
+}
+@media screen and (min-width: 1025px) and (max-width: 1320px) {
+    .flyOff{
+        position: absolute;
+        left: 30%;
+        top: 45%;
+        /* width: 85%;
+        height: 20%; */
+        background-repeat: no-repeat;
+        background-size: contain ;
+        animation-name: fadeOutShrink;
+        animation-duration: 1.3s;
+        transition-timing-function: ease-out;
+        z-index: 900;
+        visibility: hidden;
+    }
+    /*Title Page*/
+    .titleLogo{
+        width: 50%;
+    }
+
+    .titleMuteButton {
+        right: 10%;
+        color: seashell;
+    }
+
+    .buttonContainer{
+        right: 2%;
+    }
+
+    /*Search Page/main page*/
+    .searchPageContent{
+        max-width: 55%;
+        margin-bottom: 11%;
+    }
+
+    /*Data Page*/
+    .headerContainer{
+        height: 20%;
+    }
+
+    .newSearchContainer{
+        margin-top: 3%;
+    }
+
+    .newSearchButton:hover{
+        transform: scale(1.1);
+        cursor: pointer;
+    }
+
+    .infoContainer{
+        height: 60%;
+    }
+    .tideInfoDataContainer {
+        height: 87%;
+    }
+
+    .pictureInfoContainer{
+        height: 90%;
+    }
+    .pictureContent{
+        width: 60%;
+        height: 55%;
+    }
+
+    .headerContainer {
+        height: 20%;
+    }
+    .weatherInfoContainer{
+        height: 20%;
+    }
+    .tempBox {
+        width: 15%;
+    }
+
+    /*.tempPic {*/
+        /*width: 70%;*/
+    /*}*/
+
+    .infoContainer{
+        height: 60%;
+    }
+}
+
+@media screen and (min-width: 1321px) {
+    /*Title Page*/
+    .titleMuteButton {
+        right: 10%;
+        color: seashell;
+    }
+
+    .buttonContainer{
+        right: 2%;
+    }
+
+    /*Search Page/main page*/
+    .searchPageContent{
+        max-width: 55%;
+    }
+
+    /*Data Page*/
+    .newSearchContainer{
+        margin-top: 3%;
+    }
+
+    .newSearchButton:hover{
+        transform: scale(1.1);
+        cursor: pointer;
+    }
+
+    .headerContainer{
+        height: 20%;
+    }
+
+    .weatherInfoContainer {
+        height: 20%;
+    }
+
+    .infoContainer{
+        height: 60%;
+    }
+    .tideInfoDataContainer {
+        height: 87%;
+    }
+
+    .pictureInfoContainer{
+        height: 90%;
+    }
+    .pictureContent{
+        width: 60%;
+        height: 55%;
+    }
+
+    .tempBox {
+        width: 17%;
+        height: 85%;
+        margin-top: 5px;
+    }
+
+    .tempPic {
+        width: 50%;
+    }
+    .beachName{
+        margin-top: -7px;
+        /* font-size: 4vmin; */
+    }
+
+}
+
+
+
+
+
+
+
+
