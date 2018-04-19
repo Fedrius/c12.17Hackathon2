@@ -4,15 +4,15 @@ Application to show you weather and surf conditions at any beach!
 
 ## Technologies Used
 
-### Frontend:
+### Front end:
 
->HTML, CSS, Javscript, Bootstrap, and jQuery.
+>HTML, CSS, Javacript, Bootstrap, and jQuery.
 
-### Backend:
+### Back end:
 
 >Node.js, Express, Passport.js, and MySql.
 
-### APIs Used:
+### APIs:
 
 >Google Geo Location, Flikr, and World Weather Online.
 
