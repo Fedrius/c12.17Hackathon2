@@ -764,9 +764,9 @@ h2 {
         color: seashell;
     }
 
-    .titleMuteButton {
+    /* .titleMuteButton {
         right: 10%;
-    }
+    } */
     .logoContainer {
         height: 35%;
         width: 100%;
@@ -888,9 +888,9 @@ h2 {
         color: white;
     }
 
-    .titleMuteButton {
+    /* .titleMuteButton {
         right: 10%;
-    }
+    } */
     .logoContainer {
         height: 35%;
         width: 100%;
@@ -1075,7 +1075,7 @@ h2 {
     }
 
     .titleMuteButton {
-        right: 10%;
+        /* right: 10%; */
         color: seashell;
     }
     .logoContainer {
@@ -1198,9 +1198,9 @@ h2 {
     .titleLogo{
         width: 45%;
     }
-    .titleMuteButton {
+    /* .titleMuteButton {
         right: 10%;
-    }
+    } */
 
     .buttonContainer{
         right: 2%;
@@ -1387,7 +1387,7 @@ h2 {
     }
 
     .titleMuteButton {
-        right: 10%;
+        /* right: 10%; */
         color: seashell;
     }
 
@@ -1452,7 +1452,7 @@ h2 {
 @media screen and (min-width: 1321px) {
     /*Title Page*/
     .titleMuteButton {
-        right: 10%;
+        /* right: 10%; */
         color: seashell;
     }
 
