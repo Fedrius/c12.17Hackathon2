@@ -1,4 +1,4 @@
-# Surfs Up
+# Surfs Up - No Longer Maintained
 
 Application to show you weather and surf conditions at any beach!
 
